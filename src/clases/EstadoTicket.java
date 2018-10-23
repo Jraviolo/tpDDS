@@ -1,6 +1,6 @@
-package principal;
+package clases;
 
-public enum estadoTicket {
+public enum EstadoTicket {
 abiertoSinDerivar, 
 abiertoDerivado,
 solucionadoALaEsperaOK,

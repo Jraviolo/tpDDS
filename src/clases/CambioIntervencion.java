@@ -1,16 +1,16 @@
-package principal;
+package clases;
 
 import java.sql.Date;
 
-public class cambioIntervencion {
+public class CambioIntervencion {
 	
 	private Integer idCambiosIntervencion;
-	private estadoIntervencion estado;
+	private EstadoIntervencion estado;
 	private Date fechaInicioAsignacion;
 	private Date fechaFinAsignacion;
 	private Date fechaInicioAtencion;
 
-	public cambioIntervencion() {
+	public CambioIntervencion() {
 		// TODO Auto-generated constructor stub
 	}
 

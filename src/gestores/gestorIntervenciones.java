@@ -1,4 +1,4 @@
-package principal;
+package gestores;
 
 public class gestorIntervenciones {
 

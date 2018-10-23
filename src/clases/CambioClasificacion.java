@@ -1,9 +1,9 @@
-package principal;
+package clases;
 
 import java.sql.Date;
 import java.sql.Time;
 
-public class cambioClasificacion {
+public class CambioClasificacion {
 
 	private Integer idCambioClasificacion;
 	private Date fechaInicio;
@@ -11,7 +11,7 @@ public class cambioClasificacion {
 	private Time tiempo;
 	
 	
-	public cambioClasificacion() {
+	public CambioClasificacion() {
 		// TODO Auto-generated constructor stub
 	}
 
