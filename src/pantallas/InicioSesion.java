@@ -14,6 +14,7 @@ import java.awt.Panel;
 import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.JTextField;
@@ -55,8 +56,8 @@ public class InicioSesion extends JFrame {
 		Color theme = new Color(38, 79, 111);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/image/favico.png")));
-		setTitle("Iniciar sesion");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/imagenes/favico.png")));
+		setTitle("La llamita");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 460, 568);
 		contentPane = new JPanel();
@@ -65,7 +66,7 @@ public class InicioSesion extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel Logo = new JLabel("");
-		Logo.setIcon(new ImageIcon(InicioSesion.class.getResource("/image/logo2.png")));
+		Logo.setIcon(new ImageIcon(InicioSesion.class.getResource("/imagenes/logo2.png")));
 		Logo.setBounds(16, 0, 300, 95);
 		contentPane.add(Logo);
 		
@@ -96,8 +97,25 @@ public class InicioSesion extends JFrame {
 		titulo_pantalla.setBounds(93, 99, 416, 25);
 		contentPane.add(titulo_pantalla);
 		
-		
+
 		JButton iniciarsesion = new JButton("Iniciar sesi\u00F3n");
+		//Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();
+		iniciarsesion.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+					Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();
+					setContentPane(panelMesaDeAyuda);
+				}
+				
+			}
+				
+			public void actionPerformed(ActionEvent e) {
+				Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();
+				setContentPane(panelMesaDeAyuda);
+				//panelMesaDeAyuda.setLocation();
+			}
+		});
 		iniciarsesion.setForeground(new Color(255, 255, 255));
 		iniciarsesion.setBackground(theme);
 		iniciarsesion.setBounds(93, 384, 264, 40);
