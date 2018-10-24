@@ -28,6 +28,7 @@ import javax.swing.JPasswordField;
 
 public class Mesa_de_ayuda extends JPanel {
 	JFrame padre;
+	Boolean finalizarPanel=false;
 
 	//private JPanel contentPane;
 
@@ -67,6 +68,7 @@ public class Mesa_de_ayuda extends JPanel {
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
 		setBounds(0, 0, 460, 568);
+
 		
 		JLabel Logo = new JLabel("");
 		Logo.setIcon(new ImageIcon(Mesa_de_ayuda.class.getResource("/imagenes/logo2.png")));
@@ -121,9 +123,18 @@ public class Mesa_de_ayuda extends JPanel {
 		registrarTicket.addActionListener(new ActionListener() {				
 			public void actionPerformed(ActionEvent e) {
 				CU1_RegistrarT panelRegistrarTicket = new CU1_RegistrarT();
-				padre.setContentPane(panelRegistrarTicket);
+				panelRegistrarTicket.setPadre(padre);
+				padre.setContentPane(panelRegistrarTicket);	
+				padre.setBounds(panelRegistrarTicket.getBounds());
+				padre.setLocationRelativeTo(null);
+				try {
+					finalizarPanel();
+				} catch (Throwable e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
-		});
+		});		
 		registrarTicket.setBackground(Color.WHITE);
 		registrarTicket.setBounds(93, 182, 264, 40);
 		this.add(registrarTicket);
@@ -134,6 +145,11 @@ public class Mesa_de_ayuda extends JPanel {
 	public void setPadre(JFrame padre) {
 		this.padre = padre;
 	}
-
+	
+	public void finalizarPanel() throws Throwable {
+		this.finalize();
+	}
+	
+	
 }
 

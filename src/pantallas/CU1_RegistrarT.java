@@ -29,7 +29,8 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 
 public class CU1_RegistrarT extends JPanel {
-
+	
+	private JFrame padre;
 	private JTextField textNro_de_ticket;
 	private JTextField legajo;
 	private JTextArea ob;
@@ -62,7 +63,7 @@ public class CU1_RegistrarT extends JPanel {
 	public CU1_RegistrarT() {
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
-		setBounds(0, 0, 460, 568);
+		setBounds(0, 0, 554, 700);
 		Color theme = new Color(38, 79, 111);
 
 		JLabel Logo = new JLabel("");
@@ -196,11 +197,28 @@ public class CU1_RegistrarT extends JPanel {
 		JButton cerrar = new JButton("Cancelar");
 		cerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();				
+				panelMesaDeAyuda.setPadre(padre);
+				padre.setContentPane(panelMesaDeAyuda);
+				try {
+					finalize();
+				} catch (Throwable e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		cerrar.setBackground(new Color(255, 255, 255));
 		cerrar.setBounds(408, 620, 130, 40);
 		this.add(cerrar);
+	}
+
+	public JFrame getPadre() {
+		return padre;
+	}
+
+	public void setPadre(JFrame padre) {
+		this.padre = padre;
 	}
 	
 

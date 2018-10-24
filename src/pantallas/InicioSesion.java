@@ -60,6 +60,7 @@ public class InicioSesion extends JFrame {
 		setTitle("La llamita");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 460, 568);
+		//setBounds(100,100,554,700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -102,9 +103,9 @@ public class InicioSesion extends JFrame {
 		JButton iniciarsesion = new JButton("Iniciar sesi\u00F3n");
 		iniciarsesion.addActionListener(new ActionListener() {				
 			public void actionPerformed(ActionEvent e) {
-				Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();
-				setContentPane(panelMesaDeAyuda);
+				Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();				
 				panelMesaDeAyuda.setPadre(frame);
+				setContentPane(panelMesaDeAyuda);	
 			}
 		});
 		iniciarsesion.setForeground(new Color(255, 255, 255));
