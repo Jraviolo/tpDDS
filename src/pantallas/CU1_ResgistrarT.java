@@ -6,6 +6,8 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -30,7 +32,8 @@ public class CU1_ResgistrarT extends JFrame {
 	private JPanel contentPane;
 	private JTextField textNro_de_ticket;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JTextArea ob;
+	private JScrollPane obscroll;
 	private JTextField txtDdmmaaaa;
 	private JTextField txtHhmm;
 
@@ -132,21 +135,33 @@ public class CU1_ResgistrarT extends JFrame {
 		comboBox.setBounds(230, 216, 231, 20);
 		contentPane.add(comboBox);
 		
+		
+		//DESCRIPICION 
+		
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n del problema:");
 		lblDescripcin.setBounds(93, 247, 223, 14);
 		contentPane.add(lblDescripcin);
 		
-		textField_1 = new JTextField();
-		textField_1.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_1.setBounds(93, 272, 368, 95);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		
+		ob = new JTextArea();
+		ob.setLineWrap(true);
+		ob.setWrapStyleWord(true);
+		ob.setBounds(93, 272, 368, 95);
+		contentPane.add(ob);
+		ob.setColumns(10);
+		
+		obscroll = new JScrollPane(ob);
+		obscroll.setBounds(93, 272, 368, 95);
+		obscroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		contentPane.add(obscroll);
+        
+		
 		
 		//FECHA Y HORA
 		
 		Date now = new Date();
 		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat h = new SimpleDateFormat("K:mm a");
+		SimpleDateFormat h = new SimpleDateFormat("hh:mm a");
 		String fecha=f.format(now);
 		String hora = h.format(now);
 		
