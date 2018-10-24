@@ -99,21 +99,10 @@ public class InicioSesion extends JFrame {
 		
 
 		JButton iniciarsesion = new JButton("Iniciar sesi\u00F3n");
-		//Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();
-		iniciarsesion.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(KeyEvent e) {
-				if(e.getKeyCode()==KeyEvent.VK_ENTER) {
-					Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();
-					setContentPane(panelMesaDeAyuda);
-				}
-				
-			}
-				
+		iniciarsesion.addActionListener(new ActionListener() {				
 			public void actionPerformed(ActionEvent e) {
 				Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();
 				setContentPane(panelMesaDeAyuda);
-				//panelMesaDeAyuda.setLocation();
 			}
 		});
 		iniciarsesion.setForeground(new Color(255, 255, 255));
