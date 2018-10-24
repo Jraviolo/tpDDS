@@ -197,9 +197,9 @@ public class CU1_RegistrarT extends JPanel {
 		JButton cerrar = new JButton("Cancelar");
 		cerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();				
-				panelMesaDeAyuda.setPadre(padre);
-				padre.setContentPane(panelMesaDeAyuda);
+				//Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();				
+				//panelMesaDeAyuda.setPadre(padre);
+				//padre.setContentPane(panelMesaDeAyuda);
 				try {
 					finalize();
 				} catch (Throwable e1) {
