@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Panel;
@@ -30,7 +31,7 @@ import javax.swing.JComboBox;
 public class CU1_RegistrarT extends JPanel {
 
 	private JTextField textNro_de_ticket;
-	private JTextField textField;
+	private JTextField legajo;
 	private JTextArea ob;
 	private JScrollPane obscroll;
 	private JTextField txtDdmmaaaa;
@@ -87,6 +88,8 @@ public class CU1_RegistrarT extends JPanel {
 		titulo_pantalla.setBounds(93, 99, 416, 25);
 		this.add(titulo_pantalla);
 
+		
+		//NUMERO TICKET
 		JLabel Nro_de_ticket = new JLabel("N\u00FAmero de ticket:");
 		Nro_de_ticket.setBounds(93, 157, 141, 20);
 		this.add(Nro_de_ticket);
@@ -101,26 +104,25 @@ public class CU1_RegistrarT extends JPanel {
 		textNro_de_ticket.setColumns(10);
 		textNro_de_ticket.setDisabledTextColor(Color.BLACK);
 
-		JLabel Nro_de_legajo = new JLabel("Nro de legajo:");
-		Nro_de_legajo.setBounds(93, 180, 141, 14);
-		this.add(Nro_de_ticket);
-
+		
+		//NUMERO DE LEGAJO
 		JLabel lblNroDeLegajo = new JLabel("N\u00FAmero de legajo:");
 		lblNroDeLegajo.setBounds(93, 185, 141, 20);
 		this.add(lblNroDeLegajo);
 
-		textField = new JTextField();
-		textField.setBounds(230, 185, 231, 20);
-		this.add(textField);
-		textField.setColumns(10);
-
+		legajo = new JTextField();
+		legajo.setBounds(230, 185, 231, 20);
+		this.add(legajo);
+		legajo.setColumns(10);
+		
+		//CLASIFICACION 
 		JLabel lblClasificacionTicket = new JLabel("Clasificaci\u00F3n ticket:");
 		lblClasificacionTicket.setBounds(93, 216, 141, 20);
 		this.add(lblClasificacionTicket);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(230, 216, 231, 20);
-		this.add(comboBox);
+		JComboBox clasificacion = new JComboBox();
+		clasificacion.setBounds(230, 216, 231, 20);
+		this.add(clasificacion);
 
 		// DESCRIPICION
 
@@ -172,7 +174,20 @@ public class CU1_RegistrarT extends JPanel {
 		this.add(txtHhmm);
 		txtHhmm.setDisabledTextColor(Color.BLACK);
 
+		
+		//BOTONES
 		JButton registrar = new JButton("Registrar ticket");
+		registrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int leg=Integer.valueOf(legajo.getText());
+					String obs=ob.getText();
+					
+				}catch(Exception ex) {
+				    //JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos incorrectos", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		registrar.setForeground(new Color(255, 255, 255));
 		registrar.setBackground(theme);
 		registrar.setBounds(268, 620, 130, 40);
@@ -187,4 +202,6 @@ public class CU1_RegistrarT extends JPanel {
 		cerrar.setBounds(408, 620, 130, 40);
 		this.add(cerrar);
 	}
+	
+
 }
