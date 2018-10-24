@@ -14,6 +14,9 @@ import java.awt.Panel;
 import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.JTextField;
@@ -78,12 +81,7 @@ public class CU1_ResgistrarT extends JFrame {
 		barraIzquierda.setBounds(0, 0, 10, 691);
 		contentPane.add(barraIzquierda);
 		
-		JButton cerrar = new JButton("Cancelar");
-		cerrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		cerrar.setBackground(new Color(255, 255, 255));
+		
 
 		barraIzquierda.setBackground(theme);
 		
@@ -97,15 +95,8 @@ public class CU1_ResgistrarT extends JFrame {
 		titulo_pantalla.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		titulo_pantalla.setBounds(93, 99, 416, 25);
 		contentPane.add(titulo_pantalla);
-		cerrar.setBounds(408, 620, 130, 40);
-		contentPane.add(cerrar);
 		
-		JButton imprimir_aceptar = new JButton("Registrar ticket");
-		imprimir_aceptar.setForeground(new Color(255, 255, 255));
-		imprimir_aceptar.setBackground(theme);
-		imprimir_aceptar.setBounds(268, 620, 130, 40);
-		contentPane.add(imprimir_aceptar);
-		
+				
 		JLabel Nro_de_ticket = new JLabel("N\u00FAmero de ticket:");
 		Nro_de_ticket.setBounds(93, 157, 141, 20);
 		contentPane.add(Nro_de_ticket);
@@ -151,34 +142,52 @@ public class CU1_ResgistrarT extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
+		//FECHA Y HORA
+		
+		Date now = new Date();
+		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat h = new SimpleDateFormat("K:mm a");
+		String fecha=f.format(now);
+		String hora = h.format(now);
+		
 		JLabel lblFechaDeApertura = new JLabel("Fecha de apertura:");
 		lblFechaDeApertura.setBounds(93, 378, 141, 20);
 		contentPane.add(lblFechaDeApertura);
 		
 		txtDdmmaaaa = new JTextField();
-		txtDdmmaaaa.setEnabled(false);
 		txtDdmmaaaa.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDdmmaaaa.setEditable(false);
-		txtDdmmaaaa.setText("dd/mm/aaaa");
+		txtDdmmaaaa.setText(fecha);
 		txtDdmmaaaa.setBounds(230, 378, 86, 20);
 		contentPane.add(txtDdmmaaaa);
-		txtDdmmaaaa.setColumns(10);
 		txtDdmmaaaa.setDisabledTextColor(Color.BLACK);
 		
 		JLabel lblHoraDeApertura = new JLabel("Hora de apertura:");
 		lblHoraDeApertura.setBounds(93, 409, 141, 14);
 		contentPane.add(lblHoraDeApertura);
-		
+	
 		txtHhmm = new JTextField();
-		txtHhmm.setEnabled(false);
 		txtHhmm.setHorizontalAlignment(SwingConstants.CENTER);
 		txtHhmm.setEditable(false);
-		txtHhmm.setText("hh:mm");
+		txtHhmm.setText(hora);
 		txtHhmm.setBounds(230, 406, 86, 20);
 		contentPane.add(txtHhmm);
-		txtHhmm.setColumns(10);
 		txtHhmm.setDisabledTextColor(Color.BLACK);
-		//txtHhmm.setBorder(null);
-
+		
+		
+		JButton registrar = new JButton("Registrar ticket");
+		registrar.setForeground(new Color(255, 255, 255));
+		registrar.setBackground(theme);
+		registrar.setBounds(268, 620, 130, 40);
+		contentPane.add(registrar);
+		
+		JButton cerrar = new JButton("Cancelar");
+		cerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		cerrar.setBackground(new Color(255, 255, 255));
+		cerrar.setBounds(408, 620, 130, 40);
+		contentPane.add(cerrar);
 	}
 }
