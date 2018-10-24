@@ -76,9 +76,10 @@ public class InicioSesion extends JFrame {
 		barraIzquierda.setBounds(0, 0, 10, 691);
 		contentPane.add(barraIzquierda);
 		
-		JButton cerrar = new JButton("Cancelar");
+		JButton cerrar = new JButton("Cerrarar");
 		cerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 			}
 		});
 		cerrar.setBackground(new Color(255, 255, 255));
