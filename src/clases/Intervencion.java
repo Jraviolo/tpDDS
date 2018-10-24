@@ -12,9 +12,15 @@ public class Intervencion {
 	private Time tiempoDeAtencion;
 	private String observaciones;
 	
+	private GrupoDeResolucion intervencion;
 	
 	public Intervencion() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Intervencion(EstadoIntervencion e,GrupoDeResolucion g) {
+		estado=e;
+		intervencion=g;
 	}
 
 

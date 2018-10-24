@@ -9,7 +9,16 @@ public class CambioEstado {
 	private Date fechaInicio;
 	private Date fechaFin;
 	
+	private Usuario interviene; //@ale agregue este 
+	
 	public CambioEstado() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	//ale creo este
+	public CambioEstado(EstadoTicket e,Usuario u) {
+		interviene=u;
+		estado=e;
 		// TODO Auto-generated constructor stub
 	}
 

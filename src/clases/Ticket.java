@@ -2,22 +2,39 @@ package clases;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Ticket {
 
 	private Integer id;
-	private EstadoTicket estadoActual;
+	//private EstadoTicket estadoActual;
 	private String descripcion;
 	private Date fechaDeApertura;
 	private Date fechaDeCierre;
 	private String numero;
 	private Time tiempoDeAtencion;
 	
+	private CambioEstado estadoActual;
+	private ClasificacionDeTicket clasificacionActual;
+	private Empleado duenio;
+	private ArrayList<CambioEstado> historialEstados = new ArrayList<CambioEstado>();
+	private ArrayList<CambioClasificacion> cambioClasificacion = new ArrayList<CambioClasificacion>();
+	private ArrayList<Intervencion> intervenciones = new ArrayList<Intervencion>();
+	
 	
 	public Ticket() {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Ticket(Empleado e,ClasificacionDeTicket c,String des,CambioEstado e1,CambioClasificacion cc, Intervencion i) {
+		clasificacionActual=c;
+		cambioClasificacion.add(cc);
+		duenio=e;
+		historialEstados.add(e1);
+		estadoActual=e1;
+		intervenciones.add(i);
+		descripcion=des;
+	}
 
 	public Integer getId() {
 		return id;
@@ -28,7 +45,7 @@ public class Ticket {
 		this.id = id;
 	}
 
-
+/*
 	public EstadoTicket getEstadoActual() {
 		return estadoActual;
 	}
@@ -37,7 +54,7 @@ public class Ticket {
 	public void setEstadoActual(EstadoTicket estadoActual) {
 		this.estadoActual = estadoActual;
 	}
-
+*/
 
 	public String getDescripcion() {
 		return descripcion;

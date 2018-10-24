@@ -10,9 +10,16 @@ public class CambioClasificacion {
 	private Date fechaFin;
 	private Time tiempo;
 	
+	private Usuario interviene;
+	private ClasificacionDeTicket clasificacion;
 	
 	public CambioClasificacion() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public CambioClasificacion(ClasificacionDeTicket c, Usuario u) {
+		interviene=u;
+		clasificacion=c;
 	}
 	
 	
