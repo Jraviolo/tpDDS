@@ -105,6 +105,7 @@ public class InicioSesion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();				
 				panelMesaDeAyuda.setPadre(frame);
+				panelMesaDeAyuda.setAnterior(contentPane);
 				setContentPane(panelMesaDeAyuda);	
 			}
 		});

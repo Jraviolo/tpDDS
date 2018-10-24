@@ -30,6 +30,7 @@ import javax.swing.JComboBox;
 
 public class CU1_RegistrarT extends JPanel {
 	
+	private JPanel anterior;
 	private JFrame padre;
 	private JTextField textNro_de_ticket;
 	private JTextField legajo;
@@ -126,7 +127,6 @@ public class CU1_RegistrarT extends JPanel {
 		this.add(clasificacion);
 
 		// DESCRIPICION
-
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n del problema:");
 		lblDescripcin.setBounds(93, 247, 223, 14);
 		this.add(lblDescripcin);
@@ -145,7 +145,6 @@ public class CU1_RegistrarT extends JPanel {
 		this.add(obscroll);
 
 		// FECHA Y HORA
-
 		Date now = new Date();
 		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat h = new SimpleDateFormat("hh:mm a");
@@ -193,15 +192,7 @@ public class CU1_RegistrarT extends JPanel {
 		JButton cerrar = new JButton("Cancelar");
 		cerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();				
-				//panelMesaDeAyuda.setPadre(padre);
-				//padre.setContentPane(panelMesaDeAyuda);
-				try {
-					finalize();
-				} catch (Throwable e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				removerPanel();
 			}
 		});
 		cerrar.setBackground(new Color(255, 255, 255));
@@ -217,5 +208,13 @@ public class CU1_RegistrarT extends JPanel {
 		this.padre = padre;
 	}
 	
+	public void removerPanel(){
+		padre.remove(this);
+		padre.setContentPane(anterior);
+	}
+	
+	public void setAnterior(JPanel anterior) {
+		this.anterior=anterior;
+	}
 
 }
