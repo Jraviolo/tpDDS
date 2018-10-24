@@ -37,8 +37,7 @@ public class InicioSesion extends JFrame {
 			public void run() {
 				try {
 					InicioSesion frame = new InicioSesion();
-					frame.setVisible(true);
-					
+					frame.setVisible(true);					
 					//PARA QUE APAREZCA CENTRADO
 					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
@@ -59,8 +58,8 @@ public class InicioSesion extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(InicioSesion.class.getResource("/imagenes/favico.png")));
 		setTitle("La llamita");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 460, 568);
-		//setBounds(100,100,554,700);
+		//setBounds(100, 100, 460, 568);
+		setBounds(100,100,554,700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -83,13 +82,13 @@ public class InicioSesion extends JFrame {
 			}
 		});
 		cerrar.setBackground(new Color(255, 255, 255));
-		cerrar.setBounds(93, 435, 264, 40);
+		cerrar.setBounds(145, 500, 264, 40);
 		contentPane.add(cerrar);
 
 		barraIzquierda.setBackground(theme);
 		
 		Panel tituloSub = new Panel();
-		tituloSub.setBounds(93, 126, 264, 3);
+		tituloSub.setBounds(93, 126, 368, 3);
 		tituloSub.setBackground(theme);
 		contentPane.add(tituloSub);
 		
@@ -111,24 +110,24 @@ public class InicioSesion extends JFrame {
 		});
 		iniciarsesion.setForeground(new Color(255, 255, 255));
 		iniciarsesion.setBackground(theme);
-		iniciarsesion.setBounds(93, 384, 264, 40);
+		iniciarsesion.setBounds(145, 449, 264, 40);
 		contentPane.add(iniciarsesion);
 		
 		user = new JTextField();
-		user.setBounds(93, 206, 264, 34);
+		user.setBounds(145, 206, 264, 34);
 		contentPane.add(user);
 		user.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(93, 276, 264, 34);
+		passwordField.setBounds(145, 276, 264, 34);
 		contentPane.add(passwordField);
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(93, 181, 96, 14);
+		lblUsuario.setBounds(145, 181, 96, 14);
 		contentPane.add(lblUsuario);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-		lblContrasea.setBounds(93, 251, 137, 14);
+		lblContrasea.setBounds(145, 251, 137, 14);
 		contentPane.add(lblContrasea);
 		
 

@@ -35,7 +35,7 @@ public class Mesa_de_ayuda extends JPanel {
 		Color theme = new Color(38, 79, 111);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
-		setBounds(0, 0, 460, 568);
+		setBounds(0, 0, 554, 700);
 
 		JLabel Logo = new JLabel("");
 		Logo.setIcon(new ImageIcon(Mesa_de_ayuda.class.getResource("/imagenes/logo2.png")));
@@ -54,13 +54,13 @@ public class Mesa_de_ayuda extends JPanel {
 			}
 		});
 		cerrar.setBackground(new Color(255, 255, 255));
-		cerrar.setBounds(93, 439, 264, 40);
+		cerrar.setBounds(145, 500, 264, 40);
 		this.add(cerrar);
 
 		barraIzquierda.setBackground(theme);
 
 		Panel tituloSub = new Panel();
-		tituloSub.setBounds(93, 126, 264, 3);
+		tituloSub.setBounds(93, 126, 368, 3);
 		tituloSub.setBackground(theme);
 		this.add(tituloSub);
 
@@ -84,7 +84,7 @@ public class Mesa_de_ayuda extends JPanel {
 			}
 
 		});
-		consultarTicket.setBounds(93, 233, 264, 40);
+		consultarTicket.setBounds(145, 233, 264, 40);
 		this.add(consultarTicket);
 
 		JButton registrarTicket = new JButton("Registrar ticket");
@@ -94,13 +94,13 @@ public class Mesa_de_ayuda extends JPanel {
 				panelRegistrarTicket.setPadre(padre);
 				panelRegistrarTicket.setAnterior(panel);
 				padre.setContentPane(panelRegistrarTicket);
-				padre.setBounds(panelRegistrarTicket.getBounds());
-				padre.setLocationRelativeTo(null);
+			//	padre.setBounds(panelRegistrarTicket.getBounds());
+			//	padre.setLocationRelativeTo(null);
 
 			}
 		});
 		registrarTicket.setBackground(Color.WHITE);
-		registrarTicket.setBounds(93, 182, 264, 40);
+		registrarTicket.setBounds(145, 182, 264, 40);
 		this.add(registrarTicket);
 
 	}
