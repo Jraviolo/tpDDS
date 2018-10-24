@@ -137,6 +137,7 @@ public class CU1_RegistrarT extends JPanel {
 		ob.setBounds(93, 272, 368, 95);
 		this.add(ob);
 		ob.setColumns(10);
+		ob.setText("");
 
 		obscroll = new JScrollPane(ob);
 		obscroll.setBounds(93, 272, 368, 95);
@@ -180,13 +181,8 @@ public class CU1_RegistrarT extends JPanel {
 		JButton registrar = new JButton("Registrar ticket");
 		registrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					int leg=Integer.valueOf(legajo.getText());
-					String obs=ob.getText();
-					
-				}catch(Exception ex) {
-				    //JOptionPane.showMessageDialog(this, ex.getMessage(), "Datos incorrectos", JOptionPane.ERROR_MESSAGE);
-				}
+				
+
 			}
 		});
 		registrar.setForeground(new Color(255, 255, 255));
