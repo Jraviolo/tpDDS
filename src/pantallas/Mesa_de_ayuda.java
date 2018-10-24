@@ -27,7 +27,7 @@ import java.awt.Font;
 import javax.swing.JPasswordField;
 
 public class Mesa_de_ayuda extends JPanel {
-	
+	JFrame padre;
 
 	//private JPanel contentPane;
 
@@ -63,11 +63,8 @@ public class Mesa_de_ayuda extends JPanel {
 		setBounds(100, 100, 460, 568);
 		
 */		public Mesa_de_ayuda() {
-		//JFrame padre = (JFrame) this.getParent();
-		//setLocation(padre.getLocation(null));
 		Color theme = new Color(38, 79, 111);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
-		//setContentPane(contentPane);
 		this.setLayout(null);
 		setBounds(0, 0, 460, 568);
 		
@@ -121,8 +118,10 @@ public class Mesa_de_ayuda extends JPanel {
 		this.add(consultarTicket);
 		
 		JButton registrarTicket = new JButton("Registrar ticket");
-		registrarTicket.addActionListener(new ActionListener() {
+		registrarTicket.addActionListener(new ActionListener() {				
 			public void actionPerformed(ActionEvent e) {
+				CU1_RegistrarT panelRegistrarTicket = new CU1_RegistrarT();
+				padre.setContentPane(panelRegistrarTicket);
 			}
 		});
 		registrarTicket.setBackground(Color.WHITE);
@@ -131,5 +130,10 @@ public class Mesa_de_ayuda extends JPanel {
 		
 
 	}
+
+	public void setPadre(JFrame padre) {
+		this.padre = padre;
+	}
+
 }
 

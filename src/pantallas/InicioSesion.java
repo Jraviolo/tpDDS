@@ -24,7 +24,7 @@ import javax.swing.JPasswordField;
 
 public class InicioSesion extends JFrame {
 	
-
+	private JFrame frame;
 	private JPanel contentPane;
 	private JTextField user;
 	private JPasswordField passwordField;
@@ -64,6 +64,7 @@ public class InicioSesion extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		frame = this;
 		
 		JLabel Logo = new JLabel("");
 		Logo.setIcon(new ImageIcon(InicioSesion.class.getResource("/imagenes/logo2.png")));
@@ -103,6 +104,7 @@ public class InicioSesion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();
 				setContentPane(panelMesaDeAyuda);
+				panelMesaDeAyuda.setPadre(frame);
 			}
 		});
 		iniciarsesion.setForeground(new Color(255, 255, 255));
