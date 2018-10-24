@@ -114,6 +114,7 @@ public class CU1_RegistrarT extends JPanel {
 
 		legajo = new JTextField();
 		legajo.setBounds(230, 185, 231, 20);
+		legajo.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(legajo);
 		legajo.setColumns(10);
 		

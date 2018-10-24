@@ -76,7 +76,7 @@ public class InicioSesion extends JFrame {
 		barraIzquierda.setBounds(0, 0, 10, 691);
 		contentPane.add(barraIzquierda);
 		
-		JButton cerrar = new JButton("Cerrarar");
+		JButton cerrar = new JButton("Cerrar");
 		cerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
