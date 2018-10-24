@@ -1,7 +1,11 @@
 package gestores;
 
+import java.util.Date;
+import java.util.ArrayList;
+
 import clases.ClasificacionDeTicket;
 import clases.Empleado;
+import clases.EstadoTicket;
 import clases.GrupoDeResolucion;
 import clases.Ticket;
 import clases.Usuario;
@@ -31,5 +35,9 @@ public class GestorBaseDeDatos {
 	public int registrarTicket(Ticket t) {
 		int idticket=0;
 		return idticket;
+	}
+	
+	public ArrayList<Ticket> buscarTicket(int nroT,int nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {	
+		return null;
 	}
 }
