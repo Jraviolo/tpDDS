@@ -10,6 +10,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import gestores.GestorTicket;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -19,6 +22,7 @@ import java.awt.Panel;
 import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
@@ -42,7 +46,8 @@ public class CU2_ConsultarT extends JPanel {
 	private JTextField fechaUltCambio;
 	private JButton confreporte;
 	private JTable table_1;
-
+	private GestorTicket gt;
+	
 	public CU2_ConsultarT() {
 		/*
 		Color theme = new Color(38, 79, 111);
@@ -89,9 +94,18 @@ public class CU2_ConsultarT extends JPanel {
 		buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Date fechaActual = new Date();
-				Date fApertura = armarFecha(fechaApertura.getText());
-				Date fUltCambio = armarFecha(fechaUltCambio.getText());
-				if((fApertura!=null && fApertura.compareTo(fechaActual)>0) || (fUltCambio!=null && fUltCambio.compareTo(fechaActual)>0)) {
+				Date fApertura =null;
+				Date fUltCambio=null;
+				
+				if(!fechaApertura.getText().isEmpty()) {	fApertura = armarFecha(fechaApertura.getText());}
+				
+				if(!fechaUltCambio.getText().isEmpty()) { fUltCambio = armarFecha(fechaUltCambio.getText());}
+				
+			//	System.out.println("fApertura: "+fApertura);
+			//	System.out.println("getDate "+fApertura.getDay()+" "+fApertura.getMonth()+" "+fApertura.getYear());
+			//	System.out.println(fechaApertura.getText());
+			//	System.out.println(fechaApertura.getText().charAt(0)+"  "+fechaApertura.getText().charAt(1));
+				if((!fechaApertura.getText().isEmpty() && fApertura.compareTo(fechaActual)>=0) || (!fechaUltCambio.getText().isEmpty() && fUltCambio.compareTo(fechaActual)>=0 && fUltCambio.compareTo(fApertura)>=0)) {
 					JOptionPane.showMessageDialog(panel,
 						    "La fecha de apertura y/o del último cambio de estado no pueden ser mayores a la fecha actual.",
 						    "Fecha inválida",
@@ -268,8 +282,21 @@ public class CU2_ConsultarT extends JPanel {
 	
 	
 	protected Date armarFecha(String text) {
-		Date fecha = new Date(text.charAt(0)+text.charAt(1),text.charAt(3)*10+text.charAt(4),text.charAt(6)*1000+text.charAt(7)*100+text.charAt(8)*10+text.charAt(9));		
+		if(text!=null) {
+		String s1=(String) text.subSequence(0, 2);
+		String s2=(String) text.subSequence(3, 5);
+		String s3=(String) text.subSequence(6, 10);
+		
+		//int dia = Integer.parseInt(text.charAt(0))*10+text.charAt(1);		
+		//int mes = text.charAt(3)*10+text.charAt(4);
+		//int anio = text.charAt(6)*1000+text.charAt(7)*100+text.charAt(8)*10+text.charAt(9);
+		int dia = Integer.parseInt(s1);
+		int mes = Integer.parseInt(s2)-1;
+		int anio = Integer.parseInt(s3)-1900;
+		Date fecha = new Date(anio,mes,dia);
 		return fecha;
+		}
+		else return null;
 	}
 
 
