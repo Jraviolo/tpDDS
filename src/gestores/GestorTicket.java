@@ -1,5 +1,7 @@
 package gestores;
 
+import java.util.Date;
+
 import clases.CambioClasificacion;
 import clases.CambioEstado;
 import clases.ClasificacionDeTicket;
@@ -39,7 +41,7 @@ public class GestorTicket {
 		
 		//retornar idticket
 	}	
-	public void consultarTicket() {
+	public void consultarTicket(int nroT,int nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
 		
 	}
 	public void cerrarTicket() {

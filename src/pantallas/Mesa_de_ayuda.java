@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -74,16 +75,49 @@ public class Mesa_de_ayuda extends JPanel {
 		consultarTicket.setBackground(Color.WHITE);
 		consultarTicket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
-
-			public void actionPerformed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-
-				}
-
+				CU2_ConsultarT panelConsultarTicket = new CU2_ConsultarT();
+				panelConsultarTicket.setPadre(padre);
+				panelConsultarTicket.setAnterior(panel);
+				padre.setContentPane(panelConsultarTicket);
+				padre.setBounds(panelConsultarTicket.getBounds());
+				padre.setLocationRelativeTo(null);
 			}
 
 		});
+		
+		
+	/*	PARA  QUE SE MUEVA CON ENTER PERO NO FUNCIONA
+	 * consultarTicket.addActionListener(new KeyListener() {
+		public void actionPerformed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				System.out.println("llego");
+			}
+
+		}
+
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent arg0) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				System.out.println("llego");
+			}
+			// TODO Auto-generated method stub
+			
+		}
+		});
+		
+	*/	
 		consultarTicket.setBounds(145, 233, 264, 40);
 		this.add(consultarTicket);
 

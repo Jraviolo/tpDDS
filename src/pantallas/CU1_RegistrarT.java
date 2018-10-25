@@ -41,8 +41,8 @@ public class CU1_RegistrarT extends JPanel {
 	private JScrollPane obscroll;
 	private JTextField txtDdmmaaaa;
 	private JTextField txtHhmm;
-
 	private GestorTicket gt;
+	
 	/**
 	 * Launch the application.
 	 * 
