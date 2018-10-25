@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import gestores.GestorTicket;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -39,6 +42,7 @@ public class CU1_RegistrarT extends JPanel {
 	private JTextField txtDdmmaaaa;
 	private JTextField txtHhmm;
 
+	private GestorTicket gt;
 	/**
 	 * Launch the application.
 	 * 
@@ -181,8 +185,26 @@ public class CU1_RegistrarT extends JPanel {
 		JButton registrar = new JButton("Registrar ticket");
 		registrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-
+				if(legajo.getText().isEmpty() || ob.getText().isEmpty()) JOptionPane.showMessageDialog(new JPanel(),
+					    "Los campos no deben ser nulos.",
+					    "Campos nulos",
+					    JOptionPane.ERROR_MESSAGE);
+				else {
+					String leg=legajo.getText();
+					if (leg.matches("[0-9]+") && leg.length() > 2) {
+						int l=Integer.valueOf(leg);
+						
+						
+						//FALTA 
+						//IDUSUARIO que lo trae el iniciar 
+						//IDCLASIFI que habria que cargarlos como enum
+						//IDGrupo same 
+						// gt.registrarTicket(l, idClasificacion, ob.getText(), idUsuiario, idgrupo);
+					}
+					else {
+						JOptionPane.showMessageDialog(new JPanel(),"Legajo debe contener solo numeros","Error Legajo",JOptionPane.ERROR_MESSAGE);
+					}
+				}
 			}
 		});
 		registrar.setForeground(new Color(255, 255, 255));
