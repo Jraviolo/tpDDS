@@ -166,7 +166,7 @@ public class Observaciones extends JDialog {
 			else {
 				String selectedOption = "";
 				if (rdbtnResuelto.isSelected()) {
-					selectedOption = "RESUELTO";
+					selectedOption = "Marcar el ticket como RESUELTO";
 				} else if (rdbtnEderivarAGrupo.isSelected()) {
 					selectedOption = "DERIVAR A GRUPO";
 				}
