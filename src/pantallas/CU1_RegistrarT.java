@@ -30,6 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 
 public class CU1_RegistrarT extends JPanel {
 	
@@ -200,6 +201,10 @@ public class CU1_RegistrarT extends JPanel {
 						//IDCLASIFI que habria que cargarlos como enum
 						//IDGrupo same 
 						// gt.registrarTicket(l, idClasificacion, ob.getText(), idUsuiario, idgrupo);
+						
+						Observaciones asd = new Observaciones(new JFrame(), true);
+						asd.setVisible(true);
+						
 					}
 					else {
 						JOptionPane.showMessageDialog(new JPanel(),"Legajo debe contener solo numeros","Error Legajo",JOptionPane.ERROR_MESSAGE);
