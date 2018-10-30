@@ -45,7 +45,7 @@ public class Ticket {
 		this.id = id;
 	}
 
-/*
+/*ANTIGUOS
 	public EstadoTicket getEstadoActual() {
 		return estadoActual;
 	}
@@ -54,7 +54,25 @@ public class Ticket {
 	public void setEstadoActual(EstadoTicket estadoActual) {
 		this.estadoActual = estadoActual;
 	}
-*/
+*///NUEVOS:
+	
+	public CambioEstado getEstadoActual() {
+		return estadoActual;
+	}
+
+
+	public void setEstadoActual(CambioEstado estado) {
+		//nose como hacerlo con sql date para la fecha actual
+		//estadoActual.setFechaFin(new Date());
+		this.historialEstados.add(estado);
+		this.estadoActual = estado;
+	}
+	
+	public Intervencion ultimaIntervencion() {
+		
+		return null;
+	}
+
 
 	public String getDescripcion() {
 		return descripcion;

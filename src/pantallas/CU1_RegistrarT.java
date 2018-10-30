@@ -21,8 +21,9 @@ import java.awt.Panel;
 import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+
+
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
@@ -200,11 +201,11 @@ public class CU1_RegistrarT extends JPanel {
 						//IDUSUARIO que lo trae el iniciar 
 						//IDCLASIFI que habria que cargarlos como enum
 						//IDGrupo same 
-						// gt.registrarTicket(l, idClasificacion, ob.getText(), idUsuiario, idgrupo);
+						//gt.registrarTicket(l, idClasificacion, ob.getText(), idUsuiario, idgrupo,now);
 						
 						Observaciones asd = new Observaciones(new JFrame(), true);
 						asd.setVisible(true);
-						
+						removerPanel();
 					}
 					else {
 						JOptionPane.showMessageDialog(new JPanel(),"Legajo debe contener solo numeros","Error Legajo",JOptionPane.ERROR_MESSAGE);

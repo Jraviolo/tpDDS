@@ -8,6 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gestores.GestorTicket;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -37,6 +40,8 @@ public class Observaciones extends JDialog {
 	private JPanel contentPane;
 	private JTextArea textField;
 	private JScrollPane obscroll;
+	
+	private GestorTicket gt;
 
 	/**
 	 * Launch the application.
@@ -63,15 +68,14 @@ public class Observaciones extends JDialog {
 	 */
 	public Observaciones(Frame parent, boolean modal) {
 		super(parent, modal);
-		this.setLocationRelativeTo(null);
 		Color theme = new Color(38, 79, 111);
-		
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Observaciones.class.getResource("/imagenes/favico.png")));
 		setTitle("Registrar ticket - Observaciones");
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100,100,544,700);
+		setBounds(100,100,544,600);
+		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -105,26 +109,26 @@ public class Observaciones extends JDialog {
 		contentPane.add(titulo_pantalla);
 		
 		textField = new JTextArea();
-		textField.setBounds(93, 135, 368, 264);
+		textField.setBounds(93, 135, 368, 200);
 		textField.setLineWrap(true);
 		textField.setWrapStyleWord(true);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		obscroll = new JScrollPane(textField);
-		obscroll.setBounds(93, 135, 368, 264);
+		obscroll.setBounds(93, 135, 368, 200);
 		obscroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		this.add(obscroll);
+		getContentPane().add(obscroll);
 		
 		
 		//MULTICHECK
 		
 		JRadioButton rdbtnResuelto = new JRadioButton("Resuelto");
-		rdbtnResuelto.setBounds(93, 409, 109, 23);
+		rdbtnResuelto.setBounds(93, 363, 109, 23);
 		contentPane.add(rdbtnResuelto);
 		
 		JRadioButton rdbtnEderivarAGrupo = new JRadioButton("Derivar a grupo de soporte:");
-		rdbtnEderivarAGrupo.setBounds(93, 435, 232, 23);
+		rdbtnEderivarAGrupo.setBounds(93, 389, 232, 23);
 		contentPane.add(rdbtnEderivarAGrupo);
 		
 		
@@ -132,7 +136,7 @@ public class Observaciones extends JDialog {
                 "Thinking in Java", "Java for Dummies"};
 		
 		JComboBox comboBox = new JComboBox(bookTitles);
-		comboBox.setBounds(331, 435, 130, 23);
+		comboBox.setBounds(331, 389, 130, 23);
 		contentPane.add(comboBox);
 		comboBox.setEnabled(false);
 		
@@ -157,12 +161,14 @@ public class Observaciones extends JDialog {
 		//BOTON
 		JButton imprimir_aceptar = new JButton("Finalizar");
 		imprimir_aceptar.addActionListener( e ->{
-			if(!rdbtnResuelto.isSelected() && !rdbtnEderivarAGrupo.isSelected()) {
-				JOptionPane.showMessageDialog(new JPanel(),
-					    "Debe seleccionar una opcion",
-					    "Error",
-					    JOptionPane.ERROR_MESSAGE);
+			
+			if(textField.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(new JPanel(),"El campo observaciones no puede estar vacio","Error",JOptionPane.ERROR_MESSAGE);
 			}
+			else if(!rdbtnResuelto.isSelected() && !rdbtnEderivarAGrupo.isSelected()) {
+				JOptionPane.showMessageDialog(new JPanel(),"Debe seleccionar una opcion","Error",JOptionPane.ERROR_MESSAGE);
+			}
+			
 			else {
 				String selectedOption = "";
 				if (rdbtnResuelto.isSelected()) {
@@ -173,16 +179,24 @@ public class Observaciones extends JDialog {
 				
 				
 				Object[] options = { "Confirmar", "CANCEL" };
-				JOptionPane.showOptionDialog(null, selectedOption, "Warning",
+				int op = JOptionPane.showOptionDialog(null, selectedOption, "Warning",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 				null, options, options[0]);
-				//JOptionPane.
-				this.setVisible(false);
+				
+				if (op==0) {
+					//FALTA: llegan de la otra interfaz 
+					//id ticket
+					//id Usuario 
+					//gt.cerrarTicket(idTicket,textField.getText(),idUsuario);
+					this.setVisible(false);
+				}
+				
+				
 			}
 		});
 		imprimir_aceptar.setForeground(new Color(255, 255, 255));
 		imprimir_aceptar.setBackground(theme);
-		imprimir_aceptar.setBounds(268,620,130,40);
+		imprimir_aceptar.setBounds(331,501,130,40);
 		contentPane.add(imprimir_aceptar);
 	}
 }

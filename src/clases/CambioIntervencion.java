@@ -9,11 +9,19 @@ public class CambioIntervencion {
 	private Date fechaInicioAsignacion;
 	private Date fechaFinAsignacion;
 	private Date fechaInicioAtencion;
+	private Usuario interviene;
 
 	public CambioIntervencion() {
 		// TODO Auto-generated constructor stub
 	}
 
+	public CambioIntervencion(EstadoIntervencion e, Usuario u) {
+		this.estado=e;
+		//this.fechaInicioAtencion=new Date();
+		this.interviene=u;
+		
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Integer getIdCambiosIntervencion() {
 		return idCambiosIntervencion;

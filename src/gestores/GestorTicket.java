@@ -1,6 +1,7 @@
 package gestores;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 
 import clases.CambioClasificacion;
 import clases.CambioEstado;
@@ -24,7 +25,7 @@ public class GestorTicket {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void registrarTicket(int legajo,int idClasificacion,String Descripcion,int idUsuario,int idgrupo) {
+	public void registrarTicket(int legajo,int idClasificacion,String Descripcion,int idUsuario,int idgrupo,Date fecha) {
 		
 		ClasificacionDeTicket clasificacion= gbd.buscarClasificacion(idClasificacion);
 		Usuario usuario=gbd.buscarUsuario(idUsuario);
@@ -35,6 +36,7 @@ public class GestorTicket {
 		CambioClasificacion cc = gc.newCambioClasificacion(clasificacion, usuario);
 		Intervencion i = gi.newIntervencion(EstadoIntervencion.trabajando,mesaDeAyuda);
 		Ticket t=new Ticket(empleado,clasificacion,Descripcion,e1,cc,i);
+		t.setFechaDeApertura(fecha);
 		
 		//esto bd
 		gbd.registrarTicket(t);
@@ -44,7 +46,13 @@ public class GestorTicket {
 	public void consultarTicket(int nroT,int nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
 		
 	}
-	public void cerrarTicket() {
+	public void cerrarTicket(int idTicket,String obs,int idU) {
+		
+		Ticket t = gbd.buscarTicket(idTicket);
+		Usuario u=gbd.buscarUsuario(idU);
+		CambioEstado e1=new CambioEstado(EstadoTicket.cerrado,u);
+		t.setEstadoActual(e1);
+		Intervencion i = t.ultimaIntervencion();
 		
 	}
 	public void derivarTicket() {

@@ -40,4 +40,8 @@ public class GestorBaseDeDatos {
 	public ArrayList<Ticket> buscarTicket(int nroT,int nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {	
 		return null;
 	}
+	
+	public Ticket buscarTicket(int idTicket) {	
+		return null;
+	}
 }
