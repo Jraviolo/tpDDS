@@ -13,12 +13,14 @@ import clases.GrupoDeResolucion;
 import clases.Intervencion;
 import clases.Ticket;
 import clases.Usuario;
+import pantallas.CU2_ConsultarT;
 
 public class GestorTicket {
 
 	private GestorBaseDeDatos gbd = new GestorBaseDeDatos();
 	private gestorIntervenciones gi = new gestorIntervenciones();
 	private GestorClasificacionDeTicket gc=new GestorClasificacionDeTicket();
+	private CU2_ConsultarT panelConsultar;
 	
 	
 	public GestorTicket() {
@@ -43,8 +45,8 @@ public class GestorTicket {
 		
 		//retornar idticket
 	}	
-	public void consultarTicket(int nroT,int nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
-		
+	public void consultarTicket(Integer nroT,Integer nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
+		this.panelConsultar.setListaTickets(gbd.buscarTicket(nroT, nroL, clasificacion, estado, fechaApertura, fechaUltCambio, ultGrupo), true);
 	}
 	public void cerrarTicket(int idTicket,String obs,int idU) {
 		

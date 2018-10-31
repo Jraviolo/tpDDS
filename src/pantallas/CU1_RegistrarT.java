@@ -45,28 +45,7 @@ public class CU1_RegistrarT extends JPanel {
 	private JTextField txtHhmm;
 	private GestorTicket gt;
 	
-	/**
-	 * Launch the application.
-	 * 
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { CU1_RegistrarT frame = new
-	 * CU1_RegistrarT(); frame.setVisible(true);
-	 * 
-	 * //PARA QUE APAREZCA CENTRADO frame.setLocationRelativeTo(null); } catch
-	 * (Exception e) { e.printStackTrace(); } } }); }
-	 * 
-	 * /** Create the frame.
-	 * 
-	 * public CU1_RegistrarT() { setBackground(Color.BLUE);
-	 * 
-	 * Color theme = new Color(38, 79, 111); setLocationRelativeTo(null);
-	 * setResizable(false);
-	 * setIconImage(Toolkit.getDefaultToolkit().getImage(CU1_RegistrarT.class.getResource("/imagenes/favico.png")));
-	 * setTitle("Registrar ticket"); setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	 * setBounds(100, 100, 554, 700); contentPane = new JPanel();
-	 * contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-	 * setContentPane(contentPane); contentPane.setLayout(null);
-	 */
+
 	public CU1_RegistrarT() {
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);

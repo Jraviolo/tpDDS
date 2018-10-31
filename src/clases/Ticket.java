@@ -123,5 +123,12 @@ public class Ticket {
 		this.tiempoDeAtencion = tiempoDeAtencion;
 	}
 
+	public Empleado getEmpleado() {
+		return duenio;
+	}
+	
+	public ClasificacionDeTicket getClasificacionActual() {
+		return clasificacionActual;
+	}
 	
 }
