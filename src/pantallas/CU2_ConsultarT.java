@@ -103,10 +103,23 @@ public class CU2_ConsultarT extends JPanel {
 				Boolean fUltCVacia = fechaUltCambio.getText().isEmpty();
 
 				if (!fApVacia) {
-					fApertura = armarFecha(fechaApertura.getText());
+					if (fechaApertura.getText().length() == 10) {
+						fApertura = armarFecha(fechaApertura.getText());
+					} else {
+						JOptionPane.showMessageDialog(panel, "Por favor ingrese la fecha con formato DD/MM/AAAA",
+								"Fecha invalida", JOptionPane.ERROR_MESSAGE);
+						fApVacia = true;
+					}
 				}
+
 				if (!fUltCVacia) {
-					fUltCambio = armarFecha(fechaUltCambio.getText());
+					if (fechaUltCambio.getText().length() == 10) {
+						fUltCambio = armarFecha(fechaUltCambio.getText());
+					} else {
+						JOptionPane.showMessageDialog(panel, "Por favor ingrese la fecha con formato DD/MM/AAAA",
+								"Fecha invalida", JOptionPane.ERROR_MESSAGE);
+						fUltCVacia = true;
+					}
 				}
 
 				if ((!fApVacia && fApertura.compareTo(fechaActual) >= 0) || (!fUltCVacia
@@ -118,15 +131,17 @@ public class CU2_ConsultarT extends JPanel {
 
 				} else {
 					Integer nroT = null;
-							if(!numeroTicket.getText().isEmpty())Integer.valueOf(numeroTicket.getText());
+					if (!numeroTicket.getText().isEmpty())
+						Integer.valueOf(numeroTicket.getText());
 					Integer nroL = null;
-							if(!numeroLegajo.getText().isEmpty())Integer.valueOf(numeroLegajo.getText());
-					String clasificacion = ((ClasificacionDeTicket) comboClasificacion.getSelectedItem()).getNombre(); 
+					if (!numeroLegajo.getText().isEmpty())
+						Integer.valueOf(numeroLegajo.getText());
+					String clasificacion = ((ClasificacionDeTicket) comboClasificacion.getSelectedItem()).getNombre();
 					EstadoTicket estado = (EstadoTicket) comboEstado.getSelectedItem();
 					GrupoDeResolucion ultGrupo = (GrupoDeResolucion) comboUltGrupo.getSelectedItem();
-					
-					//gt.consultarTicket(nroT, nroL, clasificacion , estado, fApertura, fUltCambio, ultGrupo);
-					
+
+					// gt.consultarTicket(nroT, nroL, clasificacion , estado, fApertura, fUltCambio, ultGrupo);
+
 				}
 			}
 		});
@@ -149,7 +164,7 @@ public class CU2_ConsultarT extends JPanel {
 		comboClasificacion.setModel(new DefaultComboBoxModel(new String[] { "Todas", "asd" }));
 		comboClasificacion.setBounds(489, 142, 150, 20);
 		this.add(comboClasificacion);
-		
+
 		JComboBox<EstadoTicket> comboEstado = new JComboBox();
 		comboEstado.setModel(new DefaultComboBoxModel(new String[] { "Abierto en mesa de ayuda", "Todos" }));
 		comboEstado.setBounds(488, 173, 151, 20);
@@ -157,14 +172,12 @@ public class CU2_ConsultarT extends JPanel {
 
 		fechaApertura = new JTextField();
 		fechaApertura.setHorizontalAlignment(SwingConstants.CENTER);
-		fechaApertura.setText("/      /");
 		fechaApertura.setBounds(876, 142, 134, 20);
 		this.add(fechaApertura);
 		fechaApertura.setColumns(10);
 
 		fechaUltCambio = new JTextField();
 		fechaUltCambio.setHorizontalAlignment(SwingConstants.CENTER);
-		fechaUltCambio.setText("/      /");
 		fechaUltCambio.setBounds(876, 173, 134, 20);
 		this.add(fechaUltCambio);
 		fechaUltCambio.setColumns(10);
@@ -252,7 +265,7 @@ public class CU2_ConsultarT extends JPanel {
 		// TABLA NUEVA
 
 		table_1 = new JTable(this.tableModel);
-		table_1.setFillsViewportHeight(true); 
+		table_1.setFillsViewportHeight(true);
 		table_1.setBounds(109, 266, 607, -95);
 		JScrollPane JS = new JScrollPane(table_1);
 		JS.setSize(1171, 394);
@@ -295,8 +308,8 @@ public class CU2_ConsultarT extends JPanel {
 		cerrar.setBackground(new Color(255, 255, 255));
 		cerrar.setBounds(1134, 640, 130, 40);
 		this.add(cerrar);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { numeroTicket, comboClasificacion, fechaApertura,
-				numeroLegajo, comboEstado, fechaUltCambio, comboUltGrupo, buscar }));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { numeroTicket, comboClasificacion,
+				fechaApertura, numeroLegajo, comboEstado, fechaUltCambio, comboUltGrupo, buscar }));
 
 	}
 

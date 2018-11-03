@@ -43,29 +43,6 @@ public class Observaciones extends JDialog {
 	
 	private GestorTicket gt;
 
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Observaciones frame = new Observaciones();
-					frame.setVisible(true);
-					
-					//PARA QUE APAREZCA CENTRADO
-					frame.setLocationRelativeTo(null);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Observaciones(Frame parent, boolean modal) {
 		super(parent, modal);
 		Color theme = new Color(38, 79, 111);
@@ -178,7 +155,7 @@ public class Observaciones extends JDialog {
 				}
 				
 				
-				Object[] options = { "Confirmar", "CANCEL" };
+				Object[] options = { "Confirmar", "Cancelar" };
 				int op = JOptionPane.showOptionDialog(null, selectedOption, "Warning",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
 				null, options, options[0]);
