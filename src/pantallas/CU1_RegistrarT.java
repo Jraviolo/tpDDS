@@ -47,6 +47,10 @@ public class CU1_RegistrarT extends JPanel {
 	
 
 	public CU1_RegistrarT() {
+		
+		
+		
+		
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
 		setBounds(0, 0, 554, 700);
@@ -81,11 +85,16 @@ public class CU1_RegistrarT extends JPanel {
 		Nro_de_ticket.setBounds(93, 157, 141, 20);
 		this.add(Nro_de_ticket);
 
+		
+		//NO SE POR QUE NO ME DEJA LPM
+		//int idTicket=gt.ultimoIdTicket();
+		int idTicket=123123;
+		
 		textNro_de_ticket = new JTextField();
 		textNro_de_ticket.setEnabled(false);
 		textNro_de_ticket.setHorizontalAlignment(SwingConstants.CENTER);
 		textNro_de_ticket.setEditable(false);
-		textNro_de_ticket.setText("999999999");
+		textNro_de_ticket.setText(String.valueOf(idTicket));
 		textNro_de_ticket.setBounds(230, 157, 231, 20);
 		this.add(textNro_de_ticket);
 		textNro_de_ticket.setColumns(10);
