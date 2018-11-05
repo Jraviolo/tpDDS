@@ -36,7 +36,7 @@ public class GestorTicket {
 		
 		CambioEstado e1=new CambioEstado(EstadoTicket.abiertoSinDerivar,usuario);
 		CambioClasificacion cc = gc.newCambioClasificacion(clasificacion, usuario);
-		Intervencion i = gi.newIntervencion(EstadoIntervencion.trabajando,mesaDeAyuda);
+		Intervencion i = gi.crearIntervencion(EstadoIntervencion.trabajando,mesaDeAyuda);
 		Ticket t=new Ticket(empleado,clasificacion,Descripcion,e1,cc,i);
 		t.setFechaDeApertura(fecha);
 		
@@ -56,11 +56,21 @@ public class GestorTicket {
 		CambioEstado e1=new CambioEstado(EstadoTicket.cerrado,u);
 		t.setEstadoActual(e1);
 		Intervencion i = t.ultimaIntervencion();
-		gbd.actualizarTicket(idTicket, t);		
+		gi.actualizarIntervencion(i, EstadoIntervencion.terminada, u, obs);
+		gbd.actualizarTicket(idTicket, t);
 	}
 	
-	public void derivarTicket() {
-		
+	public void derivarTicket(int idTicket,String obs,int idU,int idgrupo) {
+		Ticket t = gbd.buscarTicket(idTicket);
+		Usuario u=gbd.buscarUsuario(idU);
+		GrupoDeResolucion g=gbd.buscarGrupo(idgrupo);
+		CambioEstado e2=new CambioEstado(EstadoTicket.abiertoDerivado,u);
+		Intervencion i1 = gi.crearIntervencion(EstadoIntervencion.asignada,g);
+		t.setEstadoActual(e2);
+		Intervencion i=t.ultimaIntervencion();
+		gi.actualizarIntervencion(i, EstadoIntervencion.enEspera, u, obs);
+		t.nuevaIntervencion(i1);
+		gbd.actualizarTicket(idTicket, t);
 	}
 	
 	public int ultimoIdTicket() {

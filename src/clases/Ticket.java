@@ -68,6 +68,10 @@ public class Ticket {
 		this.estadoActual = estado;
 	}
 	
+	public void nuevaIntervencion(Intervencion i) {
+		this.intervenciones.add(i);
+	}
+	
 	public Intervencion ultimaIntervencion() {
 		
 		return null;
