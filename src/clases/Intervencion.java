@@ -95,7 +95,14 @@ public class Intervencion {
 	
 	public CambioIntervencion UltimoEstado(){
 		CambioIntervencion c1=new CambioIntervencion();
-		//buscar con un for el ultmo cambio de intervencion
+		Boolean encontrado=false;
+		int i=historialIntervencion.size()-1;
+		while(encontrado==false && i>0) {
+			if(historialIntervencion.get(i).getFechaFinAsignacion()==null) {
+				c1=historialIntervencion.get(i);
+				encontrado=true;
+			}
+		}
 		return c1;
 	}
 }
