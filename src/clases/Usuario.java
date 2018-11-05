@@ -1,9 +1,20 @@
 package clases;
 
-public class Usuario {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Usuario")
+public class Usuario {
 	
+	@Id
+	@Column(name="IdUsuario")
+	private Integer idUsuario;
+	@Column(name="NobmreUsuario")
 	private String usuario;
+	@Column(name="Contrasena")
 	private String contraseña;
 	
 	
