@@ -2,18 +2,42 @@ package clases;
 
 import java.sql.Time;
 import java.util.ArrayList;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
 import java.sql.Date;
 
+@Entity
+@Table(name="intervencion")
 public class Intervencion {
 
+	@Id
+	@Column(name="IDinterv")
 	private Integer idIntervencion;
+	//FALTA MAPEAR
 	private EstadoIntervencion estado;
+	@Column(name="fecha_inicio")
 	private Date fechaInicio;
+	@Column(name="fecha_fin")
 	private Date fechaFin;
 	private Time tiempoDeAtencion;
+	@Column(name="observacion")
 	private String observaciones;
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private GrupoDeResolucion intervencion;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Ticket ticket;
+	
 	private ArrayList<CambioIntervencion> historialIntervencion = new ArrayList<CambioIntervencion>();
 	
 	public Intervencion() {

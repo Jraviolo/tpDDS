@@ -3,15 +3,40 @@ package clases;
 import java.sql.Date;
 import java.sql.Time;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+@Entity
+@Table(name="cambio_clasificacion")
 public class CambioClasificacion {
-
+	
+	@Id
+	@Column(name="IDCambios_clasif")
 	private Integer idCambioClasificacion;
+	@Column(name="fecha_inicio")
 	private Date fechaInicio;
+	@Column(name="fecha_fin")
 	private Date fechaFin;
+	
+	//TIEMPO NO SE GUARDA EN BD?
 	private Time tiempo;
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private Usuario interviene;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private ClasificacionDeTicket clasificacion;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Ticket ticket;
+	
 	
 	public CambioClasificacion() {
 		// TODO Auto-generated constructor stub
