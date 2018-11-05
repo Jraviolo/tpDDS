@@ -48,7 +48,8 @@ public class CU1_RegistrarT extends JPanel {
 
 	public CU1_RegistrarT() {
 		
-		
+		//tiene que venir de la otra interfaz 
+		int idUsuario=1123;
 		
 		
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -191,7 +192,7 @@ public class CU1_RegistrarT extends JPanel {
 						//IDGrupo same 
 						//gt.registrarTicket(l, idClasificacion, ob.getText(), idUsuiario, idgrupo,now);
 						
-						Observaciones asd = new Observaciones(new JFrame(), true);
+						Observaciones asd = new Observaciones(new JFrame(),true,idTicket,idUsuario);
 						asd.setVisible(true);
 						removerPanel();
 					}

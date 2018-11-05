@@ -43,7 +43,7 @@ public class Observaciones extends JDialog {
 	
 	private GestorTicket gt;
 
-	public Observaciones(Frame parent, boolean modal) {
+	public Observaciones(Frame parent, boolean modal,int idTicket,int idUsuario) {
 		super(parent, modal);
 		Color theme = new Color(38, 79, 111);
 		setResizable(false);
@@ -151,7 +151,7 @@ public class Observaciones extends JDialog {
 				if (rdbtnResuelto.isSelected()) {
 					selectedOption = "Marcar el ticket como RESUELTO";
 				} else if (rdbtnEderivarAGrupo.isSelected()) {
-					selectedOption = "DERIVAR A GRUPO";
+					selectedOption = "DERIVAR A GRUPO ";
 				}
 				
 				
@@ -161,10 +161,13 @@ public class Observaciones extends JDialog {
 				null, options, options[0]);
 				
 				if (op==0) {
-					//FALTA: llegan de la otra interfaz 
-					//id ticket
-					//id Usuario 
-					//gt.cerrarTicket(idTicket,textField.getText(),idUsuario);
+					if (rdbtnResuelto.isSelected()) {
+						
+						//gt.cerrarTicket(idTicket,textField.getText(),idUsuario);
+					} else if (rdbtnEderivarAGrupo.isSelected()) {
+						//derivar
+						
+					}
 					this.setVisible(false);
 				}
 				
