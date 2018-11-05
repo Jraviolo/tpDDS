@@ -44,4 +44,8 @@ public class GestorBaseDeDatos {
 	public Ticket buscarTicket(int idTicket) {	
 		return null;
 	}
+	
+	public int actualizarTicket(int idticket,Ticket t) {
+		return idticket;
+	}
 }

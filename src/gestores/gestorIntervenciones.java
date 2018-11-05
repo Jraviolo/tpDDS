@@ -1,8 +1,10 @@
 package gestores;
 
+import clases.CambioIntervencion;
 import clases.EstadoIntervencion;
 import clases.GrupoDeResolucion;
 import clases.Intervencion;
+import clases.Usuario;
 
 public class gestorIntervenciones {
 
@@ -25,6 +27,11 @@ public class gestorIntervenciones {
 	
 	public void actualizarEstadoIntervencion() {
 		
+	}
+	
+	public void actualizarIntervencion(Intervencion i,EstadoIntervencion e,Usuario u,String obs) {
+		CambioIntervencion c1=new CambioIntervencion(e,u);
+		i.actualizarIntervencion(c1, obs);
 	}
 
 }

@@ -1,6 +1,7 @@
 package clases;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.sql.Date;
 
 public class Intervencion {
@@ -13,6 +14,7 @@ public class Intervencion {
 	private String observaciones;
 	
 	private GrupoDeResolucion intervencion;
+	private ArrayList<CambioIntervencion> historialIntervencion = new ArrayList<CambioIntervencion>();
 	
 	public Intervencion() {
 		// TODO Auto-generated constructor stub
@@ -83,5 +85,17 @@ public class Intervencion {
 		this.observaciones = observaciones;
 	}
 
+	public void actualizarIntervencion(CambioIntervencion ci,String Obs){
+		//this.UltimoEstado().setFechaFinAsignacion(new Date());
+		estado=ci.getEstado();
+		//fechaFin=Date;
+		historialIntervencion.add(ci);
+		observaciones=Obs;
+	}
 	
+	public CambioIntervencion UltimoEstado(){
+		CambioIntervencion c1=new CambioIntervencion();
+		//buscar con un for el ultmo cambio de intervencion
+		return c1;
+	}
 }

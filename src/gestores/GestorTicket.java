@@ -48,6 +48,7 @@ public class GestorTicket {
 	public void consultarTicket(Integer nroT,Integer nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
 		this.panelConsultar.setListaTickets(gbd.buscarTicket(nroT, nroL, clasificacion, estado, fechaApertura, fechaUltCambio, ultGrupo), true);
 	}
+	
 	public void cerrarTicket(int idTicket,String obs,int idU) {
 		
 		Ticket t = gbd.buscarTicket(idTicket);
@@ -55,8 +56,9 @@ public class GestorTicket {
 		CambioEstado e1=new CambioEstado(EstadoTicket.cerrado,u);
 		t.setEstadoActual(e1);
 		Intervencion i = t.ultimaIntervencion();
-		
+		gbd.actualizarTicket(idTicket, t);		
 	}
+	
 	public void derivarTicket() {
 		
 	}
