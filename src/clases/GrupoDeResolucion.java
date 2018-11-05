@@ -1,11 +1,24 @@
 package clases;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="grupo_de_resolucion")
 public class GrupoDeResolucion {
 
+	@Id
+	@Column(name="codigo")
 	private String codigo;
+	@Column(name="nombre")
 	private String nombre;
+	@Column(name="descripcion")
 	private String descripcion;
+	@Column(name="nivel")
 	private NivelDeGrupo nivel;
+	@Column(name="activo")
 	private String estado;
 	
 	

@@ -4,17 +4,35 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
-public class Ticket {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="ticket")
+public class Ticket {
+	@Column(name="numero")
 	private Integer id;
-	//private EstadoTicket estadoActual;
-	private String descripcion;
-	private Date fechaDeApertura;
-	private Date fechaDeCierre;
+	
 	private String numero;
+
+	@Column(name="descripcion")
+	private String descripcion;
+	@Column(name="fecha_apertura")
+	private Date fechaDeApertura;
+	@Column(name="fecha_cierre")
+	private Date fechaDeCierre;
+
+	//TIEMPO DE ATENCION NO SE GUARDA EN BD? -JOSE
 	private Time tiempoDeAtencion;
 	
 	private CambioEstado estadoActual;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private ClasificacionDeTicket clasificacionActual;
 	private Empleado duenio;
 	private ArrayList<CambioEstado> historialEstados = new ArrayList<CambioEstado>();

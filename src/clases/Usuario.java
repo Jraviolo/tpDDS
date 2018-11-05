@@ -1,8 +1,11 @@
 package clases;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -12,10 +15,15 @@ public class Usuario {
 	@Id
 	@Column(name="IdUsuario")
 	private Integer idUsuario;
-	@Column(name="NobmreUsuario")
+	@Column(name="NombreUsuario")
 	private String usuario;
 	@Column(name="Contrasena")
 	private String contraseña;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Empleado empleado;
+	
 	
 	
 	public Usuario() {

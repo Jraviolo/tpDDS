@@ -1,15 +1,29 @@
 package clases;
 
-public class Empleado {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Empleado")
+public class Empleado {
+	@Id
+	@Column (name="Legajo")
 	private Integer legajo;
+	@Column (name="Nombre")
 	private String nombre;
+	@Column (name="Apellido")
 	private String apellido;
+	@Column (name="Telefono_interno")
 	private Integer telefonoInterno;
+	@Column (name="Telefono_directo")
 	private Integer telefonoDirecto;
+	//UBICACION NO APARECE EN LAS TABLAS? -JOSE
+	//@Column (name="Ubicacion")
 	private String ubicacion;
+	@Column (name="Descripcion_cargo")
 	private String descripcionDeCargo;
-	
 	
 	public Empleado() {
 		// TODO Auto-generated constructor stub

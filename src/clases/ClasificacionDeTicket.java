@@ -1,11 +1,31 @@
 package clases;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="clasificacion")
 public class ClasificacionDeTicket {
 
+	@Id
+	@Column(name="IDclasif")
 	private Integer idClasificacion;
+	@Column(name="nombre")
 	private String nombre;
+	@Column(name="descripcion")
 	private String descripcion;
+	//INCONSISTENCIA ENTRE BD Y DIAGRAMA DE CLASES
+	//@Column(name="activo")
 	private EstadoClasificacion estado;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Usuario usuario;
 	
 	
 	public ClasificacionDeTicket() {
