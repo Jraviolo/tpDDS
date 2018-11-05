@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clases.GrupoDeResolucion;
 import gestores.GestorTicket;
 
 import javax.swing.JLabel;
@@ -166,6 +167,9 @@ public class Observaciones extends JDialog {
 						//gt.cerrarTicket(idTicket,textField.getText(),idUsuario);
 					} else if (rdbtnEderivarAGrupo.isSelected()) {
 						//derivar
+						String idGrupo = ((GrupoDeResolucion) comboBox.getSelectedItem()).getCodigo();
+						//gt.derivarTicket(idTicket,textField.getText(),idUsuario,idGrupo);
+
 						
 					}
 					this.setVisible(false);

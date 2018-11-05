@@ -8,7 +8,6 @@ public class CambioEstado {
 	private EstadoTicket estado;
 	private Date fechaInicio;
 	private Date fechaFin;
-	
 	private Usuario interviene; //@ale agregue este 
 	
 	public CambioEstado() {
