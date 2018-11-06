@@ -48,6 +48,10 @@ public class Intervencion {
 		estado=e;
 		intervencion=g;
 	}
+	
+	public void addCambioIntervencion(CambioIntervencion c) {
+		this.historialIntervencion.add(c);
+	}
 
 
 	public Integer getIdIntervencion() {

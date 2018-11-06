@@ -12,8 +12,10 @@ public class gestorIntervenciones {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Intervencion crearIntervencion(EstadoIntervencion e,GrupoDeResolucion g) {
+	public Intervencion crearIntervencion(EstadoIntervencion e,GrupoDeResolucion g,Usuario u) {
+		CambioIntervencion ci=new CambioIntervencion(e,u);
 		Intervencion i=new Intervencion(e,g);
+		i.addCambioIntervencion(ci);
 		return i;
 	}
 	
