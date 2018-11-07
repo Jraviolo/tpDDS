@@ -48,4 +48,9 @@ public class GestorBaseDeDatos {
 	public int actualizarTicket(int idticket,Ticket t) {
 		return idticket;
 	}
+	
+	public int ultimoIdTicket() {
+		//Busca en la base de datos el ultimo id
+		return 123456;
+	}
 }

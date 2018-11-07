@@ -43,7 +43,7 @@ public class CU1_RegistrarT extends JPanel {
 	private JScrollPane obscroll;
 	private JTextField txtDdmmaaaa;
 	private JTextField txtHhmm;
-	private GestorTicket gt;
+	private GestorTicket gt=new GestorTicket();
 	
 
 	public CU1_RegistrarT() {
@@ -87,9 +87,9 @@ public class CU1_RegistrarT extends JPanel {
 		this.add(Nro_de_ticket);
 
 		
-		//NO SE POR QUE NO ME DEJA LPM
-		//int idTicket=gt.ultimoIdTicket();
-		int idTicket=123123;
+		//--Pide el ultimo id y le suma 1 para un nuevo ticket
+		int idTicket=gt.ultimoIdTicket()+1;
+		
 		
 		textNro_de_ticket = new JTextField();
 		textNro_de_ticket.setEnabled(false);

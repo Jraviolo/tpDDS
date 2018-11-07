@@ -74,10 +74,7 @@ public class GestorTicket {
 	}
 	
 	public int ultimoIdTicket() {
-		//me retorna el ultimo id ticket
-		//int ultimo id= gbd.ultimoIdTicket();
-		int a=1;
-		return a;
+		return gbd.ultimoIdTicket();
 	}
 	
 	

@@ -42,7 +42,7 @@ public class Observaciones extends JDialog {
 	private JTextArea textField;
 	private JScrollPane obscroll;
 	
-	private GestorTicket gt;
+	private GestorTicket gt=new GestorTicket();
 
 	public Observaciones(Frame parent, boolean modal,int idTicket,int idUsuario) {
 		super(parent, modal);
