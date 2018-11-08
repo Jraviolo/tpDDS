@@ -79,6 +79,15 @@ public class Ticket {
 		return estadoActual;
 	}
 
+	
+
+	public ArrayList<CambioEstado> getHistorialEstados() {
+		return historialEstados;
+	}
+
+	public void setHistorialEstados(ArrayList<CambioEstado> historialEstados) {
+		this.historialEstados = historialEstados;
+	}
 
 	public void setEstadoActual(CambioEstado estado) {
 		//nose como hacerlo con sql date para la fecha actual
