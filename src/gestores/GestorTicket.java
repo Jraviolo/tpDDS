@@ -1,7 +1,7 @@
 package gestores;
 
-import java.sql.Date;
-import java.sql.Time;
+
+import java.util.Date;
 
 import clases.CambioClasificacion;
 import clases.CambioEstado;
@@ -35,8 +35,13 @@ public class GestorTicket {
 		Empleado empleado=gbd.buscarEmpleado(legajo);
 		
 		CambioEstado e1=new CambioEstado(EstadoTicket.abiertoSinDerivar,usuario);
+		e1.setFechaInicio(fecha);
+		
 		CambioClasificacion cc = gc.newCambioClasificacion(clasificacion, usuario);
-		Intervencion i = gi.crearIntervencion(EstadoIntervencion.trabajando,mesaDeAyuda,usuario);
+		cc.setFechaInicio(fecha);
+		
+		Intervencion i = gi.crearIntervencion(EstadoIntervencion.trabajando,mesaDeAyuda,usuario,fecha);
+		
 		Ticket t=new Ticket(empleado,clasificacion,Descripcion,e1,cc,i);
 		t.setFechaDeApertura(fecha);
 		
@@ -53,10 +58,18 @@ public class GestorTicket {
 		
 		Ticket t = gbd.buscarTicket(idTicket);
 		Usuario u=gbd.buscarUsuario(idU);
+		
+		Date fechacierre=new Date();
+		
 		CambioEstado e1=new CambioEstado(EstadoTicket.cerrado,u);
+		e1.setFechaInicio(fechacierre);
+		
 		t.setEstadoActual(e1);
+		
+		//chequear
 		Intervencion i = t.ultimaIntervencion();
-		gi.actualizarIntervencion(i, EstadoIntervencion.terminada, u, obs);
+		
+		gi.finalizarIntervencion(i, EstadoIntervencion.terminada, u, obs,fechacierre);
 		gbd.actualizarTicket(idTicket, t);
 	}
 	
@@ -64,11 +77,19 @@ public class GestorTicket {
 		Ticket t = gbd.buscarTicket(idTicket);
 		Usuario u=gbd.buscarUsuario(idU);
 		GrupoDeResolucion g=gbd.buscarGrupo(idgrupo);
+		
+		Date fechaderivar=new Date();
+		
 		CambioEstado e2=new CambioEstado(EstadoTicket.abiertoDerivado,u);
-		Intervencion i1 = gi.crearIntervencion(EstadoIntervencion.asignada,g,u);
+		e2.setFechaInicio(fechaderivar);
+		
+		Intervencion i1 = gi.crearIntervencion(EstadoIntervencion.asignada,g,u,fechaderivar);
+		
 		t.setEstadoActual(e2);
+		
+		//ojota
 		Intervencion i=t.ultimaIntervencion();
-		gi.actualizarIntervencion(i, EstadoIntervencion.enEspera, u, obs);
+		gi.actualizarIntervencion(i, EstadoIntervencion.enEspera, u, obs,fechaderivar);
 		t.nuevaIntervencion(i1);
 		gbd.actualizarTicket(idTicket, t);
 	}

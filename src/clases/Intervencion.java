@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name="intervencion")
@@ -112,10 +112,18 @@ public class Intervencion {
 		this.observaciones = observaciones;
 	}
 
-	public void actualizarIntervencion(CambioIntervencion ci,String Obs){
-		//this.UltimoEstado().setFechaFinAsignacion(new Date());
+	public void finalizarIntervencion(CambioIntervencion ci,String Obs,Date fecha){
+		this.UltimoEstado().setFechaFinAsignacion(fecha);
 		estado=ci.getEstado();
-		//fechaFin=Date;
+		fechaFin=fecha;
+		historialIntervencion.add(ci);
+		observaciones=Obs;
+	}
+	
+	public void actualizarIntervencion(CambioIntervencion ci,String Obs,Date fecha){
+		this.UltimoEstado().setFechaFinAsignacion(fecha);
+		estado=ci.getEstado();
+
 		historialIntervencion.add(ci);
 		observaciones=Obs;
 	}

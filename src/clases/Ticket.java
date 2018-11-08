@@ -1,6 +1,6 @@
 package clases;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
@@ -103,8 +103,9 @@ public class Ticket {
 	}
 
 	public void setEstadoActual(CambioEstado estado) {
-		//nose como hacerlo con sql date para la fecha actual
-		//estadoActual.setFechaFin(new Date());
+		//para que quede la misma fecha que el nuevo estado
+		estadoActual.setFechaFin(estado.getFechaInicio());
+		
 		this.historialEstados.add(estado);
 		this.estadoActual = estado;
 	}

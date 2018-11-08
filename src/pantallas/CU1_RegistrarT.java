@@ -28,7 +28,6 @@ import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -159,7 +158,8 @@ public class CU1_RegistrarT extends JPanel {
 		obscroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(obscroll);
 
-		// FECHA Y HORA
+		// FECHA Y HORA 
+			//now is fecha actual
 		Date now = new Date();
 		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat h = new SimpleDateFormat("hh:mm a");
