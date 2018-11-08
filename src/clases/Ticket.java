@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -30,14 +32,25 @@ public class Ticket {
 	//TIEMPO DE ATENCION NO SE GUARDA EN BD? -JOSE
 	private Time tiempoDeAtencion;
 	
+	
+	
+	@OneToOne
 	private CambioEstado estadoActual;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@ManyToOne
 	private ClasificacionDeTicket clasificacionActual;
+	
+	@ManyToOne
 	private Empleado duenio;
+	
+	
+	@OneToMany(mappedBy="ticket")
 	private ArrayList<CambioEstado> historialEstados = new ArrayList<CambioEstado>();
+	
+	@OneToMany(mappedBy="ticket")
 	private ArrayList<CambioClasificacion> cambioClasificacion = new ArrayList<CambioClasificacion>();
+	
+	@OneToMany(mappedBy="ticket")
 	private ArrayList<Intervencion> intervenciones = new ArrayList<Intervencion>();
 	
 	

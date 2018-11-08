@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -25,16 +26,11 @@ public class CambioClasificacion {
 	//TIEMPO NO SE GUARDA EN BD?
 	private Time tiempo;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
 	private Usuario interviene;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
 	private ClasificacionDeTicket clasificacion;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@ManyToOne
 	private Ticket ticket;
 	
 	

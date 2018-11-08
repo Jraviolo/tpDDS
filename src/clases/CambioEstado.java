@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -18,19 +19,20 @@ public class CambioEstado {
 	@Column(name="IDcambios_est")
 	private Integer idCambioEstado;
 	
-	//FALTA MAPEAR
+	@ManyToOne
 	private EstadoTicket estado;
 	@Column(name="fecha_inicio")
 	private Date fechaInicio;
 	@Column(name="fecha_fin")
 	private Date fechaFin;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	
+	@OneToOne (mappedBy="estadoActual")
+	private Ticket ticketactual;
+	
+	@ManyToOne
 	private Ticket ticket;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
 	private Usuario interviene; //@ale agregue este 
 	
 	public CambioEstado() {
