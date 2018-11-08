@@ -1,8 +1,11 @@
 package clases;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +27,10 @@ public class Empleado {
 	private String ubicacion;
 	@Column (name="Descripcion_cargo")
 	private String descripcionDeCargo;
+	
+	@OneToMany(mappedBy="duenio")
+	private ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+	
 	
 	public Empleado() {
 		// TODO Auto-generated constructor stub
