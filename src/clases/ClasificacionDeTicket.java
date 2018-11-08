@@ -81,7 +81,7 @@ public class ClasificacionDeTicket {
 	
 	@Override
 	public String toString() {
-		return nombre;
+		return this.nombre;
 	}
 
 	

@@ -16,6 +16,10 @@ public class GestorBaseDeDatos {
 		
 	}
 	
+	public ArrayList<ClasificacionDeTicket> getClasificaciones() {
+		return null;
+	}
+	
 	public ClasificacionDeTicket buscarClasificacion(int idclasificacion) {
 		return null;
 	}

@@ -7,7 +7,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gestores.GestorUsuario;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Panel;
@@ -28,6 +32,8 @@ public class InicioSesion extends JFrame {
 	private JPanel contentPane;
 	private JTextField user;
 	private JPasswordField passwordField;
+	
+	public GestorUsuario gu=new GestorUsuario();
 
 	/**
 	 * Launch the application.
@@ -103,10 +109,18 @@ public class InicioSesion extends JFrame {
 		JButton iniciarsesion = new JButton("Iniciar sesi\u00F3n");
 		iniciarsesion.addActionListener(new ActionListener() {				
 			public void actionPerformed(ActionEvent e) {
-				Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda();				
-				panelMesaDeAyuda.setPadre(frame);
-				panelMesaDeAyuda.setAnterior(contentPane);
-				setContentPane(panelMesaDeAyuda);	
+				
+				int idUsuario=gu.login(user.getText(), String.valueOf(passwordField.getPassword()));
+				
+				if(idUsuario>0) {
+					Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda(idUsuario);				
+					panelMesaDeAyuda.setPadre(frame);
+					panelMesaDeAyuda.setAnterior(contentPane);
+					setContentPane(panelMesaDeAyuda);
+				}
+				else {
+					JOptionPane.showMessageDialog(new JPanel(),"Usuario o contraseña incorrectos","Error",JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		iniciarsesion.setForeground(new Color(255, 255, 255));

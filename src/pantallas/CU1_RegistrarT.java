@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Image;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,12 +13,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import clases.ClasificacionDeTicket;
+import gestores.GestorClasificacionDeTicket;
 import gestores.GestorTicket;
 
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Panel;
 import javax.swing.JButton;
 import java.awt.Button;
@@ -24,7 +30,9 @@ import java.awt.event.ActionListener;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.JTextField;
@@ -43,12 +51,15 @@ public class CU1_RegistrarT extends JPanel {
 	private JScrollPane obscroll;
 	private JTextField txtDdmmaaaa;
 	private JTextField txtHhmm;
-	private GestorTicket gt=new GestorTicket();
 	
+	private GestorTicket gt=new GestorTicket();
+	private GestorClasificacionDeTicket gc=new GestorClasificacionDeTicket();
 
-	public CU1_RegistrarT() {
+	public CU1_RegistrarT(int idUsuario2) {
 		
+		//                       SACAR EL 2DE ID
 		//tiene que venir de la otra interfaz 
+		//int 
 		int idUsuario=1123;
 		
 		
@@ -118,9 +129,17 @@ public class CU1_RegistrarT extends JPanel {
 		lblClasificacionTicket.setBounds(93, 216, 141, 20);
 		this.add(lblClasificacionTicket);
 
-		JComboBox clasificacion = new JComboBox();
+		
+		ArrayList<ClasificacionDeTicket> c=gc.getClasificaciones();
+		
+		JComboBox<ClasificacionDeTicket> clasificacion = new JComboBox<ClasificacionDeTicket>();
+		for(int j = 0; j < c.size(); j++)
+			clasificacion.addItem(c.get(j));
+		
 		clasificacion.setBounds(230, 216, 231, 20);
 		this.add(clasificacion);
+		
+		
 
 		// DESCRIPICION
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n del problema:");
@@ -185,11 +204,10 @@ public class CU1_RegistrarT extends JPanel {
 					if (leg.matches("[0-9]+") && leg.length() > 2) {
 						int l=Integer.valueOf(leg);
 						
-						
-						//FALTA 
-						//IDUSUARIO que lo trae el iniciar 
-						//IDCLASIFI que habria que cargarlos como enum
-						//IDGrupo same 
+						int idClasificacion= ((ClasificacionDeTicket) clasificacion.getSelectedItem()).getIdClasificacion();
+						System.out.println(String.valueOf(idClasificacion));
+						//FALTA
+						//IDGrupo 
 						//gt.registrarTicket(l, idClasificacion, ob.getText(), idUsuiario, idgrupo,now);
 						
 						Observaciones asd = new Observaciones(new JFrame(),true,idTicket,idUsuario);
