@@ -1,6 +1,11 @@
 package gestores;
 
 import java.util.Date;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import java.util.ArrayList;
 
 import clases.ClasificacionDeTicket;
@@ -10,6 +15,8 @@ import clases.GrupoDeResolucion;
 import clases.Ticket;
 import clases.Usuario;
 
+
+
 public class GestorBaseDeDatos {
 	
 	public GestorBaseDeDatos() {
@@ -17,8 +24,27 @@ public class GestorBaseDeDatos {
 	}
 	
 	public ArrayList<ClasificacionDeTicket> getClasificaciones() {
-		return null;
-	}
+
+		//crear factory
+
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(ClasificacionDeTicket.class).buildSessionFactory();
+
+		//crear sesión
+
+		Session session = factory.getCurrentSession();
+
+		//usar el objeto session
+		session.beginTransaction();
+		ArrayList<ClasificacionDeTicket> clasificaciones=
+		(ArrayList<ClasificacionDeTicket>) session.createQuery("from ClasificacionDeTicket").getResultList();
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+		return clasificaciones;
+	
+		
+
+		}
 	
 	public ClasificacionDeTicket buscarClasificacion(int idclasificacion) {
 		return null;

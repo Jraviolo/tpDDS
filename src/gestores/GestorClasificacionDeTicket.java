@@ -26,7 +26,7 @@ public class GestorClasificacionDeTicket {
 	public ArrayList<ClasificacionDeTicket> getClasificaciones() {
 		//https://stackoverflow.com/questions/31884775/create-enumeration-of-objects
 		//ArrayList<ClasificacionDeTicket> clasificaciones = gbd.getClasificaciones();
-		ArrayList<ClasificacionDeTicket> clasificaciones=new ArrayList<>();
+		/*ArrayList<ClasificacionDeTicket> clasificaciones=new ArrayList<>(); 
 		ClasificacionDeTicket c=new ClasificacionDeTicket();
 		c.setIdClasificacion(123);
 		c.setNombre("Deudor");
@@ -37,9 +37,9 @@ public class GestorClasificacionDeTicket {
 		c1.setIdClasificacion(345);
 		c1.setNombre("Es alto down");
 		
-		clasificaciones.add(c1);
+		clasificaciones.add(c1);*/
 		
-		return clasificaciones;
+		return gbd.getClasificaciones();
 	}
 	
 	public void agregarClasificacion() {

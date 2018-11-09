@@ -1,15 +1,19 @@
 package clases;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="clasificacion")
@@ -23,16 +27,17 @@ public class ClasificacionDeTicket {
 	@Column(name="descripcion")
 	private String descripcion;
 	//INCONSISTENCIA ENTRE BD Y DIAGRAMA DE CLASES
-	//@Column(name="activo")
-	private EstadoClasificacion estado;
+	@Column(name="activo")
+	private boolean estado;
+	//private EstadoClasificacion estado;
 	
 	
+	//@OneToMany(mappedBy = "clasificacionActual", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany (mappedBy="clasificacionActual",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	public List<Ticket> tickets = new ArrayList<>();
 	
-	@OneToMany (mappedBy="clasificacionActual")
-	private ArrayList<Ticket> tickets = new ArrayList<Ticket>();
 	
-	
-	private Usuario usuario;
+	//private Usuario usuario;
 	
 	
 	public ClasificacionDeTicket() {
@@ -70,12 +75,12 @@ public class ClasificacionDeTicket {
 	}
 
 
-	public EstadoClasificacion getEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(EstadoClasificacion estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 	

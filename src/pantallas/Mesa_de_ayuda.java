@@ -32,7 +32,7 @@ public class Mesa_de_ayuda extends JPanel {
 	JPanel anterior;
 	JPanel panel=this;
 	
-	public Mesa_de_ayuda(int idUsuario) {
+	public Mesa_de_ayuda(int idUsuario,int idgrupo) {
 		Color theme = new Color(38, 79, 111);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
@@ -124,7 +124,7 @@ public class Mesa_de_ayuda extends JPanel {
 		JButton registrarTicket = new JButton("Registrar ticket");
 		registrarTicket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CU1_RegistrarT panelRegistrarTicket = new CU1_RegistrarT(idUsuario);
+				CU1_RegistrarT panelRegistrarTicket = new CU1_RegistrarT(idUsuario,idgrupo);
 				panelRegistrarTicket.setPadre(padre);
 				panelRegistrarTicket.setAnterior(panel);
 				padre.setContentPane(panelRegistrarTicket);

@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -35,6 +36,7 @@ public class Intervencion {
 	private GrupoDeResolucion intervencion;
 	
 	@ManyToOne
+	@JoinColumn(name = "numero")
 	private Ticket ticket;
 	
 	private ArrayList<CambioIntervencion> historialIntervencion = new ArrayList<CambioIntervencion>();

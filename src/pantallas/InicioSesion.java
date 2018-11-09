@@ -111,9 +111,10 @@ public class InicioSesion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				int idUsuario=gu.login(user.getText(), String.valueOf(passwordField.getPassword()));
+				int idgrupo=gu.getgrupo(idUsuario);
 				
 				if(idUsuario>0) {
-					Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda(idUsuario);				
+					Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda(idUsuario,idgrupo);				
 					panelMesaDeAyuda.setPadre(frame);
 					panelMesaDeAyuda.setAnterior(contentPane);
 					setContentPane(panelMesaDeAyuda);

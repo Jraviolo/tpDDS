@@ -13,4 +13,9 @@ public class GestorUsuario {
 		int idUsuario=1;
 		return idUsuario;
 	}
+	public int getgrupo(int idusuario){
+		//int idUsuario= gbd.login(usuario,contraseña);
+		int idUsuario=1;
+		return idUsuario;
+	}
 }

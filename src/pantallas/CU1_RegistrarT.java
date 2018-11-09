@@ -54,13 +54,13 @@ public class CU1_RegistrarT extends JPanel {
 	private GestorTicket gt=new GestorTicket();
 	private GestorClasificacionDeTicket gc=new GestorClasificacionDeTicket();
 
-	public CU1_RegistrarT(int idUsuario2) {
+	public CU1_RegistrarT(int idUsuario2,int idgrupo2) {
 		
 		//                       SACAR EL 2DE ID
 		//tiene que venir de la otra interfaz 
 		//int 
-		int idUsuario=1123;
-		
+		int idUsuario=1;
+		int idgrupo=1;
 		
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
@@ -206,8 +206,7 @@ public class CU1_RegistrarT extends JPanel {
 						
 						int idClasificacion= ((ClasificacionDeTicket) clasificacion.getSelectedItem()).getIdClasificacion();
 						System.out.println(String.valueOf(idClasificacion));
-						//FALTA
-						//IDGrupo 
+						
 						//gt.registrarTicket(l, idClasificacion, ob.getText(), idUsuiario, idgrupo,now);
 						
 						Observaciones asd = new Observaciones(new JFrame(),true,idTicket,idUsuario);

@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -31,6 +32,7 @@ public class CambioEstado {
 	private Ticket ticketactual;
 	
 	@ManyToOne
+	@JoinColumn(name = "numero")
 	private Ticket ticket;
 	
 	private Usuario interviene; //@ale agregue este 
