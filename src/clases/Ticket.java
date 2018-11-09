@@ -1,6 +1,7 @@
 package clases;
 
 import java.util.Date;
+import java.util.List;
 import java.sql.Time;
 import java.util.ArrayList;
 
@@ -34,10 +35,10 @@ public class Ticket {
 	
 	
 	@OneToOne
+	@JoinColumn(name = "idestado_actual")
 	private CambioEstado estadoActual;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "IDClasif")
+	@ManyToOne
 	public ClasificacionDeTicket clasificacionActual;
 	
 	@ManyToOne
@@ -45,13 +46,13 @@ public class Ticket {
 	
 	
 	@OneToMany(mappedBy="ticket")
-	private ArrayList<CambioEstado> historialEstados = new ArrayList<CambioEstado>();
+	private List<CambioEstado> historialEstados = new ArrayList<CambioEstado>();
 	
     @OneToMany(mappedBy="ticket")
-	private ArrayList<CambioClasificacion> cambioClasificacion = new ArrayList<CambioClasificacion>(); 
+	private List<CambioClasificacion> cambioClasificacion = new ArrayList<CambioClasificacion>(); 
 	
 	@OneToMany(mappedBy="ticket")
-	private ArrayList<Intervencion> intervenciones = new ArrayList<Intervencion>();
+	private List<Intervencion> intervenciones = new ArrayList<Intervencion>();
 	
 	
 	public Ticket() {
@@ -94,7 +95,7 @@ public class Ticket {
 
 	
 
-	public ArrayList<CambioEstado> getHistorialEstados() {
+	public List<CambioEstado> getHistorialEstados() {
 		return historialEstados;
 	}
 

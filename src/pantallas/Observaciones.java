@@ -167,7 +167,7 @@ public class Observaciones extends JDialog {
 						//gt.cerrarTicket(idTicket,textField.getText(),idUsuario);
 					} else if (rdbtnEderivarAGrupo.isSelected()) {
 						//derivar
-						String idGrupo = ((GrupoDeResolucion) comboBox.getSelectedItem()).getCodigo();
+						int idGrupo = ((GrupoDeResolucion) comboBox.getSelectedItem()).getCodigo();
 						//gt.derivarTicket(idTicket,textField.getText(),idUsuario,idGrupo);
 
 						

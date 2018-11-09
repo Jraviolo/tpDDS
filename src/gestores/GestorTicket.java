@@ -30,8 +30,12 @@ public class GestorTicket {
 	public void registrarTicket(int legajo,int idClasificacion,String Descripcion,int idUsuario,int idgrupo,Date fecha) {
 		
 		ClasificacionDeTicket clasificacion= gbd.buscarClasificacion(idClasificacion);
-		Usuario usuario=gbd.buscarUsuario(idUsuario);
+
 		GrupoDeResolucion mesaDeAyuda=gbd.buscarGrupo(idgrupo);
+		System.out.println(mesaDeAyuda.getNombre());
+	/*
+		Usuario usuario=gbd.buscarUsuario(idUsuario);
+		
 		Empleado empleado=gbd.buscarEmpleado(legajo);
 		
 		CambioEstado e1=new CambioEstado(EstadoTicket.abiertoSinDerivar,usuario);
@@ -48,7 +52,7 @@ public class GestorTicket {
 		//esto bd
 		gbd.registrarTicket(t);
 		
-		//retornar idticket
+		//retornar idticket*/
 	}	
 	public void consultarTicket(Integer nroT,Integer nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
 		this.panelConsultar.setListaTickets(gbd.buscarTicket(nroT, nroL, clasificacion, estado, fechaApertura, fechaUltCambio, ultGrupo), true);

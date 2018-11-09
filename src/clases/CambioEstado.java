@@ -8,9 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="cambio_estado")
@@ -21,20 +23,27 @@ public class CambioEstado {
 	private Integer idCambioEstado;
 	
 	@ManyToOne
+	private et e;
+	
+	@Transient
 	private EstadoTicket estado;
+	
+	
 	@Column(name="fecha_inicio")
 	private Date fechaInicio;
 	@Column(name="fecha_fin")
 	private Date fechaFin;
 	
 	
-	@OneToOne (mappedBy="estadoActual")
-	private Ticket ticketactual;
+	//@OneToOne (mappedBy="estadoActual")
+	//private Ticket ticketactual;
 	
 	@ManyToOne
 	@JoinColumn(name = "numero")
 	private Ticket ticket;
 	
+	@OneToOne
+	@JoinColumn(name = "IdUsuario")
 	private Usuario interviene; //@ale agregue este 
 	
 	public CambioEstado() {

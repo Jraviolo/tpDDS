@@ -1,8 +1,13 @@
 package clases;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -11,15 +16,22 @@ public class GrupoDeResolucion {
 
 	@Id
 	@Column(name="codigo")
-	private String codigo;
+	private int codigo;
+	
 	@Column(name="nombre")
 	private String nombre;
+	
 	@Column(name="descripcion")
 	private String descripcion;
+	
 	@Column(name="nivel")
 	private NivelDeGrupo nivel;
+	
 	@Column(name="activo")
 	private String estado;
+	
+	@OneToMany(mappedBy = "intervencion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Intervencion> intervenciones = new ArrayList<Intervencion>();
 	
 	
 	public GrupoDeResolucion() {
@@ -27,12 +39,12 @@ public class GrupoDeResolucion {
 	}
 
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 

@@ -33,7 +33,8 @@ public class ClasificacionDeTicket {
 	
 	
 	//@OneToMany(mappedBy = "clasificacionActual", cascade = CascadeType.ALL, orphanRemoval = true)
-	@OneToMany (mappedBy="clasificacionActual",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	//@OneToMany (mappedBy="clasificacionActual",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="clasificacionActual")
 	public List<Ticket> tickets = new ArrayList<>();
 	
 	

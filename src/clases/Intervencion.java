@@ -32,7 +32,7 @@ public class Intervencion {
 	@Column(name="observacion")
 	private String observaciones;
 	
-	
+	@ManyToOne
 	private GrupoDeResolucion intervencion;
 	
 	@ManyToOne

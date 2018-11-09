@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 @Entity
 @Table(name="cambio_clasificacion")
 public class CambioClasificacion {
@@ -25,10 +26,15 @@ public class CambioClasificacion {
 	private Date fechaFin;
 	
 	//TIEMPO NO SE GUARDA EN BD?
+	@Transient
 	private Time tiempo;
 	
+	@OneToOne
+	@JoinColumn(name = "IdUsuario")
 	private Usuario interviene;
 	
+	@OneToOne
+	@JoinColumn(name = "IDClasif")
 	private ClasificacionDeTicket clasificacion;
 	
 	@ManyToOne

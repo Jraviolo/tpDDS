@@ -23,7 +23,19 @@
 
 		<!-- Set the current session context -->
 		<property name="current_session_context_class">thread</property>
- 
+		
+			
+ 		<mapping class="clases.Ticket"/>
+ 		<mapping class="clases.ClasificacionDeTicket"/>
+ 		<mapping class="clases.CambioEstado"/>
+ 		<mapping class="clases.et"/>
+ 		<mapping class="clases.CambioClasificacion"/>
+ 		<mapping class="clases.Empleado"/>
+ 		<mapping class="clases.EstadoClasificacion"/>
+ 		<mapping class="clases.EstadoIntervencion"/>
+ 		<mapping class="clases.GrupoDeResolucion"/>
+ 		<mapping class="clases.Intervencion"/>
+ 		<mapping class="clases.Usuario"/>
     </session-factory>
 
 </hibernate-configuration>  
