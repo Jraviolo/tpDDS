@@ -36,7 +36,7 @@ public class ConsultarTableModel extends AbstractTableModel{
 		switch (columnIndex) {
 		
 		case 0:
-			valor = this.tickets.get(rowIndex).getNumero();
+			valor = this.tickets.get(rowIndex).getId();
 			break;
 		case 1:
 			valor = this.tickets.get(rowIndex).getEmpleado().getLegajo();

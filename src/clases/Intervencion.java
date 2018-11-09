@@ -133,10 +133,11 @@ public class Intervencion {
 		Boolean encontrado=false;
 		int i=historialIntervencion.size()-1;
 		while(encontrado==false && i>0) {
-			if(historialIntervencion.get(i).getFechaFinAsignacion()==null) {
-				c1=historialIntervencion.get(i);
+			c1=historialIntervencion.get(i);
+			if(c1.getFechaFinAsignacion()==null && c1.getEstado().toString()=="trabajando") {
 				encontrado=true;
 			}
+			else c1=null;
 		}
 		return c1;
 	}
