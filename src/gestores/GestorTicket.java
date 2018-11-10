@@ -1,6 +1,7 @@
 package gestores;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import clases.CambioClasificacion;
@@ -13,6 +14,7 @@ import clases.GrupoDeResolucion;
 import clases.Intervencion;
 import clases.Ticket;
 import clases.Usuario;
+import clasesAuxiliares.TicketAux;
 import pantallas.CU2_ConsultarT;
 
 public class GestorTicket {
@@ -55,7 +57,17 @@ public class GestorTicket {
 		//retornar idticket*/
 	}	
 	public void consultarTicket(Integer nroT,Integer nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
-		this.panelConsultar.setListaTickets(gbd.buscarTicket(nroT, nroL, clasificacion, estado, fechaApertura, fechaUltCambio, ultGrupo), true);
+		ArrayList<Ticket> busqueda = gbd.buscarTicket(nroT, nroL, clasificacion, estado, fechaApertura, fechaUltCambio, ultGrupo);
+		ArrayList<TicketAux> listaResultado = new ArrayList<TicketAux>();
+		
+		
+		for(int i=0;i<busqueda.size();i++) {
+			Ticket t= busqueda.get(i);
+			TicketAux aux = new TicketAux(t.getId(),t.getEmpleado().getLegajo(),t.getFechaDeApertura(),t.getFechaUltCambio(),t.getUsuarioCreador(),t.clasificacionActual.getNombre(),t.getEstadoActual().toString(),t.ultimaIntervencion().getGrupo());
+			listaResultado.add(aux);
+		}
+		
+		this.panelConsultar.setListaTickets(listaResultado, true);
 	}
 	
 	public void cerrarTicket(int idTicket,String obs,int idU) {

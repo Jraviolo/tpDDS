@@ -1,16 +1,18 @@
 package pantallas;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import clases.Ticket;
+import clasesAuxiliares.TicketAux;
 
 
 public class ConsultarTableModel extends AbstractTableModel{
 	
-	private List<Ticket> tickets;
+	private List<TicketAux> tickets;
 	private String[] columnas = {"Numero ticket","Numero legajo","Fecha apertura","Hora apertura", "Operador","Clasificacion actual", "Estado actual", "Ultimo cambio de estado", "Grupo de resolucion actual"};
 	
 	
@@ -36,38 +38,35 @@ public class ConsultarTableModel extends AbstractTableModel{
 		switch (columnIndex) {
 		
 		case 0:
-			valor = this.tickets.get(rowIndex).getId();
+			valor = this.tickets.get(rowIndex).getIdTicket();
 			break;
 		case 1:
-			valor = this.tickets.get(rowIndex).getEmpleado().getLegajo();
+			valor = this.tickets.get(rowIndex).getLegajo();
 			break;
 		case 2:			
 			SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-			String fecha = f.format(this.tickets.get(rowIndex).getFechaDeApertura());
+			String fecha = f.format(this.tickets.get(rowIndex).getFechaApertura());
 			valor = fecha;
 			break;
 		case 3:
 			SimpleDateFormat h = new SimpleDateFormat("hh:mm a");
-			String hora = h.format(this.tickets.get(rowIndex).getFechaDeApertura());
+			String hora = h.format(this.tickets.get(rowIndex).getFechaApertura());
 			valor = hora;
 			break;
 		case 4:
-			//COMENTADO PORQUE NO ESTA EL METODO TODAVIA
-			//valor = this.tickets.get(rowIndex).getOperador();
+			valor = this.tickets.get(rowIndex).getNombreUsuario();
 			break;
 		case 5:
-			valor = this.tickets.get(rowIndex).getClasificacionActual();
+			valor = this.tickets.get(rowIndex).getClasificacion();
 			break;
 		case 6:
 			valor = this.tickets.get(rowIndex).getEstadoActual();
 			break;
 		case 7:
-			//COMENTADO PORQUE NO ESTA EL METODO TODAVIA
-			//valor = this.tickets.get(rowIndex).getFechaUltCambio();
+			valor = this.tickets.get(rowIndex).getFechaUltCambio();
 			break;
 		case 8:
-			//COMENTADO PORQUE NO ESTA EL METODO TODAVIA
-			//valor = this.tickets.get(rowIndex).getGrupoResolucion();
+			valor = this.tickets.get(rowIndex).getGrupoActual();
 			break;
 			
 		default:
@@ -78,11 +77,11 @@ public class ConsultarTableModel extends AbstractTableModel{
 		return valor;
 	}
 
-	public List<Ticket> getTickets() {
+	public List<TicketAux> getTickets() {
 		return tickets;
 	}
 
-	public void setTickets(List<Ticket> tickets) {
-		this.tickets = tickets;
+	public void setTickets(ArrayList<TicketAux> listaResultado) {
+		this.tickets = listaResultado;
 	}
 }

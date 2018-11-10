@@ -143,4 +143,8 @@ public class Intervencion {
 		}
 		return c1;
 	}
+
+	public String getGrupo() {
+		return intervencion.getNombre();
+	}
 }

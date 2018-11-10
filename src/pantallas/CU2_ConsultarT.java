@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -42,6 +43,7 @@ import clases.ClasificacionDeTicket;
 import clases.EstadoTicket;
 import clases.GrupoDeResolucion;
 import clases.Ticket;
+import clasesAuxiliares.TicketAux;
 
 import java.awt.Component;
 
@@ -328,8 +330,8 @@ public class CU2_ConsultarT extends JPanel {
 			return null;
 	}
 
-	public void setListaTickets(List<Ticket> ticketsLista, boolean actualizar) {
-		this.tableModel.setTickets(ticketsLista);
+	public void setListaTickets(ArrayList<TicketAux> listaResultado, boolean actualizar) {
+		this.tableModel.setTickets(listaResultado);
 		if (actualizar)
 			this.tableModel.fireTableDataChanged();
 	}

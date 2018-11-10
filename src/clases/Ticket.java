@@ -169,5 +169,13 @@ public class Ticket {
 	public ClasificacionDeTicket getClasificacionActual() {
 		return clasificacionActual;
 	}
+
+	public Date getFechaUltCambio() {
+		return estadoActual.getFechaInicio();
+	}
+	
+	public String getUsuarioCreador(){
+		return null;
+	}
 	
 }
