@@ -6,7 +6,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,6 +18,7 @@ public class GrupoDeResolucion {
 
 	@Id
 	@Column(name="codigo")
+	@GeneratedValue
 	private int codigo;
 	
 	@Column(name="nombre")
@@ -28,10 +31,24 @@ public class GrupoDeResolucion {
 	private NivelDeGrupo nivel;
 	
 	@Column(name="activo")
-	private String estado;
+	private Boolean estado;
 	
-	@OneToMany(mappedBy = "intervencion", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "cod_gr")
+	private List<Usuario> usuarios = new ArrayList<Usuario>();
+	
+	
+	@OneToMany(
+	        mappedBy = "intervencion", 
+	        cascade = CascadeType.ALL, 
+	        orphanRemoval = true
+	    )
     private List<Intervencion> intervenciones = new ArrayList<Intervencion>();
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "cod_gr")
+	private List<ClasificacionDeTicket> clasificaciones = new ArrayList<ClasificacionDeTicket>();
 	
 	
 	public GrupoDeResolucion() {
@@ -79,12 +96,12 @@ public class GrupoDeResolucion {
 	}
 
 
-	public String getEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(String estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 

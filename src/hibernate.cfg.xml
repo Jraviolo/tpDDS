@@ -30,6 +30,7 @@
  		<mapping class="clases.CambioEstado"/>
  		<mapping class="clases.et"/>
  		<mapping class="clases.CambioClasificacion"/>
+ 		<mapping class="clases.CambioIntervencion"/>
  		<mapping class="clases.Empleado"/>
  		<mapping class="clases.EstadoClasificacion"/>
  		<mapping class="clases.EstadoIntervencion"/>

@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +23,7 @@ import javax.persistence.Table;
 public class Ticket {
 	
 	@Id
+	@GeneratedValue
 	@Column(name="numero")
 	private Integer id;
 
@@ -39,19 +41,24 @@ public class Ticket {
 	private CambioEstado estadoActual;
 	
 	@ManyToOne
+	@JoinColumn(name= "IDClasif")
 	public ClasificacionDeTicket clasificacionActual;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "duenio")
 	private Empleado duenio;
 	
 	
-	@OneToMany(mappedBy="ticket")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "numero")
 	private List<CambioEstado> historialEstados = new ArrayList<CambioEstado>();
 	
-    @OneToMany(mappedBy="ticket")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "numero")
 	private List<CambioClasificacion> cambioClasificacion = new ArrayList<CambioClasificacion>(); 
 	
-	@OneToMany(mappedBy="ticket")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "numero")
 	private List<Intervencion> intervenciones = new ArrayList<Intervencion>();
 	
 	

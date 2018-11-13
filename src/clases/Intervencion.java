@@ -6,41 +6,65 @@ import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="intervencion")
 public class Intervencion {
 
 	@Id
+	@GeneratedValue
 	@Column(name="IDinterv")
 	private Integer idIntervencion;
-	//FALTA MAPEAR
+	@ManyToOne
+	@JoinColumn(name = "IDestado_interv")
 	private EstadoIntervencion estado;
 	@Column(name="fecha_inicio")
 	private Date fechaInicio;
 	@Column(name="fecha_fin")
 	private Date fechaFin;
+	@Transient
 	private Time tiempoDeAtencion;
 	@Column(name="observacion")
 	private String observaciones;
 	
 	@ManyToOne
+	@JoinColumn(name = "codigo")
 	private GrupoDeResolucion intervencion;
 	
-	@ManyToOne
-	@JoinColumn(name = "numero")
-	private Ticket ticket;
 	
-	private ArrayList<CambioIntervencion> historialIntervencion = new ArrayList<CambioIntervencion>();
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "IDintervencion")
+	private List<CambioIntervencion> historialIntervencion = new ArrayList<CambioIntervencion>();
 	
+	public GrupoDeResolucion getIntervencion() {
+		return intervencion;
+	}
+
+	public void setIntervencion(GrupoDeResolucion intervencion) {
+		this.intervencion = intervencion;
+	}
+
+	public List<CambioIntervencion> getHistorialIntervencion() {
+		return historialIntervencion;
+	}
+
+	public void setHistorialIntervencion(List<CambioIntervencion> historialIntervencion) {
+		this.historialIntervencion = historialIntervencion;
+	}
+
 	public Intervencion() {
 		// TODO Auto-generated constructor stub
 	}

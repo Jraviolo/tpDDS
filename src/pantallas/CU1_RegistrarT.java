@@ -207,7 +207,7 @@ public class CU1_RegistrarT extends JPanel {
 						int idClasificacion= ((ClasificacionDeTicket) clasificacion.getSelectedItem()).getIdClasificacion();
 						System.out.println(String.valueOf(idClasificacion));
 						
-						gt.registrarTicket(l, idClasificacion, ob.getText(),idUsuario, idgrupo,now);
+						//gt.registrarTicket(l, idClasificacion, ob.getText(),idUsuario, idgrupo,now);
 						
 						Observaciones asd = new Observaciones(new JFrame(),true,idTicket,idUsuario);
 						asd.setVisible(true);

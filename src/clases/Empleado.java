@@ -1,9 +1,12 @@
 package clases;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -12,6 +15,7 @@ import javax.persistence.Table;
 @Table(name="Empleado")
 public class Empleado {
 	@Id
+	@GeneratedValue
 	@Column (name="Legajo")
 	private Integer legajo;
 	
@@ -27,14 +31,16 @@ public class Empleado {
 	@Column (name="Telefono_directo")
 	private Integer telefonoDirecto;
 	
-	//UBICACION NO APARECE EN LAS TABLAS? -JOSE
-	//@Column (name="Ubicacion")
+	
+	@Column (name="ubicacion")
 	private String ubicacion;
 	@Column (name="Descripcion_cargo")
 	private String descripcionDeCargo;
 	
-	//@OneToMany(mappedBy="duenio")
-	//private ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+	@OneToMany(mappedBy="duenio",
+			cascade = CascadeType.ALL, 
+	        orphanRemoval = true)
+	private List<Ticket> tickets = new ArrayList<Ticket>();
 	
 	
 	public Empleado() {

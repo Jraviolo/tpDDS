@@ -3,7 +3,9 @@ package clases;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -13,6 +15,7 @@ import javax.persistence.Table;
 public class Usuario {
 	
 	@Id
+	@GeneratedValue
 	@Column(name="IdUsuario")
 	private Integer idUsuario;
 	
@@ -22,8 +25,8 @@ public class Usuario {
 	@Column(name="Contrasena")
 	private String contraseña;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="legajo")
 	private Empleado empleado;
 	
 	

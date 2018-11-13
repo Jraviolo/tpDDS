@@ -85,7 +85,7 @@ public class GestorTicket {
 		//chequear
 		Intervencion i = t.ultimaIntervencion();
 		
-		gi.finalizarIntervencion(i, EstadoIntervencion.terminada, u, obs,fechacierre);
+	//	gi.finalizarIntervencion(i, EstadoIntervencion.terminada, u, obs,fechacierre);
 		gbd.actualizarTicket(idTicket, t);
 	}
 	
@@ -99,13 +99,13 @@ public class GestorTicket {
 		CambioEstado e2=new CambioEstado(EstadoTicket.abiertoDerivado,u);
 		e2.setFechaInicio(fechaderivar);
 		
-		Intervencion i1 = gi.crearIntervencion(EstadoIntervencion.asignada,g,u,fechaderivar);
+	//	Intervencion i1 = gi.crearIntervencion(EstadoIntervencion.asignada,g,u,fechaderivar);
 		
 		t.setEstadoActual(e2);
 		
 		//ojota
 		Intervencion i=t.ultimaIntervencion();
-		gi.actualizarIntervencion(i, EstadoIntervencion.enEspera, u, obs,fechaderivar);
+	//	gi.actualizarIntervencion(i, EstadoIntervencion.enEspera, u, obs,fechaderivar);
 		t.nuevaIntervencion(i1);
 		gbd.actualizarTicket(idTicket, t);
 	}

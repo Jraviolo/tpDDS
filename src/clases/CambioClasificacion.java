@@ -6,6 +6,7 @@ import java.sql.Time;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +19,7 @@ import javax.persistence.Transient;
 public class CambioClasificacion {
 	
 	@Id
+	@GeneratedValue
 	@Column(name="IDCambios_clasif")
 	private Integer idCambioClasificacion;
 	@Column(name="fecha_inicio")
@@ -29,19 +31,16 @@ public class CambioClasificacion {
 	@Transient
 	private Time tiempo;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "IdUsuario")
 	private Usuario interviene;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "IDClasif")
 	private ClasificacionDeTicket clasificacion;
 	
-	@ManyToOne
-	@JoinColumn(name = "numero")
-	private Ticket ticket;
 	
-	
+
 	public CambioClasificacion() {
 		// TODO Auto-generated constructor stub
 	}

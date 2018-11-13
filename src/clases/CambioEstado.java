@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,11 +20,13 @@ import javax.persistence.Transient;
 public class CambioEstado {
 
 	@Id
+	@GeneratedValue
 	@Column(name="IDcambios_est")
 	private Integer idCambioEstado;
 	
 	@ManyToOne
-	private et e;
+	@JoinColumn(name="IDEst")
+	private et es;
 	
 	@Transient
 	private EstadoTicket estado;
@@ -35,14 +38,7 @@ public class CambioEstado {
 	private Date fechaFin;
 	
 	
-	//@OneToOne (mappedBy="estadoActual")
-	//private Ticket ticketactual;
-	
 	@ManyToOne
-	@JoinColumn(name = "numero")
-	private Ticket ticket;
-	
-	@OneToOne
 	@JoinColumn(name = "IdUsuario")
 	private Usuario interviene; //@ale agregue este 
 	
