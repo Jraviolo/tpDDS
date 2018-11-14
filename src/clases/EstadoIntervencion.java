@@ -16,3 +16,13 @@ public class EstadoIntervencion {
 	@Column(name="nombre")
 	String estado;
 }
+
+
+/*
+ * id	nombre
+ * -----------
+ * 0	asignada
+ * 1	en espera
+ * 2	Terminada
+ * 3	Trabajando
+ */

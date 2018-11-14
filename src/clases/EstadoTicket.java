@@ -38,3 +38,12 @@ public class EstadoTicket {
 	
 	
 }
+
+/*BD
+ * id	nombre
+ * -----------
+ * 0	Abierto Sin Derivar
+ * 1	Abierto Derivado
+ * 2	Soucionado a la espera Ok
+ * 3	Cerrado
+ */

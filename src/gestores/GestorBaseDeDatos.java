@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import clases.ClasificacionDeTicket;
 import clases.Empleado;
+import clases.EstadoIntervencion;
 import clases.EstadoTicket;
 import clases.GrupoDeResolucion;
 import clases.Ticket;
@@ -66,6 +67,7 @@ public class GestorBaseDeDatos {
 	
 		}
 	
+	
 	public GrupoDeResolucion buscarGrupo(int idgrupo)  {
 		
 			//crear factory
@@ -90,6 +92,14 @@ public class GestorBaseDeDatos {
 	}
 	
 	public Empleado buscarEmpleado(int legajo) {
+		return null;
+	}
+	
+	public EstadoTicket buscarEstadoTicket(int idEstado) {
+		return null;
+	}
+	
+	public EstadoIntervencion buscarEstadoIntervencion(int idEstado) {
 		return null;
 	}
 	

@@ -35,25 +35,26 @@ public class GestorTicket {
 
 		GrupoDeResolucion mesaDeAyuda=gbd.buscarGrupo(idgrupo);
 		System.out.println(mesaDeAyuda.getNombre());
-	/*
+	
 		Usuario usuario=gbd.buscarUsuario(idUsuario);
-		
 		Empleado empleado=gbd.buscarEmpleado(legajo);
 		
-		CambioEstado e1=new CambioEstado(EstadoTicket.abiertoSinDerivar,usuario);
+		EstadoTicket t_abiertoSinDerivar=gbd.buscarEstadoTicket(0);
+		EstadoIntervencion i_trabajando=gbd.buscarEstadoIntervencion(3);
+		
+		CambioEstado e1=new CambioEstado(t_abiertoSinDerivar,usuario);
 		e1.setFechaInicio(fecha);
 		
 		CambioClasificacion cc = gc.newCambioClasificacion(clasificacion, usuario);
 		cc.setFechaInicio(fecha);
 		
-		Intervencion i = gi.crearIntervencion(EstadoIntervencion.trabajando,mesaDeAyuda,usuario,fecha);
+		Intervencion i = gi.crearIntervencion(i_trabajando,mesaDeAyuda,usuario,fecha);
 		
 		Ticket t=new Ticket(empleado,clasificacion,Descripcion,e1,cc,i);
 		t.setFechaDeApertura(fecha);
 		
 		//esto bd
 		gbd.registrarTicket(t);
-		
 		//retornar idticket*/
 	}	
 	public void consultarTicket(Integer nroT,Integer nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
@@ -75,9 +76,12 @@ public class GestorTicket {
 		Ticket t = gbd.buscarTicket(idTicket);
 		Usuario u=gbd.buscarUsuario(idU);
 		
+		EstadoTicket t_cerrado=gbd.buscarEstadoTicket(3);
+		EstadoIntervencion i_trabajando=gbd.buscarEstadoIntervencion(2);
+		
 		Date fechacierre=new Date();
 		
-		CambioEstado e1=new CambioEstado(EstadoTicket.cerrado,u);
+		CambioEstado e1=new CambioEstado(t_cerrado,u);
 		e1.setFechaInicio(fechacierre);
 		
 		t.setEstadoActual(e1);
@@ -94,18 +98,22 @@ public class GestorTicket {
 		Usuario u=gbd.buscarUsuario(idU);
 		GrupoDeResolucion g=gbd.buscarGrupo(idgrupo);
 		
+		EstadoTicket t_abiertoDerivado=gbd.buscarEstadoTicket(1);
+		EstadoIntervencion i_asignada=gbd.buscarEstadoIntervencion(0);
+		EstadoIntervencion i_enespera=gbd.buscarEstadoIntervencion(1);
+		
 		Date fechaderivar=new Date();
 		
-		CambioEstado e2=new CambioEstado(EstadoTicket.abiertoDerivado,u);
+		CambioEstado e2=new CambioEstado(t_abiertoDerivado,u);
 		e2.setFechaInicio(fechaderivar);
 		
-	//	Intervencion i1 = gi.crearIntervencion(EstadoIntervencion.asignada,g,u,fechaderivar);
+		Intervencion i1 = gi.crearIntervencion(i_asignada,g,u,fechaderivar);
 		
 		t.setEstadoActual(e2);
 		
 		//ojota
 		Intervencion i=t.ultimaIntervencion();
-	//	gi.actualizarIntervencion(i, EstadoIntervencion.enEspera, u, obs,fechaderivar);
+		gi.actualizarIntervencion(i, i_enespera, u, obs,fechaderivar);
 		t.nuevaIntervencion(i1);
 		gbd.actualizarTicket(idTicket, t);
 	}
