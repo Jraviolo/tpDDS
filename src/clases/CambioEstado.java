@@ -26,10 +26,9 @@ public class CambioEstado {
 	
 	@ManyToOne
 	@JoinColumn(name="IDEst")
-	private et es;
-	
-	@Transient
 	private EstadoTicket estado;
+	//private et es;
+		//@Transient
 	
 	
 	@Column(name="fecha_inicio")
@@ -46,7 +45,7 @@ public class CambioEstado {
 		// TODO Auto-generated constructor stub
 	}
 	
-	//ale creo este
+	
 	public CambioEstado(EstadoTicket e,Usuario u) {
 		interviene=u;
 		estado=e;

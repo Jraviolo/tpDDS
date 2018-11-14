@@ -1,18 +1,40 @@
 package clases;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-
-public enum EstadoTicket {
-abiertoSinDerivar ("Abierto sin derivar"), 
-abiertoDerivado ("Abierto derivado"),
-solucionadoALaEsperaOK("Solucionado a la espera de OK"),
-cerrado("Cerrado");
+@Entity
+@Table(name="estado_ticket")
+public class EstadoTicket {
+	@Id
+	@GeneratedValue
+	@Column(name="IDEst")
+	int id;
+	@Column(name="Nombre")
+	String estado;
 	
-	private String estado;
-	private EstadoTicket(String e) {
-		this.estado=e;
+	public EstadoTicket() {
+		
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getEstado() {
 		return estado;
 	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
+	
 }
