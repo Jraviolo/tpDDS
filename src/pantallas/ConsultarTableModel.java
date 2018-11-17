@@ -12,7 +12,7 @@ import clasesAuxiliares.TicketAux;
 
 public class ConsultarTableModel extends AbstractTableModel{
 	
-	private List<TicketAux> tickets;
+	private List<TicketAux> tickets = new ArrayList<TicketAux>();
 	private String[] columnas = {"Numero ticket","Numero legajo","Fecha apertura","Hora apertura", "Operador","Clasificacion actual", "Estado actual", "Ultimo cambio de estado", "Grupo de resolucion actual"};
 	
 	

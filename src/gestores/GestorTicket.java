@@ -22,7 +22,6 @@ public class GestorTicket {
 	private GestorBaseDeDatos gbd = new GestorBaseDeDatos();
 	private gestorIntervenciones gi = new gestorIntervenciones();
 	private GestorClasificacionDeTicket gc=new GestorClasificacionDeTicket();
-	private CU2_ConsultarT panelConsultar;
 	
 	
 	public GestorTicket() {
@@ -57,18 +56,17 @@ public class GestorTicket {
 		gbd.registrarTicket(t);
 		//retornar idticket*/
 	}	
-	public void consultarTicket(Integer nroT,Integer nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
+	public ArrayList<TicketAux> consultarTicket(Integer nroT,Integer nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
 		ArrayList<Ticket> busqueda = gbd.buscarTicket(nroT, nroL, clasificacion, estado, fechaApertura, fechaUltCambio, ultGrupo);
 		ArrayList<TicketAux> listaResultado = new ArrayList<TicketAux>();
-		
-		
+
 		for(int i=0;i<busqueda.size();i++) {
 			Ticket t= busqueda.get(i);
 			TicketAux aux = new TicketAux(t.getId(),t.getEmpleado().getLegajo(),t.getFechaDeApertura(),t.getFechaUltCambio(),t.getUsuarioCreador(),t.clasificacionActual.getNombre(),t.getEstadoActual().toString(),t.ultimaIntervencion().getGrupo());
 			listaResultado.add(aux);
 		}
-		
-		this.panelConsultar.setListaTickets(listaResultado, true);
+
+		return listaResultado;
 	}
 	
 	public void cerrarTicket(int idTicket,String obs,int idU) {

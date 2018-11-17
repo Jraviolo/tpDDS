@@ -61,8 +61,8 @@ public class CU2_ConsultarT extends JPanel {
 	private JComboBox<GrupoDeResolucion> comboUltGrupo;
 	private JButton confreporte;
 	private JTable table_1;
-	private GestorTicket gt;
-	private ConsultarTableModel tableModel;
+	private GestorTicket gt = new GestorTicket();
+	private ConsultarTableModel tableModel = new ConsultarTableModel();
 
 	public CU2_ConsultarT() {
 
@@ -141,8 +141,8 @@ public class CU2_ConsultarT extends JPanel {
 					String clasificacion = ((ClasificacionDeTicket) comboClasificacion.getSelectedItem()).getNombre();
 					EstadoTicket estado = (EstadoTicket) comboEstado.getSelectedItem();
 					GrupoDeResolucion ultGrupo = (GrupoDeResolucion) comboUltGrupo.getSelectedItem();
-
-					// gt.consultarTicket(nroT, nroL, clasificacion , estado, fApertura, fUltCambio, ultGrupo);
+					
+					setListaTickets(gt.consultarTicket(nroT, nroL, clasificacion , estado, fApertura, fUltCambio, ultGrupo),true);
 
 				}
 			}
