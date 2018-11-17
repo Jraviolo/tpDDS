@@ -23,6 +23,8 @@ import java.awt.Panel;
 import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,6 +62,7 @@ public class CU2_ConsultarT extends JPanel {
 	private JComboBox<EstadoTicket> comboEstado;
 	private JComboBox<GrupoDeResolucion> comboUltGrupo;
 	private JButton confreporte;
+	private int seleccion;
 	private JTable table_1;
 	private GestorTicket gt = new GestorTicket();
 	private ConsultarTableModel tableModel = new ConsultarTableModel();
@@ -275,11 +278,26 @@ public class CU2_ConsultarT extends JPanel {
 		JS.setPreferredSize(new Dimension(400, 400));
 		this.add(JS);
 
+		table_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				int r = table_1.rowAtPoint(e.getPoint());
+				seleccion = r;
+				
+			}
+
+		});
+		
 		JButton btnNewButton = new JButton("Derivar ticket");
 		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//gt.derivarTicket(tableModel.getTickets().get(seleccion), obs, idU, idgrupo);
+			}
+		});
 		btnNewButton.setBounds(547, 640, 130, 40);
 		this.add(btnNewButton);
-
+		
 		JButton btnNewButton_1 = new JButton("Cerrar ticket");
 		btnNewButton_1.setBackground(Color.WHITE);
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -300,6 +318,7 @@ public class CU2_ConsultarT extends JPanel {
 		confreporte.setBackground(theme);
 		confreporte.setBounds(953, 640, 171, 40);
 		this.add(confreporte);
+		
 
 		JButton cerrar = new JButton("Cancelar");
 		cerrar.addActionListener(new ActionListener() {
