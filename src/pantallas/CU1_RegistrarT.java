@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import clases.ClasificacionDeTicket;
+import clasesAuxiliares.ClasificacionAux;
 import gestores.GestorClasificacionDeTicket;
 import gestores.GestorTicket;
 
@@ -129,9 +130,9 @@ public class CU1_RegistrarT extends JPanel {
 		this.add(lblClasificacionTicket);
 
 		
-		ArrayList<ClasificacionDeTicket> c=gc.getClasificaciones();
+		ArrayList<ClasificacionAux> c=gc.getClasificacionesAux();
 		
-		JComboBox<ClasificacionDeTicket> clasificacion = new JComboBox<ClasificacionDeTicket>();
+		JComboBox<ClasificacionAux> clasificacion = new JComboBox<ClasificacionAux>();
 		for(int j = 0; j < c.size(); j++)
 			clasificacion.addItem(c.get(j));
 		

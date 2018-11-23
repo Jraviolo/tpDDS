@@ -8,6 +8,11 @@ public class ClasificacionAux {
 	public ClasificacionAux() {
 		
 	}
+	
+	public ClasificacionAux(String n,int i) {
+		this.nombre=n;
+		this.Id=i;
+	}
 
 	public String getNombre() {
 		return nombre;

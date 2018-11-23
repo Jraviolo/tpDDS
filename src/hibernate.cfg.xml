@@ -28,7 +28,7 @@
  		<mapping class="clases.Ticket"/>
  		<mapping class="clases.ClasificacionDeTicket"/>
  		<mapping class="clases.CambioEstado"/>
- 		<mapping class="clases.et"/>
+ 		<mapping class="clases.EstadoTicket"/>
  		<mapping class="clases.CambioClasificacion"/>
  		<mapping class="clases.CambioIntervencion"/>
  		<mapping class="clases.Empleado"/>

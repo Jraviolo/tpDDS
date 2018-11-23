@@ -8,6 +8,7 @@ import java.util.List;
 import clases.CambioClasificacion;
 import clases.ClasificacionDeTicket;
 import clases.Usuario;
+import clasesAuxiliares.ClasificacionAux;
 
 public class GestorClasificacionDeTicket {
 	
@@ -23,23 +24,16 @@ public class GestorClasificacionDeTicket {
 		return cc;
 	}
 	
-	public ArrayList<ClasificacionDeTicket> getClasificaciones() {
-		//https://stackoverflow.com/questions/31884775/create-enumeration-of-objects
-		//ArrayList<ClasificacionDeTicket> clasificaciones = gbd.getClasificaciones();
-		/*ArrayList<ClasificacionDeTicket> clasificaciones=new ArrayList<>(); 
-		ClasificacionDeTicket c=new ClasificacionDeTicket();
-		c.setIdClasificacion(123);
-		c.setNombre("Deudor");
-		
-		clasificaciones.add(c);
-		
-		ClasificacionDeTicket c1=new ClasificacionDeTicket();
-		c1.setIdClasificacion(345);
-		c1.setNombre("Es alto down");
-		
-		clasificaciones.add(c1);*/
-		
-		return gbd.getClasificaciones();
+	public ArrayList<ClasificacionAux> getClasificacionesAux() {
+		ArrayList<ClasificacionDeTicket> c= gbd.getClasificaciones();
+		ArrayList<ClasificacionAux> r= new ArrayList<ClasificacionAux>();
+		for(int i=0;i<c.size();i++) {
+			int id=c.get(i).getIdClasificacion();
+			String nombre=c.get(i).getNombre();
+			ClasificacionAux a=new ClasificacionAux(nombre,id);
+			r.add(a);
+		}
+		return r;
 	}
 	
 	public void agregarClasificacion() {
