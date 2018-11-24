@@ -75,7 +75,7 @@ public class Mesa_de_ayuda extends JPanel {
 		consultarTicket.setBackground(Color.WHITE);
 		consultarTicket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CU2_ConsultarT panelConsultarTicket = new CU2_ConsultarT();
+				CU2_ConsultarT panelConsultarTicket = new CU2_ConsultarT(idUsuario);
 				panelConsultarTicket.setPadre(padre);
 				panelConsultarTicket.setAnterior(panel);
 				padre.setContentPane(panelConsultarTicket);

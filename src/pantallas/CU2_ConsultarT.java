@@ -67,7 +67,7 @@ public class CU2_ConsultarT extends JPanel {
 	private GestorTicket gt = new GestorTicket();
 	private ConsultarTableModel tableModel = new ConsultarTableModel();
 
-	public CU2_ConsultarT() {
+	public CU2_ConsultarT(int idUsuario) {
 
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
@@ -111,7 +111,7 @@ public class CU2_ConsultarT extends JPanel {
 					if (fechaApertura.getText().length() == 10) {
 						fApertura = armarFecha(fechaApertura.getText());
 					} else {
-						JOptionPane.showMessageDialog(panel, "Por favor ingrese la fecha con formato DD/MM/AAAA",
+						JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha con formato DD/MM/AAAA",
 								"Fecha invalida", JOptionPane.ERROR_MESSAGE);
 						fApVacia = true;
 					}
@@ -121,7 +121,7 @@ public class CU2_ConsultarT extends JPanel {
 					if (fechaUltCambio.getText().length() == 10) {
 						fUltCambio = armarFecha(fechaUltCambio.getText());
 					} else {
-						JOptionPane.showMessageDialog(panel, "Por favor ingrese la fecha con formato DD/MM/AAAA",
+						JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha con formato DD/MM/AAAA",
 								"Fecha invalida", JOptionPane.ERROR_MESSAGE);
 						fUltCVacia = true;
 					}
@@ -130,7 +130,7 @@ public class CU2_ConsultarT extends JPanel {
 				if ((!fApVacia && fApertura.compareTo(fechaActual) >= 0) || (!fUltCVacia
 						&& (fUltCambio.compareTo(fechaActual) >= 0 || fUltCambio.compareTo(fApertura) < 0))) {
 
-					JOptionPane.showMessageDialog(panel,
+					JOptionPane.showMessageDialog(null,
 							"La fecha de apertura y/o del último cambio de estado no pueden ser mayores a la fecha actual.",
 							"Fecha inválida", JOptionPane.ERROR_MESSAGE);
 
@@ -302,6 +302,20 @@ public class CU2_ConsultarT extends JPanel {
 		btnNewButton_1.setBackground(Color.WHITE);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				TicketAux ticket = tableModel.getTickets().get(seleccion);
+				if(ticket.getEstadoActual()=="Solucionado a la espera Ok") {
+					CU3_CerrarT panelCerrarTicket = new CU3_CerrarT(ticket.getIdTicket(),idUsuario);
+					panelCerrarTicket.setPadre(padre);
+					panelCerrarTicket.setAnterior(panel);
+					padre.setContentPane(panelCerrarTicket);
+					padre.setBounds(panelCerrarTicket.getBounds());
+					padre.setLocationRelativeTo(null);
+				}
+				else {
+					JOptionPane.showMessageDialog(null,
+							"No se puede cerrar un ticket en estado "+ticket.getEstadoActual(),
+							"Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnNewButton_1.setBounds(687, 640, 130, 40);

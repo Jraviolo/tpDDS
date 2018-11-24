@@ -44,6 +44,6 @@ public class EstadoTicket {
  * -----------
  * 0	Abierto Sin Derivar
  * 1	Abierto Derivado
- * 2	Soucionado a la espera Ok
+ * 2	Solucionado a la espera Ok
  * 3	Cerrado
  */
