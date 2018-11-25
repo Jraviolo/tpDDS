@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import gestores.GestorClasificacionDeTicket;
 import gestores.GestorTicket;
 
 import javax.swing.JLabel;
@@ -45,6 +46,7 @@ import clases.ClasificacionDeTicket;
 import clases.EstadoTicket;
 import clases.GrupoDeResolucion;
 import clases.Ticket;
+import clasesAuxiliares.ClasificacionAux;
 import clasesAuxiliares.TicketAux;
 
 import java.awt.Component;
@@ -65,6 +67,7 @@ public class CU2_ConsultarT extends JPanel {
 	private int seleccion;
 	private JTable table_1;
 	private GestorTicket gt = new GestorTicket();
+	private GestorClasificacionDeTicket gc=new GestorClasificacionDeTicket();
 	private ConsultarTableModel tableModel = new ConsultarTableModel();
 
 	public CU2_ConsultarT(int idUsuario) {
@@ -165,8 +168,13 @@ public class CU2_ConsultarT extends JPanel {
 		this.add(numeroLegajo);
 		numeroLegajo.setColumns(10);
 
-		JComboBox<ClasificacionDeTicket> comboClasificacion = new JComboBox();
-		comboClasificacion.setModel(new DefaultComboBoxModel(new String[] { "Todas", "asd" }));
+		
+		
+		ArrayList<ClasificacionAux> c=gc.getClasificacionesAux();
+		
+		JComboBox<ClasificacionAux> comboClasificacion = new JComboBox<ClasificacionAux>();
+		for(int j = 0; j < c.size(); j++)
+			comboClasificacion.addItem(c.get(j));
 		comboClasificacion.setBounds(489, 142, 150, 20);
 		this.add(comboClasificacion);
 
