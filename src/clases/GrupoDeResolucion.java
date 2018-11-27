@@ -24,7 +24,7 @@ public class GrupoDeResolucion {
 	@Column(name="nombre")
 	private String nombre;
 	
-	@Column(name="descripcion")
+	@Column(name="descripción")
 	private String descripcion;
 	
 	@Column(name="nivel")

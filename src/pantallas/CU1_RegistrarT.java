@@ -28,7 +28,7 @@ import java.awt.Panel;
 import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
-
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,7 +61,7 @@ public class CU1_RegistrarT extends JPanel {
 		//tiene que venir de la otra interfaz 
 		//int 
 		int idUsuario=1;
-		int idgrupo=1;
+		int idgrupo=0;
 		
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
@@ -205,13 +205,13 @@ public class CU1_RegistrarT extends JPanel {
 					if (leg.matches("[0-9]+") && leg.length() > 2) {
 						int l=Integer.valueOf(leg);
 						
-						int idClasificacion= ((ClasificacionDeTicket) clasificacion.getSelectedItem()).getIdClasificacion();
+						int idClasificacion= ((ClasificacionAux) clasificacion.getSelectedItem()).getId();
 						System.out.println(String.valueOf(idClasificacion));
 						
-						//gt.registrarTicket(l, idClasificacion, ob.getText(),idUsuario, idgrupo,now);
+						gt.registrarTicket(l, idClasificacion, ob.getText(),idUsuario, idgrupo,now);
 						
-						Observaciones asd = new Observaciones(new JFrame(),true,idTicket,idUsuario);
-						asd.setVisible(true);
+						//Observaciones asd = new Observaciones(new JFrame(),true,idTicket,idUsuario);
+						//asd.setVisible(true);
 						removerPanel();
 					}
 					else {
@@ -234,6 +234,8 @@ public class CU1_RegistrarT extends JPanel {
 		cerrar.setBackground(new Color(255, 255, 255));
 		cerrar.setBounds(408, 620, 130, 40);
 		this.add(cerrar);
+		
+		
 	}
 
 	public JFrame getPadre() {

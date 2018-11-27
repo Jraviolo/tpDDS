@@ -85,23 +85,100 @@ public class GestorBaseDeDatos {
 	}
 
 	public Usuario buscarUsuario(int idusuario) {
-		return null;
+		// crear factory
+
+				SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+						.addAnnotatedClass(Usuario.class).buildSessionFactory();
+
+				// crear sesión
+
+				Session session = factory.getCurrentSession();
+				// usar el objeto session
+				session.beginTransaction();
+				Usuario u = session.get(Usuario.class, idusuario);
+				session.getTransaction().commit();
+				session.close();
+				factory.close();
+				return u;
 	}
 
 	public Empleado buscarEmpleado(int legajo) {
-		return null;
+		// crear factory
+
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Empleado.class).buildSessionFactory();
+
+		// crear sesión
+
+		Session session = factory.getCurrentSession();
+		// usar el objeto session
+		session.beginTransaction();
+		Empleado u = session.get(Empleado.class, legajo);
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+		return u;
 	}
 
 	public EstadoTicket buscarEstadoTicket(int idEstado) {
-		return null;
+		// crear factory
+
+				SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+						.addAnnotatedClass(EstadoTicket.class).buildSessionFactory();
+
+				// crear sesión
+
+				Session session = factory.getCurrentSession();
+				// usar el objeto session
+				session.beginTransaction();
+				EstadoTicket u = session.get(EstadoTicket.class, idEstado);
+				session.getTransaction().commit();
+				session.close();
+				factory.close();
+				return u;
 	}
 
 	public EstadoIntervencion buscarEstadoIntervencion(int idEstado) {
-		return null;
+		// crear factory
+
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+				.addAnnotatedClass(EstadoIntervencion.class).buildSessionFactory();
+
+		// crear sesión
+
+		Session session = factory.getCurrentSession();
+		// usar el objeto session
+		session.beginTransaction();
+		EstadoIntervencion u = session.get(EstadoIntervencion.class, idEstado);
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+		return u;
 	}
 
 	public int registrarTicket(Ticket t) {
-		return 0;
+		// crear factory
+	
+		SessionFactory sf = new Configuration()
+		        .configure("hibernate.cfg.xml").buildSessionFactory();
+		// crear sesión
+		Session session = sf.openSession();
+		
+		// usar el objeto session
+
+	
+				session.beginTransaction();
+
+				int idt=(int)session.save(t);
+				
+				session.getTransaction().commit();
+				session.close();
+				sf.close();
+
+       
+
+        
+		return idt;
 		/*
 		 * //crear factory
 		 * 

@@ -15,6 +15,32 @@ public class EstadoIntervencion {
 	int id;
 	@Column(name="nombre")
 	String estado;
+	
+	
+	public EstadoIntervencion() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 }
 
 

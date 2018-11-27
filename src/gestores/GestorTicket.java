@@ -31,15 +31,21 @@ public class GestorTicket {
 	public void registrarTicket(int legajo,int idClasificacion,String Descripcion,int idUsuario,int idgrupo,Date fecha) {
 		
 		ClasificacionDeTicket clasificacion= gbd.buscarClasificacion(idClasificacion);
-
 		GrupoDeResolucion mesaDeAyuda=gbd.buscarGrupo(idgrupo);
-		System.out.println(mesaDeAyuda.getNombre());
 	
 		Usuario usuario=gbd.buscarUsuario(idUsuario);
 		Empleado empleado=gbd.buscarEmpleado(legajo);
 		
 		EstadoTicket t_abiertoSinDerivar=gbd.buscarEstadoTicket(0);
 		EstadoIntervencion i_trabajando=gbd.buscarEstadoIntervencion(3);
+
+		System.out.println("Nombre Clasificacion:"+clasificacion.getNombre());
+		System.out.println("Nombre grupo:"+mesaDeAyuda.getNombre());
+		System.out.println("--Usuario:"+usuario.getUsuario());
+		System.out.println("--Empleado:"+empleado.getApellido());
+		System.out.println("--Estado inter trabajando:"+i_trabajando.getEstado());
+		System.out.println("--Estado ticket abierto:"+t_abiertoSinDerivar.getEstado());
+		
 		
 		CambioEstado e1=new CambioEstado(t_abiertoSinDerivar,usuario);
 		e1.setFechaInicio(fecha);
@@ -51,9 +57,10 @@ public class GestorTicket {
 		
 		Ticket t=new Ticket(empleado,clasificacion,Descripcion,e1,cc,i);
 		t.setFechaDeApertura(fecha);
+		t.setId(123);
 		
 		//esto bd
-		gbd.registrarTicket(t);
+		System.out.println("--Estado ticket abierto:"+gbd.registrarTicket(t));
 		//retornar idticket*/
 	}	
 	public ArrayList<TicketAux> consultarTicket(Integer nroT,Integer nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
