@@ -144,9 +144,26 @@ public class CU2_ConsultarT extends JPanel {
 					Integer nroL = null;
 					if (!numeroLegajo.getText().isEmpty())
 						Integer.valueOf(numeroLegajo.getText());
-					String clasificacion = ((ClasificacionDeTicket) comboClasificacion.getSelectedItem()).getNombre();
-					EstadoTicket estado = (EstadoTicket) comboEstado.getSelectedItem();
-					GrupoDeResolucion ultGrupo = (GrupoDeResolucion) comboUltGrupo.getSelectedItem();
+					String clasificacion;
+					if(comboClasificacion.getSelectedItem().toString()=="Todas") {
+						clasificacion = null;
+					}else {
+						clasificacion = ((ClasificacionDeTicket) comboClasificacion.getSelectedItem()).getNombre();
+					}
+					EstadoTicket estado = new EstadoTicket();
+					if(comboEstado.getSelectedItem().toString()=="Todos") {
+						estado = null;
+					}
+					else{
+						estado = (EstadoTicket) comboEstado.getSelectedItem();
+					}
+					GrupoDeResolucion ultGrupo;
+					if(comboUltGrupo.getSelectedItem().toString()=="Todos") {
+						ultGrupo = null;
+					}
+					else{
+						ultGrupo = (GrupoDeResolucion) comboUltGrupo.getSelectedItem();
+					}
 					
 					setListaTickets(gt.consultarTicket(nroT, nroL, clasificacion , estado, fApertura, fUltCambio, ultGrupo),true);
 
@@ -173,31 +190,32 @@ public class CU2_ConsultarT extends JPanel {
 		ArrayList<ClasificacionAux> c=gc.getClasificacionesAux();
 		
 		JComboBox<ClasificacionAux> comboClasificacion = new JComboBox<ClasificacionAux>();
+		comboClasificacion.setModel(new DefaultComboBoxModel(new String[] {"Todas"}));
 		for(int j = 0; j < c.size(); j++)
 			comboClasificacion.addItem(c.get(j));
-		comboClasificacion.setBounds(489, 142, 150, 20);
+		comboClasificacion.setBounds(489, 142, 185, 20);
 		this.add(comboClasificacion);
 
 		JComboBox<EstadoTicket> comboEstado = new JComboBox();
 		comboEstado.setModel(new DefaultComboBoxModel(new String[] { "Abierto en mesa de ayuda", "Todos" }));
-		comboEstado.setBounds(488, 173, 151, 20);
+		comboEstado.setBounds(489, 173, 185, 20);
 		this.add(comboEstado);
 
 		fechaApertura = new JTextField();
 		fechaApertura.setHorizontalAlignment(SwingConstants.CENTER);
-		fechaApertura.setBounds(876, 142, 134, 20);
+		fechaApertura.setBounds(915, 142, 134, 20);
 		this.add(fechaApertura);
 		fechaApertura.setColumns(10);
 
 		fechaUltCambio = new JTextField();
 		fechaUltCambio.setHorizontalAlignment(SwingConstants.CENTER);
-		fechaUltCambio.setBounds(876, 173, 134, 20);
+		fechaUltCambio.setBounds(915, 173, 134, 20);
 		this.add(fechaUltCambio);
 		fechaUltCambio.setColumns(10);
 
 		JComboBox<GrupoDeResolucion> comboUltGrupo = new JComboBox();
 		comboUltGrupo.setModel(new DefaultComboBoxModel(new String[] { "Todos" }));
-		comboUltGrupo.setBounds(326, 204, 150, 20);
+		comboUltGrupo.setBounds(326, 204, 185, 20);
 		this.add(comboUltGrupo);
 
 		JLabel lblNewLabel = new JLabel("N\u00FAmero de ticket:");
@@ -217,66 +235,18 @@ public class CU2_ConsultarT extends JPanel {
 		this.add(lblNewLabel_2);
 
 		JLabel lblNewLabel_3 = new JLabel("Fecha de apertura:");
-		lblNewLabel_3.setBounds(661, 142, 223, 20);
+		lblNewLabel_3.setBounds(700, 142, 223, 20);
 		this.add(lblNewLabel_3);
 
 		JLabel lblNewLabel_4 = new JLabel("Fecha del ultimo cambio de estado:");
-		lblNewLabel_4.setBounds(661, 173, 223, 20);
+		lblNewLabel_4.setBounds(700, 173, 223, 20);
 		this.add(lblNewLabel_4);
 
 		JLabel lblNewLabel_5 = new JLabel("Ultimo grupo de resoluci\u00F3n asignado:");
 		lblNewLabel_5.setBounds(93, 204, 223, 20);
 		this.add(lblNewLabel_5);
 
-		/*
-		 * TABLA VIEJA
-		 * 
-		 * 
-		 * table_1 = new JTable(); table_1.setModel(new DefaultTableModel( new
-		 * Object[][] { {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx",
-		 * "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx",
-		 * "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx",
-		 * "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa", "hh:mm",
-		 * "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa",
-		 * "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999,
-		 * "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999,
-		 * 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"},
-		 * {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa",
-		 * "xxxx"}, {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx",
-		 * "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx",
-		 * "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx",
-		 * "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa", "hh:mm",
-		 * "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa",
-		 * "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999,
-		 * "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999,
-		 * 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"},
-		 * {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa",
-		 * "xxxx"}, {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx",
-		 * "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx",
-		 * "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx",
-		 * "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa", "hh:mm",
-		 * "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999, "dd/mm/aaaa",
-		 * "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999, 9999,
-		 * "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"}, {9999,
-		 * 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa", "xxxx"},
-		 * {9999, 9999, "dd/mm/aaaa", "hh:mm", "xxxx", "xxxx", "xxxx", "dd/mm/aaaa",
-		 * "xxxx"},
-		 * 
-		 * }, new String[] { "Nro ticket", "Nro legajo", "Fecha apertura",
-		 * "Hora apertura", "Operador", "Clasificaci\u00F3n actual", "Estado actual",
-		 * "Ultimo cambio de estado", "Grupo de resolucion actual" } ) { Class[]
-		 * columnTypes = new Class[] { Integer.class, Integer.class, String.class,
-		 * String.class, String.class, String.class, String.class, String.class,
-		 * String.class }; public Class getColumnClass(int columnIndex) { return
-		 * columnTypes[columnIndex]; } }); table_1.setBounds(109, 266, 607, -95);
-		 * JScrollPane JS= new JScrollPane(table_1); JS.setSize(1171, 394);
-		 * JS.setLocation(93, 235); JS.setPreferredSize(new Dimension(400,400));
-		 * this.add(JS); //fin tabla
-		 * 
-		 */
-
-		// TABLA NUEVA
-
+		
 		table_1 = new JTable(this.tableModel);
 		table_1.setFillsViewportHeight(true);
 		table_1.setBounds(109, 266, 607, -95);
