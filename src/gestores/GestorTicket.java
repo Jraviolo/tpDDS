@@ -57,10 +57,10 @@ public class GestorTicket {
 		
 		Ticket t=new Ticket(empleado,clasificacion,Descripcion,e1,cc,i);
 		t.setFechaDeApertura(fecha);
-		t.setId(123);
+		//t.setId(123);
 		
 		//esto bd
-		System.out.println("--Estado ticket abierto:"+gbd.registrarTicket(t));
+		System.out.println("-ID DEL TICKET:"+gbd.registrarTicket(t));
 		//retornar idticket*/
 	}	
 	public ArrayList<TicketAux> consultarTicket(Integer nroT,Integer nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
