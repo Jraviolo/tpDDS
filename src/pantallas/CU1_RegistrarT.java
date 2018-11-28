@@ -61,7 +61,7 @@ public class CU1_RegistrarT extends JPanel {
 		//tiene que venir de la otra interfaz 
 		//int 
 		int idUsuario=1;
-		int idgrupo=0;
+		int idgrupo=1;
 		
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);

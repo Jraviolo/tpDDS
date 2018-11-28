@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name="estado_intervencion")
 public class EstadoIntervencion {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="IDestado_interv")
 	int id;
 	@Column(name="nombre")

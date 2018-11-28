@@ -34,20 +34,20 @@ public class GrupoDeResolucion {
 	@Column(name="activo")
 	private Boolean estado;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL)//, orphanRemoval = true)
 	@JoinColumn(name = "cod_gr")
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	
 	
 	@OneToMany(
 	        mappedBy = "intervencion", 
-	        cascade = CascadeType.ALL, 
-	        orphanRemoval = true
+	        cascade = CascadeType.ALL
+	        //,orphanRemoval = true
 	    )
     private List<Intervencion> intervenciones = new ArrayList<Intervencion>();
 	
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL)//, orphanRemoval = true)
 	@JoinColumn(name = "cod_gr")
 	private List<ClasificacionDeTicket> clasificaciones = new ArrayList<ClasificacionDeTicket>();
 	
