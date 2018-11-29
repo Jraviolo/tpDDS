@@ -69,6 +69,12 @@ public class GestorTicket {
 
 		for(int i=0;i<busqueda.size();i++) {
 			Ticket t= busqueda.get(i);
+			System.out.println("Id"+t.getId());
+			System.out.println("Legajo"+t.getEmpleado().getLegajo());
+			System.out.println("Fecha AP"+t.getFechaDeApertura());
+			System.out.println("fecha ult"+t.getFechaUltCambio());
+			System.out.println("usuario"+t.getUsuarioCreador());
+			
 			TicketAux aux = new TicketAux(t.getId(),t.getEmpleado().getLegajo(),t.getFechaDeApertura(),t.getFechaUltCambio(),t.getUsuarioCreador(),t.clasificacionActual.getNombre(),t.getEstadoActual().toString(),t.ultimaIntervencion().getGrupo());
 			listaResultado.add(aux);
 		}

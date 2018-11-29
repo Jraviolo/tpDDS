@@ -24,7 +24,7 @@ public class TicketAux {
 		this.legajo = legajo;
 		this.fechaApertura = fechaApertura;
 		this.fechaUltCambio = fechaUltCambio;
-		this.nombreUsuario = nombreUsuario;
+		//this.nombreUsuario = nombreUsuario;
 		this.clasificacion = clasificacion;
 		this.estadoActual = estadoActual;
 		this.grupoActual = grupoActual;

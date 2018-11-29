@@ -87,26 +87,26 @@ public class GestorBaseDeDatos {
 	public Usuario buscarUsuario(int idusuario) {
 		// crear factory
 
-				SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
-						.addAnnotatedClass(Usuario.class).buildSessionFactory();
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Usuario.class)
+				.buildSessionFactory();
 
-				// crear sesión
+		// crear sesión
 
-				Session session = factory.getCurrentSession();
-				// usar el objeto session
-				session.beginTransaction();
-				Usuario u = session.get(Usuario.class, idusuario);
-				session.getTransaction().commit();
-				session.close();
-				factory.close();
-				return u;
+		Session session = factory.getCurrentSession();
+		// usar el objeto session
+		session.beginTransaction();
+		Usuario u = session.get(Usuario.class, idusuario);
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+		return u;
 	}
 
 	public Empleado buscarEmpleado(int legajo) {
 		// crear factory
 
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Empleado.class).buildSessionFactory();
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Empleado.class)
+				.buildSessionFactory();
 
 		// crear sesión
 
@@ -123,19 +123,19 @@ public class GestorBaseDeDatos {
 	public EstadoTicket buscarEstadoTicket(int idEstado) {
 		// crear factory
 
-				SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
-						.addAnnotatedClass(EstadoTicket.class).buildSessionFactory();
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+				.addAnnotatedClass(EstadoTicket.class).buildSessionFactory();
 
-				// crear sesión
+		// crear sesión
 
-				Session session = factory.getCurrentSession();
-				// usar el objeto session
-				session.beginTransaction();
-				EstadoTicket u = session.get(EstadoTicket.class, idEstado);
-				session.getTransaction().commit();
-				session.close();
-				factory.close();
-				return u;
+		Session session = factory.getCurrentSession();
+		// usar el objeto session
+		session.beginTransaction();
+		EstadoTicket u = session.get(EstadoTicket.class, idEstado);
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+		return u;
 	}
 
 	public EstadoIntervencion buscarEstadoIntervencion(int idEstado) {
@@ -158,26 +158,21 @@ public class GestorBaseDeDatos {
 
 	public int registrarTicket(Ticket t) {
 		// crear factory
-	
-		SessionFactory sf = new Configuration()
-		        .configure("hibernate.cfg.xml").buildSessionFactory();
+
+		SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 		// crear sesión
 		Session session = sf.openSession();
-		
+
 		// usar el objeto session
 
-	
-				session.beginTransaction();
+		session.beginTransaction();
 
-				int idt=(int)session.save(t);
-				
-				session.getTransaction().commit();
-				session.close();
-				sf.close();
+		int idt = (int) session.save(t);
 
-       
+		session.getTransaction().commit();
+		session.close();
+		sf.close();
 
-        
 		return idt;
 		/*
 		 * //crear factory
@@ -225,43 +220,49 @@ public class GestorBaseDeDatos {
 		ArrayList<Ticket> L6 = new ArrayList<Ticket>();
 		ArrayList<Ticket> L7 = new ArrayList<Ticket>();
 		ArrayList<Ticket> listaResultado = new ArrayList<Ticket>();
-		Boolean legajo = false;
+		Boolean idTicket = false;
 
 		if (nroT != null) {
-			legajo = true;
-			T1 = buscarTicket(nroT);
+			int i = tickets.size();
+			while (idTicket == false && i >= 0) {
+				if (tickets.get(i).getId() == nroT) {
+					T1 = buscarTicket(nroT);
+					idTicket=true;
+				}
+				i--;
+			}
 		}
-		
+
 		if (nroL != null) {
 			L2 = buscarTicketPorLegajo(nroL);
 		} else {
 			L2 = tickets;
 		}
-		
+
 		if (clasificacion != null) {
 			L3 = buscarTicketPorClasificacion(clasificacion);
 		} else {
 			L3 = tickets;
 		}
-		
+
 		if (estado != null) {
 			L4 = buscarTicketPorEstado(estado);
 		} else {
 			L4 = tickets;
 		}
-		
+
 		if (fechaApertura != null) {
 			L5 = buscarTicketPorFechaApertura(fechaApertura);
 		} else {
 			L5 = tickets;
 		}
-		
+
 		if (fechaUltCambio != null) {
 			L6 = buscarTicketPorFechaUltCambio(fechaUltCambio);
 		} else {
 			L6 = tickets;
 		}
-		
+
 		if (ultGrupo != null) {
 			L7 = buscarTicketPorUltGrupo(ultGrupo);
 		} else {
@@ -276,7 +277,7 @@ public class GestorBaseDeDatos {
 						if (L5.contains(t)) {
 							if (L6.contains(t)) {
 								if (L7.contains(t)) {
-									if (legajo) {
+									if (idTicket) {
 										if (t.equals(T1)) {
 											listaResultado.add(t);
 										}
@@ -291,10 +292,9 @@ public class GestorBaseDeDatos {
 			}
 
 		}
-		
+
 		return listaResultado;
 	}
-
 
 	private ArrayList<Ticket> buscarTicketPorUltGrupo(GrupoDeResolucion ultGrupo) {
 		// TODO Auto-generated method stub

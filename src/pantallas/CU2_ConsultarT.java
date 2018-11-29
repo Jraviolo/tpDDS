@@ -60,7 +60,7 @@ public class CU2_ConsultarT extends JPanel {
 	private JTextField numeroLegajo;
 	private JTextField fechaApertura;
 	private JTextField fechaUltCambio;
-	private JComboBox<ClasificacionDeTicket> comboClasificacion;
+	private JComboBox<ClasificacionAux> comboClasificacion;
 	private JComboBox<EstadoTicket> comboEstado;
 	private JComboBox<GrupoDeResolucion> comboUltGrupo;
 	private JButton confreporte;
@@ -145,25 +145,25 @@ public class CU2_ConsultarT extends JPanel {
 					if (!numeroLegajo.getText().isEmpty())
 						Integer.valueOf(numeroLegajo.getText());
 					String clasificacion;
-					if(comboClasificacion.getSelectedItem().toString()=="Todas") {
+					//if(comboClasificacion.getSelectedItem().toString()=="Todas") {
 						clasificacion = null;
-					}else {
-						clasificacion = ((ClasificacionDeTicket) comboClasificacion.getSelectedItem()).getNombre();
-					}
+					//}else {
+					//	clasificacion = ((ClasificacionAux) comboClasificacion.getSelectedItem()).getNombre();
+					//}
 					EstadoTicket estado = new EstadoTicket();
-					if(comboEstado.getSelectedItem().toString()=="Todos") {
+					//if(comboEstado.getSelectedItem().toString()=="Todos") {
 						estado = null;
-					}
-					else{
-						estado = (EstadoTicket) comboEstado.getSelectedItem();
-					}
+					//}
+					//else{
+					//	estado = (EstadoTicket) comboEstado.getSelectedItem();
+					//}
 					GrupoDeResolucion ultGrupo;
-					if(comboUltGrupo.getSelectedItem().toString()=="Todos") {
+					//if(comboUltGrupo.getSelectedItem().toString()=="Todos") {
 						ultGrupo = null;
-					}
-					else{
-						ultGrupo = (GrupoDeResolucion) comboUltGrupo.getSelectedItem();
-					}
+					//}
+					//else{
+					//	ultGrupo = (GrupoDeResolucion) comboUltGrupo.getSelectedItem();
+					//}
 					
 					setListaTickets(gt.consultarTicket(nroT, nroL, clasificacion , estado, fApertura, fUltCambio, ultGrupo),true);
 
