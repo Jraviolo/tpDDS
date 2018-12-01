@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import clases.ClasificacionDeTicket;
 import clasesAuxiliares.ClasificacionAux;
+import gestores.GestorBaseDeDatos;
 import gestores.GestorClasificacionDeTicket;
 import gestores.GestorTicket;
 
@@ -54,6 +55,7 @@ public class CU1_RegistrarT extends JPanel {
 	
 	private GestorTicket gt=new GestorTicket();
 	private GestorClasificacionDeTicket gc=new GestorClasificacionDeTicket();
+	private GestorBaseDeDatos gbd=new GestorBaseDeDatos();
 
 	public CU1_RegistrarT(int idUsuario2,int idgrupo2) {
 		
@@ -99,7 +101,7 @@ public class CU1_RegistrarT extends JPanel {
 
 		
 		//--Pide el ultimo id y le suma 1 para un nuevo ticket
-		int idTicket=gt.ultimoIdTicket()+1;
+		int idTicket=gbd.ultimoIdTicket()+1;
 		
 		
 		textNro_de_ticket = new JTextField();
@@ -196,8 +198,8 @@ public class CU1_RegistrarT extends JPanel {
 		JButton registrar = new JButton("Registrar ticket");
 		registrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(legajo.getText().isEmpty() || ob.getText().isEmpty()) JOptionPane.showMessageDialog(new JPanel(),
-					    "Los campos no deben ser nulos.",
+				if(legajo.getText().isEmpty() || ob.getText().isEmpty() || ob.getText().length()>299) JOptionPane.showMessageDialog(new JPanel(),
+					    "-Los campos no deben ser nulos. \n -La descripcion es muy extensa",
 					    "Campos nulos",
 					    JOptionPane.ERROR_MESSAGE);
 				else {
@@ -208,11 +210,16 @@ public class CU1_RegistrarT extends JPanel {
 						int idClasificacion= ((ClasificacionAux) clasificacion.getSelectedItem()).getId();
 						System.out.println(String.valueOf(idClasificacion));
 						
+						if(gbd.existeLegajo(l)) {
 						gt.registrarTicket(l, idClasificacion, ob.getText(),idUsuario, idgrupo,now);
 						
 						//Observaciones asd = new Observaciones(new JFrame(),true,idTicket,idUsuario);
 						//asd.setVisible(true);
 						removerPanel();
+						}
+						else {
+							JOptionPane.showMessageDialog(new JPanel(),"El legajo es invalido","Error Legajo",JOptionPane.ERROR_MESSAGE);
+						}
 					}
 					else {
 						JOptionPane.showMessageDialog(new JPanel(),"Legajo debe contener solo numeros","Error Legajo",JOptionPane.ERROR_MESSAGE);

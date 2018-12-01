@@ -2,6 +2,7 @@ package gestores;
 
 import java.util.Date;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -20,6 +21,31 @@ public class GestorBaseDeDatos {
 
 	public GestorBaseDeDatos() {
 
+	}
+	
+	
+	
+	public boolean existeLegajo(int legajo){
+
+	//crear factory
+	SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Empleado.class).buildSessionFactory();
+	//crear sesión
+
+	Session session = factory.getCurrentSession();
+	//usar el objeto session
+
+	session.beginTransaction();
+	Empleado e=session.get(Empleado.class, legajo);
+	session.getTransaction().commit();
+	session.close();
+	factory.close();
+
+	if (e==null){
+		return false;
+	}
+	else{
+		return true;
+	}
 	}
 
 	public ArrayList<ClasificacionDeTicket> getClasificaciones() {
