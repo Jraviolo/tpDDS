@@ -58,7 +58,7 @@ public class Ticket {
 	@JoinColumn(name = "numero")
 	private List<CambioClasificacion> cambioClasificacion = new ArrayList<CambioClasificacion>(); 
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "numero")
 	private List<Intervencion> intervenciones = new ArrayList<Intervencion>();
 	
@@ -124,8 +124,8 @@ public class Ticket {
 	}
 	
 	public Intervencion ultimaIntervencion() {
-		
-		return null;
+		int i = intervenciones.size();
+		return intervenciones.get(i-1);
 	}
 
 
@@ -182,8 +182,8 @@ public class Ticket {
 		return estadoActual.getFechaInicio();
 	}
 	
-	public String getUsuarioCreador(){
-		return null;
+	public Usuario getUsuarioCreador(){
+		return intervenciones.get(0).getHistorialIntervencion().get(0).getUsuario();
 	}
 	
 }

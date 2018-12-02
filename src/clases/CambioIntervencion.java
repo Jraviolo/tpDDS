@@ -95,6 +95,12 @@ public class CambioIntervencion {
 		this.fechaInicioAtencion = fechaInicioAtencion;
 	}
 
+	public void setUsuario(Usuario u) {
+		this.interviene=u;
+	}
 	
+	public Usuario getUsuario() {
+		return interviene;
+	}
 	
 }

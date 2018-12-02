@@ -19,12 +19,11 @@ public class TicketAux {
 	
 	public TicketAux(Integer idTicket, Integer legajo, Date fechaApertura, Date fechaUltCambio, String nombreUsuario,
 			String clasificacion, String estadoActual, String grupoActual) {
-		super();
 		this.idTicket = idTicket;
 		this.legajo = legajo;
 		this.fechaApertura = fechaApertura;
 		this.fechaUltCambio = fechaUltCambio;
-		//this.nombreUsuario = nombreUsuario;
+		this.nombreUsuario = nombreUsuario;
 		this.clasificacion = clasificacion;
 		this.estadoActual = estadoActual;
 		this.grupoActual = grupoActual;

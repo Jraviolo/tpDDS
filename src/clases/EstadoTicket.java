@@ -37,8 +37,9 @@ public class EstadoTicket {
 		this.estado = estado;
 	}
 	
-	
 }
+
+
 
 /*BD
  * id	nombre

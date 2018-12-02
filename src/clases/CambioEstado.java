@@ -84,7 +84,6 @@ public class CambioEstado {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
-	}
-
+	}	
 	
 }
