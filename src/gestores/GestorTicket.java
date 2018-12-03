@@ -14,6 +14,8 @@ import clases.GrupoDeResolucion;
 import clases.Intervencion;
 import clases.Ticket;
 import clases.Usuario;
+import clasesAuxiliares.ClasificacionAux;
+import clasesAuxiliares.GrupoDeResolucionAux;
 import clasesAuxiliares.TicketAux;
 import pantallas.CU2_ConsultarT;
 
@@ -63,7 +65,7 @@ public class GestorTicket {
 		System.out.println("-ID DEL TICKET:"+gbd.registrarTicket(t));
 		//retornar idticket*/
 	}	
-	public ArrayList<TicketAux> consultarTicket(Integer nroT,Integer nroL,String clasificacion,EstadoTicket estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucion ultGrupo) {
+	public ArrayList<TicketAux> consultarTicket(Integer nroT,Integer nroL,String clasificacion,String estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucionAux ultGrupo) {
 		ArrayList<Ticket> busqueda = gbd.buscarTicket(nroT, nroL, clasificacion, estado, fechaApertura, fechaUltCambio, ultGrupo);
 		ArrayList<TicketAux> listaResultado = new ArrayList<TicketAux>();
 
@@ -77,7 +79,7 @@ public class GestorTicket {
 			aux.setNombreUsuario(t.getUsuarioCreador().getUsuario());
 			aux.setClasificacion(t.clasificacionActual.getNombre());
 			aux.setEstadoActual(t.getEstadoActual().getEstado().getEstado());
-			aux.setGrupoActual(t.ultimaIntervencion().getGrupo());
+			aux.setGrupoActual(t.ultimaIntervencion().getGrupo().getNombre());
 			listaResultado.add(aux);
 		}
 
@@ -129,6 +131,10 @@ public class GestorTicket {
 		gi.actualizarIntervencion(i, i_enespera, u, obs,fechaderivar);
 		t.nuevaIntervencion(i1);
 		gbd.actualizarTicket(idTicket, t);
+	}
+	
+	public ArrayList<EstadoTicket> getEstados() {
+		return gbd.getEstados();
 	}
 	
 	public int ultimoIdTicket() {

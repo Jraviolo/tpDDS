@@ -37,6 +37,11 @@ public class EstadoTicket {
 		this.estado = estado;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return estado;
+	}
 }
 
 
@@ -44,7 +49,7 @@ public class EstadoTicket {
 /*BD
  * id	nombre
  * -----------
- * 0	Abierto Sin Derivar
+ * 0	Abierto sin derivar
  * 1	Abierto Derivado
  * 2	Solucionado a la espera Ok
  * 3	Cerrado

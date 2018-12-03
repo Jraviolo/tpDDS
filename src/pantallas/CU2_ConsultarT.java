@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import gestores.GestorClasificacionDeTicket;
+import gestores.GestorGrupoDeResolucion;
 import gestores.GestorTicket;
 
 import javax.swing.JLabel;
@@ -47,6 +48,7 @@ import clases.EstadoTicket;
 import clases.GrupoDeResolucion;
 import clases.Ticket;
 import clasesAuxiliares.ClasificacionAux;
+import clasesAuxiliares.GrupoDeResolucionAux;
 import clasesAuxiliares.TicketAux;
 
 import java.awt.Component;
@@ -67,7 +69,8 @@ public class CU2_ConsultarT extends JPanel {
 	private int seleccion;
 	private JTable table_1;
 	private GestorTicket gt = new GestorTicket();
-	private GestorClasificacionDeTicket gc=new GestorClasificacionDeTicket();
+	private GestorClasificacionDeTicket gc = new GestorClasificacionDeTicket();
+	private GestorGrupoDeResolucion ggr = new GestorGrupoDeResolucion();
 	private ConsultarTableModel tableModel = new ConsultarTableModel();
 
 	public CU2_ConsultarT(int idUsuario) {
@@ -99,6 +102,98 @@ public class CU2_ConsultarT extends JPanel {
 		titulo_pantalla.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		titulo_pantalla.setBounds(93, 99, 416, 25);
 		this.add(titulo_pantalla);
+
+		numeroTicket = new JTextField();
+		numeroTicket.setBounds(204, 142, 134, 20);
+		this.add(numeroTicket);
+		numeroTicket.setColumns(10);
+
+		numeroLegajo = new JTextField();
+		numeroLegajo.setBounds(204, 173, 134, 20);
+		this.add(numeroLegajo);
+		numeroLegajo.setColumns(10);
+
+		ArrayList<ClasificacionAux> c = gc.getClasificacionesAux();
+
+		JComboBox<ClasificacionAux> comboClasificacion = new JComboBox<ClasificacionAux>();
+		comboClasificacion.setModel(new DefaultComboBoxModel(new String[] { "Todas" }));
+		for (int j = 0; j < c.size(); j++)
+			comboClasificacion.addItem(c.get(j));
+		comboClasificacion.setBounds(489, 142, 185, 20);
+		this.add(comboClasificacion);
+
+		JComboBox comboEstado = new JComboBox();
+		comboEstado.setModel(new DefaultComboBoxModel(new String[] { "Abierto sin derivar","Abierto derivado","Solucionado a la espera ok","Cerrado", "Todos"} ));
+		comboEstado.setBounds(489, 173, 185, 20);
+		this.add(comboEstado);
+
+		fechaApertura = new JTextField();
+		fechaApertura.setHorizontalAlignment(SwingConstants.CENTER);
+		fechaApertura.setBounds(915, 142, 134, 20);
+		this.add(fechaApertura);
+		fechaApertura.setColumns(10);
+
+		fechaUltCambio = new JTextField();
+		fechaUltCambio.setHorizontalAlignment(SwingConstants.CENTER);
+		fechaUltCambio.setBounds(915, 173, 134, 20);
+		this.add(fechaUltCambio);
+		fechaUltCambio.setColumns(10);
+
+		ArrayList<GrupoDeResolucionAux> g = ggr.getGruposAux();
+		
+		JComboBox<GrupoDeResolucionAux> comboUltGrupo = new JComboBox<GrupoDeResolucionAux>();
+		comboUltGrupo.setModel(new DefaultComboBoxModel(new String[] { "Todos" }));
+		for (int j = 0; j < g.size(); j++)
+			comboUltGrupo.addItem(g.get(j));
+		comboUltGrupo.setBounds(326, 204, 185, 20);
+		this.add(comboUltGrupo);
+
+		JLabel lblNewLabel = new JLabel("N\u00FAmero de ticket:");
+		lblNewLabel.setBounds(93, 141, 105, 20);
+		this.add(lblNewLabel);
+
+		JLabel lblNmeroDeLegajo = new JLabel("N\u00FAmero de legajo:");
+		lblNmeroDeLegajo.setBounds(93, 172, 105, 20);
+		this.add(lblNmeroDeLegajo);
+
+		JLabel lblNewLabel_1 = new JLabel("Clasificaci\u00F3n actual:");
+		lblNewLabel_1.setBounds(369, 141, 223, 20);
+		this.add(lblNewLabel_1);
+
+		JLabel lblNewLabel_2 = new JLabel("Estado actual:");
+		lblNewLabel_2.setBounds(369, 172, 223, 20);
+		this.add(lblNewLabel_2);
+
+		JLabel lblNewLabel_3 = new JLabel("Fecha de apertura:");
+		lblNewLabel_3.setBounds(700, 142, 223, 20);
+		this.add(lblNewLabel_3);
+
+		JLabel lblNewLabel_4 = new JLabel("Fecha del ultimo cambio de estado:");
+		lblNewLabel_4.setBounds(700, 173, 223, 20);
+		this.add(lblNewLabel_4);
+
+		JLabel lblNewLabel_5 = new JLabel("Ultimo grupo de resoluci\u00F3n asignado:");
+		lblNewLabel_5.setBounds(93, 204, 223, 20);
+		this.add(lblNewLabel_5);
+
+		table_1 = new JTable(this.tableModel);
+		table_1.setFillsViewportHeight(true);
+		table_1.setBounds(109, 266, 607, -95);
+		JScrollPane JS = new JScrollPane(table_1);
+		JS.setSize(1171, 394);
+		JS.setLocation(93, 235);
+		JS.setPreferredSize(new Dimension(400, 400));
+		this.add(JS);
+
+		table_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				int r = table_1.rowAtPoint(e.getPoint());
+				seleccion = r;
+
+			}
+
+		});
 
 		JButton buscar = new JButton("Buscar");
 		buscar.addActionListener(new ActionListener() {
@@ -140,32 +235,32 @@ public class CU2_ConsultarT extends JPanel {
 				} else {
 					Integer nroT = null;
 					if (!numeroTicket.getText().isEmpty())
-						Integer.valueOf(numeroTicket.getText());
+						nroT = Integer.valueOf(numeroTicket.getText());
 					Integer nroL = null;
 					if (!numeroLegajo.getText().isEmpty())
-						Integer.valueOf(numeroLegajo.getText());
+						nroL = Integer.valueOf(numeroLegajo.getText());
 					String clasificacion;
-					//if(comboClasificacion.getSelectedItem().toString()=="Todas") {
+					if (comboClasificacion.getSelectedItem().toString() == "Todas") {
 						clasificacion = null;
-					//}else {
-					//	clasificacion = ((ClasificacionAux) comboClasificacion.getSelectedItem()).getNombre();
-					//}
-					EstadoTicket estado = new EstadoTicket();
-					//if(comboEstado.getSelectedItem().toString()=="Todos") {
+					} else {
+						clasificacion = ((ClasificacionAux) comboClasificacion.getSelectedItem()).getNombre();
+					}
+					String estado = new String();
+					if (comboEstado.getSelectedItem().toString() == "Todos") {
 						estado = null;
-					//}
-					//else{
-					//	estado = (EstadoTicket) comboEstado.getSelectedItem();
-					//}
-					GrupoDeResolucion ultGrupo;
-					//if(comboUltGrupo.getSelectedItem().toString()=="Todos") {
+					} else {
+						estado = comboEstado.getSelectedItem().toString();
+					}
+					GrupoDeResolucionAux ultGrupo;
+					if (comboUltGrupo.getSelectedItem().toString() == "Todos") {
 						ultGrupo = null;
-					//}
-					//else{
-					//	ultGrupo = (GrupoDeResolucion) comboUltGrupo.getSelectedItem();
-					//}
-					
-					setListaTickets(gt.consultarTicket(nroT, nroL, clasificacion , estado, fApertura, fUltCambio, ultGrupo),true);
+					} else {
+						ultGrupo = (GrupoDeResolucionAux) comboUltGrupo.getSelectedItem();
+					}
+
+					setListaTickets(
+							gt.consultarTicket(nroT, nroL, clasificacion, estado, fApertura, fUltCambio, ultGrupo),
+							true);
 
 				}
 			}
@@ -175,124 +270,32 @@ public class CU2_ConsultarT extends JPanel {
 		buscar.setBounds(1134, 142, 130, 40);
 		this.add(buscar);
 
-		numeroTicket = new JTextField();
-		numeroTicket.setBounds(204, 142, 134, 20);
-		this.add(numeroTicket);
-		numeroTicket.setColumns(10);
-
-		numeroLegajo = new JTextField();
-		numeroLegajo.setBounds(204, 173, 134, 20);
-		this.add(numeroLegajo);
-		numeroLegajo.setColumns(10);
-
-		
-		
-		ArrayList<ClasificacionAux> c=gc.getClasificacionesAux();
-		
-		JComboBox<ClasificacionAux> comboClasificacion = new JComboBox<ClasificacionAux>();
-		comboClasificacion.setModel(new DefaultComboBoxModel(new String[] {"Todas"}));
-		for(int j = 0; j < c.size(); j++)
-			comboClasificacion.addItem(c.get(j));
-		comboClasificacion.setBounds(489, 142, 185, 20);
-		this.add(comboClasificacion);
-
-		JComboBox<EstadoTicket> comboEstado = new JComboBox();
-		comboEstado.setModel(new DefaultComboBoxModel(new String[] { "Abierto en mesa de ayuda", "Todos" }));
-		comboEstado.setBounds(489, 173, 185, 20);
-		this.add(comboEstado);
-
-		fechaApertura = new JTextField();
-		fechaApertura.setHorizontalAlignment(SwingConstants.CENTER);
-		fechaApertura.setBounds(915, 142, 134, 20);
-		this.add(fechaApertura);
-		fechaApertura.setColumns(10);
-
-		fechaUltCambio = new JTextField();
-		fechaUltCambio.setHorizontalAlignment(SwingConstants.CENTER);
-		fechaUltCambio.setBounds(915, 173, 134, 20);
-		this.add(fechaUltCambio);
-		fechaUltCambio.setColumns(10);
-
-		JComboBox<GrupoDeResolucion> comboUltGrupo = new JComboBox();
-		comboUltGrupo.setModel(new DefaultComboBoxModel(new String[] { "Todos" }));
-		comboUltGrupo.setBounds(326, 204, 185, 20);
-		this.add(comboUltGrupo);
-
-		JLabel lblNewLabel = new JLabel("N\u00FAmero de ticket:");
-		lblNewLabel.setBounds(93, 141, 105, 20);
-		this.add(lblNewLabel);
-
-		JLabel lblNmeroDeLegajo = new JLabel("N\u00FAmero de legajo:");
-		lblNmeroDeLegajo.setBounds(93, 172, 105, 20);
-		this.add(lblNmeroDeLegajo);
-
-		JLabel lblNewLabel_1 = new JLabel("Clasificaci\u00F3n actual:");
-		lblNewLabel_1.setBounds(369, 141, 223, 20);
-		this.add(lblNewLabel_1);
-
-		JLabel lblNewLabel_2 = new JLabel("Estado actual:");
-		lblNewLabel_2.setBounds(369, 172, 223, 20);
-		this.add(lblNewLabel_2);
-
-		JLabel lblNewLabel_3 = new JLabel("Fecha de apertura:");
-		lblNewLabel_3.setBounds(700, 142, 223, 20);
-		this.add(lblNewLabel_3);
-
-		JLabel lblNewLabel_4 = new JLabel("Fecha del ultimo cambio de estado:");
-		lblNewLabel_4.setBounds(700, 173, 223, 20);
-		this.add(lblNewLabel_4);
-
-		JLabel lblNewLabel_5 = new JLabel("Ultimo grupo de resoluci\u00F3n asignado:");
-		lblNewLabel_5.setBounds(93, 204, 223, 20);
-		this.add(lblNewLabel_5);
-
-		
-		table_1 = new JTable(this.tableModel);
-		table_1.setFillsViewportHeight(true);
-		table_1.setBounds(109, 266, 607, -95);
-		JScrollPane JS = new JScrollPane(table_1);
-		JS.setSize(1171, 394);
-		JS.setLocation(93, 235);
-		JS.setPreferredSize(new Dimension(400, 400));
-		this.add(JS);
-
-		table_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				int r = table_1.rowAtPoint(e.getPoint());
-				seleccion = r;
-				
-			}
-
-		});
-		
 		JButton btnNewButton = new JButton("Derivar ticket");
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//gt.derivarTicket(tableModel.getTickets().get(seleccion), obs, idU, idgrupo);
+				// gt.derivarTicket(tableModel.getTickets().get(seleccion), obs, idU, idgrupo);
 			}
 		});
 		btnNewButton.setBounds(547, 640, 130, 40);
 		this.add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("Cerrar ticket");
 		btnNewButton_1.setBackground(Color.WHITE);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TicketAux ticket = tableModel.getTickets().get(seleccion);
-				if(ticket.getEstadoActual()=="Solucionado a la espera Ok") {
-					CU3_CerrarT panelCerrarTicket = new CU3_CerrarT(ticket.getIdTicket(),idUsuario);
+				if (ticket.getEstadoActual() == "Solucionado a la espera Ok") {
+					CU3_CerrarT panelCerrarTicket = new CU3_CerrarT(ticket.getIdTicket(), idUsuario);
 					panelCerrarTicket.setPadre(padre);
 					panelCerrarTicket.setAnterior(panel);
 					padre.setContentPane(panelCerrarTicket);
 					padre.setBounds(panelCerrarTicket.getBounds());
 					padre.setLocationRelativeTo(null);
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(null,
-							"No se puede cerrar un ticket en estado "+ticket.getEstadoActual(),
-							"Error", JOptionPane.ERROR_MESSAGE);
+							"No se puede cerrar un ticket en estado " + ticket.getEstadoActual(), "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -310,7 +313,6 @@ public class CU2_ConsultarT extends JPanel {
 		confreporte.setBackground(theme);
 		confreporte.setBounds(953, 640, 171, 40);
 		this.add(confreporte);
-		
 
 		JButton cerrar = new JButton("Cancelar");
 		cerrar.addActionListener(new ActionListener() {
