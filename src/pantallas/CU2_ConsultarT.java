@@ -73,7 +73,7 @@ public class CU2_ConsultarT extends JPanel {
 	private GestorGrupoDeResolucion ggr = new GestorGrupoDeResolucion();
 	private ConsultarTableModel tableModel = new ConsultarTableModel();
 
-	public CU2_ConsultarT(int idUsuario) {
+	public CU2_ConsultarT(int idUsuario, int idGrupo) {
 
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
@@ -240,11 +240,11 @@ public class CU2_ConsultarT extends JPanel {
 					Integer nroL = null;
 					if (!numeroLegajo.getText().isEmpty())
 						nroL = Integer.valueOf(numeroLegajo.getText());
-					String clasificacion;
+					ClasificacionAux clasificacion;
 					if (comboClasificacion.getSelectedItem().toString() == "Todas") {
 						clasificacion = null;
 					} else {
-						clasificacion = ((ClasificacionAux) comboClasificacion.getSelectedItem()).getNombre();
+						clasificacion = ((ClasificacionAux) comboClasificacion.getSelectedItem());
 					}
 					String estado = new String();
 					if (comboEstado.getSelectedItem().toString() == "Todos") {
@@ -302,7 +302,7 @@ public class CU2_ConsultarT extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				TicketAux ticket = tableModel.getTickets().get(seleccion);
 				if (ticket.getEstadoActual() == "Solucionado a la espera Ok") {
-					CU3_CerrarT panelCerrarTicket = new CU3_CerrarT(ticket.getIdTicket(), idUsuario);
+					CU3_CerrarT panelCerrarTicket = new CU3_CerrarT(ticket.getIdTicket(), idUsuario, idGrupo);
 					panelCerrarTicket.setPadre(padre);
 					panelCerrarTicket.setAnterior(panel);
 					padre.setContentPane(panelCerrarTicket);

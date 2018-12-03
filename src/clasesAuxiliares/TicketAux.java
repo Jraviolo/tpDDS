@@ -9,7 +9,7 @@ public class TicketAux {
 	private Date fechaApertura;
 	private Date fechaUltCambio;
 	private String nombreUsuario;
-	private String clasificacion;
+	private ClasificacionAux clasificacion;
 	private String estadoActual;
 	private GrupoDeResolucionAux grupoActual;
 	private String descripcion;
@@ -18,7 +18,7 @@ public class TicketAux {
 	}
 	
 	public TicketAux(Integer idTicket, Integer legajo, Date fechaApertura, Date fechaUltCambio, String nombreUsuario,
-			String clasificacion, String estadoActual, GrupoDeResolucionAux grupoActual, String descripcion) {
+			ClasificacionAux clasificacion, String estadoActual, GrupoDeResolucionAux grupoActual, String descripcion) {
 		this.idTicket = idTicket;
 		this.legajo = legajo;
 		this.fechaApertura = fechaApertura;
@@ -60,10 +60,10 @@ public class TicketAux {
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
-	public String getClasificacion() {
+	public ClasificacionAux getClasificacion() {
 		return clasificacion;
 	}
-	public void setClasificacion(String clasificacion) {
+	public void setClasificacion(ClasificacionAux clasificacion) {
 		this.clasificacion = clasificacion;
 	}
 	public String getEstadoActual() {

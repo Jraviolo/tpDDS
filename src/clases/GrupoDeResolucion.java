@@ -6,12 +6,16 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="grupo_de_resolucion")
@@ -47,7 +51,8 @@ public class GrupoDeResolucion {
     private List<Intervencion> intervenciones = new ArrayList<Intervencion>();
 	
 	
-	@OneToMany(cascade = CascadeType.ALL)//, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)//, orphanRemoval = true)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinColumn(name = "cod_gr")
 	private List<ClasificacionDeTicket> clasificaciones = new ArrayList<ClasificacionDeTicket>();
 	

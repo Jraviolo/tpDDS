@@ -72,11 +72,22 @@ public class GestorGrupoDeResolucion {
 	return listaResultado;
 	}
 
-	public GrupoDeResolucionAux getGrupo(ClasificacionAux clasificacion) {
+	public GrupoDeResolucionAux getGrupo(ClasificacionAux c) {
+		ClasificacionDeTicket clasificacion = gbd.buscarClasificacion(c.getId());
+		ArrayList<GrupoDeResolucion> grupos = gbd.getGrupos();
+		GrupoDeResolucionAux a = new GrupoDeResolucionAux();
 		
-		//GrupoDeResolucion grupo = gbd.buscarClasificacion(clasificacion.getId());
-		//GrupoDeResolucionAux a = new GrupoDeResolucionAux(grupo.getNombre(),grupo.getCodigo());		
-		return null;
+		for(GrupoDeResolucion g: grupos) {
+			System.out.println("vuelta: "+a.getNombre());
+			if(g.getClasificaciones().contains(clasificacion)) {
+				
+				a = new GrupoDeResolucionAux(g.getNombre(),g.getCodigo());	
+				System.out.println("grupo: "+a.getNombre());
+				break;
+			}
+		}	
+		System.out.println("grupo: "+a.getNombre());
+		return a;
 	}	
 
 }

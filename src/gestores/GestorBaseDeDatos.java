@@ -94,10 +94,6 @@ public class GestorBaseDeDatos {
 
 	}
 
-	public GrupoDeResolucion buscarGrupo(ClasificacionAux clasificacion) {
-		return null;
-	}
-	
 	public GrupoDeResolucion buscarGrupo(int idgrupo) {
 
 		// crear factory
@@ -225,7 +221,7 @@ public class GestorBaseDeDatos {
 
 	}
 
-	public ArrayList<Ticket> buscarTicket(Integer nroT, Integer nroL, String clasificacion, String estado,
+	public ArrayList<Ticket> buscarTicket(Integer nroT, Integer nroL, ClasificacionAux clasificacion, String estado,
 			Date fechaApertura, Date fechaUltCambio, GrupoDeResolucionAux ultGrupo) {
 
 		// crear objeto factory
@@ -278,7 +274,7 @@ public class GestorBaseDeDatos {
 
 		if (clasificacion != null) {
 			for(Ticket t: tickets) {
-				if(t.getClasificacionActual().getNombre().equals(clasificacion)) {
+				if(t.getClasificacionActual().getIdClasificacion().equals(clasificacion.getId())) {
 					L3.add(t);
 				}
 			}

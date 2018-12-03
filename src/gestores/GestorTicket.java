@@ -66,7 +66,7 @@ public class GestorTicket {
 		System.out.println("-ID DEL TICKET:"+gbd.registrarTicket(t));
 		//retornar idticket*/
 	}	
-	public ArrayList<TicketAux> consultarTicket(Integer nroT,Integer nroL,String clasificacion,String estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucionAux ultGrupo) {
+	public ArrayList<TicketAux> consultarTicket(Integer nroT,Integer nroL,ClasificacionAux clasificacion,String estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucionAux ultGrupo) {
 		ArrayList<Ticket> busqueda = gbd.buscarTicket(nroT, nroL, clasificacion, estado, fechaApertura, fechaUltCambio, ultGrupo);
 		ArrayList<TicketAux> listaResultado = new ArrayList<TicketAux>();
 
@@ -74,12 +74,13 @@ public class GestorTicket {
 			Ticket t= busqueda.get(i);
 			TicketAux aux = new TicketAux();
 			GrupoDeResolucionAux grupo = new GrupoDeResolucionAux(t.ultimaIntervencion().getGrupo().getNombre(), t.ultimaIntervencion().getGrupo().getCodigo());
+			ClasificacionAux clasif = new ClasificacionAux(t.getClasificacionActual().getNombre(),t.getClasificacionActual().getIdClasificacion());
 			aux.setIdTicket(t.getId());
 			aux.setLegajo(t.getEmpleado().getLegajo());
 			aux.setFechaApertura(t.getFechaDeApertura());
 			aux.setFechaUltCambio(t.getFechaUltCambio());
 			aux.setNombreUsuario(t.getUsuarioCreador().getUsuario());
-			aux.setClasificacion(t.clasificacionActual.getNombre());
+			aux.setClasificacion(clasif);
 			aux.setEstadoActual(t.getEstadoActual().getEstado().getEstado());
 			aux.setGrupoActual(grupo);
 			aux.setDescripcion(t.getDescripcion());

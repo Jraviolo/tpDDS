@@ -25,7 +25,7 @@ public class CU3_CerrarT extends JPanel {
 	private GestorTicket gt;
 	
 	
-	public CU3_CerrarT(int idTicket,int idUsuario) {
+	public CU3_CerrarT(int idTicket,int idUsuario, int idGrupo) {
 
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
@@ -46,7 +46,7 @@ public class CU3_CerrarT extends JPanel {
 		barraIzquierda.setBackground(theme);
 
 		Panel tituloSub = new Panel();
-		tituloSub.setBounds(93, 126, 264, 3);
+		tituloSub.setBounds(93, 126, 368, 3);
 		tituloSub.setBackground(theme);
 		this.add(tituloSub);
 
@@ -64,7 +64,7 @@ public class CU3_CerrarT extends JPanel {
 
 		JLabel lblCerrado = new JLabel("Cerrado");
 		lblCerrado.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblCerrado.setBounds(304, 135, 46, 14);
+		lblCerrado.setBounds(232, 134, 66, 14);
 		this.add(lblCerrado);
 
 		JLabel lblObservaciones = new JLabel("Observaciones:");
@@ -72,7 +72,7 @@ public class CU3_CerrarT extends JPanel {
 		this.add(lblObservaciones);
 
 		JTextField observaciones = new JTextField();
-		observaciones.setBounds(93, 185, 264, 164);
+		observaciones.setBounds(93, 185, 368, 200);
 		this.add(observaciones);
 		observaciones.setColumns(10);
 
@@ -88,23 +88,24 @@ public class CU3_CerrarT extends JPanel {
 							"Campos nulos", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-				gt.cerrarTicket(idTicket, obs, idUsuario);
+				gt.cerrarTicket(idTicket, obs, idUsuario, idGrupo);
 				}
 			}
 		});
 		aceptar.setForeground(new Color(255, 255, 255));
 		aceptar.setBackground(theme);
-		aceptar.setBounds(994, 640, 130, 40);
+		aceptar.setBounds(268, 620, 130, 40);
 		this.add(aceptar);
 		
 
 		JButton cerrar = new JButton("Cerrar");
 		cerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				removerPanel();
 			}
 		});
 		cerrar.setBackground(new Color(255, 255, 255));
-		cerrar.setBounds(1134, 640, 130, 40);
+		cerrar.setBounds(408, 620, 130, 40);
 		this.add(cerrar);
 	}
 	
