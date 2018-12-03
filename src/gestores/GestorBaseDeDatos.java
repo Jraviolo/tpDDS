@@ -400,24 +400,26 @@ public class GestorBaseDeDatos {
 	}
 
 	public int ultimoIdTicket() {
-		/*
-		 * //crear factory
-		 * 
-		 * SessionFactory factory = new
-		 * Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class
-		 * ).buildSessionFactory();
-		 * 
-		 * //crear sesión
-		 * 
-		 * Session session = factory.getCurrentSession();
-		 * 
-		 * //usar el objeto session session.beginTransaction(); int idTicket= (int)
-		 * session.createQuery("select max(Id) as id from Ticket").uniqueResult();
-		 * session.getTransaction().commit(); session.close();
-		 * 
-		 * factory.close(); return idTicket;/
-		 */
-		return 1;
+		
+		  //crear factory
+		  
+		  SessionFactory factory = new
+		  Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class
+		  ).buildSessionFactory();
+		  
+		  //crear sesión
+		  
+		  Session session = factory.getCurrentSession();
+		  
+		  //usar el objeto session 
+		  
+		  session.beginTransaction(); 
+		  int idTicket= (int)
+		  session.createQuery("select max(id) from Ticket").uniqueResult();
+		  session.getTransaction().commit(); session.close();
+		  
+		  factory.close(); 
+		  return idTicket;
 	}
 
 
