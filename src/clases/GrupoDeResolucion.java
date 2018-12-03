@@ -106,5 +106,21 @@ public class GrupoDeResolucion {
 		this.estado = estado;
 	}
 
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+
+	public List<Intervencion> getIntervenciones() {
+		return intervenciones;
+	}
+
+
+	public List<ClasificacionDeTicket> getClasificaciones() {
+		return clasificaciones;
+	}
+	
+
 	
 }

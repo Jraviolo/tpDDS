@@ -24,6 +24,7 @@ public class GestorTicket {
 	private GestorBaseDeDatos gbd = new GestorBaseDeDatos();
 	private gestorIntervenciones gi = new gestorIntervenciones();
 	private GestorClasificacionDeTicket gc=new GestorClasificacionDeTicket();
+	private GestorGrupoDeResolucion ggr = new GestorGrupoDeResolucion();
 	
 	
 	public GestorTicket() {
@@ -72,6 +73,7 @@ public class GestorTicket {
 		for(int i=0;i<busqueda.size();i++) {
 			Ticket t= busqueda.get(i);
 			TicketAux aux = new TicketAux();
+			GrupoDeResolucionAux grupo = new GrupoDeResolucionAux(t.ultimaIntervencion().getGrupo().getNombre(), t.ultimaIntervencion().getGrupo().getCodigo());
 			aux.setIdTicket(t.getId());
 			aux.setLegajo(t.getEmpleado().getLegajo());
 			aux.setFechaApertura(t.getFechaDeApertura());
@@ -79,7 +81,8 @@ public class GestorTicket {
 			aux.setNombreUsuario(t.getUsuarioCreador().getUsuario());
 			aux.setClasificacion(t.clasificacionActual.getNombre());
 			aux.setEstadoActual(t.getEstadoActual().getEstado().getEstado());
-			aux.setGrupoActual(t.ultimaIntervencion().getGrupo().getNombre());
+			aux.setGrupoActual(grupo);
+			aux.setDescripcion(t.getDescripcion());
 			listaResultado.add(aux);
 		}
 
@@ -107,6 +110,58 @@ public class GestorTicket {
 	//	gi.finalizarIntervencion(i, EstadoIntervencion.terminada, u, obs,fechacierre);
 		gbd.actualizarTicket(idTicket, t);
 	}
+	
+	
+	
+	//METODO DERIVAR - BRUNO
+	public void derivarTicket(int idT,int idEstado,int idGr, int idClasificacion, String obs, int idU) {
+		Ticket t = gbd.buscarTicket(idT);
+		Usuario u=gbd.buscarUsuario(idU);
+		GrupoDeResolucion g=gbd.buscarGrupo(idGr);
+		ClasificacionDeTicket c=gbd.buscarClasificacion(idClasificacion);
+		
+		EstadoTicket t_estado=gbd.buscarEstadoTicket(idEstado);
+		EstadoIntervencion i_asignada=gbd.buscarEstadoIntervencion(0);
+		EstadoIntervencion i_enespera=gbd.buscarEstadoIntervencion(1);
+		
+		Date fechaderivar=new Date();
+		
+		CambioEstado e2=new CambioEstado(t_estado,u);
+e2.setFechaInicio(fechaderivar);		
+		t.setEstadoActual(e2);
+		
+		
+		// verificamos si hay que cambiar clasificacion
+if (idClasificacion!=t.getClasificacionActual().getIdClasificacion()) {
+	
+Date fC=new Date();
+CambioClasificacion cC=gc.newCambioClasificacion(c, u);
+cC.setFechaInicio(fC);;
+
+CambioClasificacion uc=t.ultimoCambio();
+uc.setFechaFin(fC);
+
+t.actualizarClasificacion(cC, c);
+}		
+	
+	ArrayList<Intervencion> list=new ArrayList<Intervencion>();
+list=ggr.tieneEnEspera(t, g, c);	
+	if (!list.isEmpty()) {
+
+		gi.actualizarIntervencion(list.get(0), i_asignada, u, obs, fechaderivar);
+		
+	}
+	else {
+		
+Intervencion in=gi.crearIntervencion(i_asignada, g, u, fechaderivar);
+t.nuevaIntervencion(in);
+
+	}
+	
+int id=gbd.actualizarTicket(t.getId(), t);	
+	}  
+
+	
 	
 	public void derivarTicket(int idTicket,String obs,int idU,int idgrupo) {
 		Ticket t = gbd.buscarTicket(idTicket);

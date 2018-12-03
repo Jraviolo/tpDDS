@@ -17,6 +17,7 @@ import clases.EstadoTicket;
 import clases.GrupoDeResolucion;
 import clases.Ticket;
 import clases.Usuario;
+import clasesAuxiliares.ClasificacionAux;
 import clasesAuxiliares.GrupoDeResolucionAux;
 
 public class GestorBaseDeDatos {
@@ -93,6 +94,10 @@ public class GestorBaseDeDatos {
 
 	}
 
+	public GrupoDeResolucion buscarGrupo(ClasificacionAux clasificacion) {
+		return null;
+	}
+	
 	public GrupoDeResolucion buscarGrupo(int idgrupo) {
 
 		// crear factory

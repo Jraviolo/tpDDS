@@ -11,14 +11,14 @@ public class TicketAux {
 	private String nombreUsuario;
 	private String clasificacion;
 	private String estadoActual;
-	private String grupoActual;
-	
+	private GrupoDeResolucionAux grupoActual;
+	private String descripcion;
 	
 	public TicketAux() {
 	}
 	
 	public TicketAux(Integer idTicket, Integer legajo, Date fechaApertura, Date fechaUltCambio, String nombreUsuario,
-			String clasificacion, String estadoActual, String grupoActual) {
+			String clasificacion, String estadoActual, GrupoDeResolucionAux grupoActual, String descripcion) {
 		this.idTicket = idTicket;
 		this.legajo = legajo;
 		this.fechaApertura = fechaApertura;
@@ -27,6 +27,7 @@ public class TicketAux {
 		this.clasificacion = clasificacion;
 		this.estadoActual = estadoActual;
 		this.grupoActual = grupoActual;
+		this.descripcion = descripcion;
 	}
 
 	public Integer getIdTicket() {
@@ -71,11 +72,19 @@ public class TicketAux {
 	public void setEstadoActual(String estadoActual) {
 		this.estadoActual = estadoActual;
 	}
-	public String getGrupoActual() {
+	public GrupoDeResolucionAux getGrupoActual() {
 		return grupoActual;
 	}
-	public void setGrupoActual(String grupoActual) {
+	public void setGrupoActual(GrupoDeResolucionAux grupoActual) {
 		this.grupoActual = grupoActual;
+	}
+
+	public void setDescripcion(String des) {
+		this.descripcion=des;
+		
+	}
+	public String getDescripcion() {
+		return descripcion;
 	}
 
 }

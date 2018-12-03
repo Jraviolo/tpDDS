@@ -52,5 +52,11 @@ public class GestorClasificacionDeTicket {
 		
 	}
 
+
+	public ArrayList<ClasificacionAux> getClasificacionesAux(String grupoActual) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

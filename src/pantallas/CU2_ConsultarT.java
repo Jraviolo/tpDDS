@@ -123,7 +123,8 @@ public class CU2_ConsultarT extends JPanel {
 		this.add(comboClasificacion);
 
 		JComboBox comboEstado = new JComboBox();
-		comboEstado.setModel(new DefaultComboBoxModel(new String[] { "Abierto sin derivar","Abierto derivado","Solucionado a la espera ok","Cerrado", "Todos"} ));
+		comboEstado.setModel(new DefaultComboBoxModel(new String[] { "Abierto sin derivar", "Abierto derivado",
+				"Solucionado a la espera ok", "Cerrado", "Todos" }));
 		comboEstado.setBounds(489, 173, 185, 20);
 		this.add(comboEstado);
 
@@ -140,7 +141,7 @@ public class CU2_ConsultarT extends JPanel {
 		fechaUltCambio.setColumns(10);
 
 		ArrayList<GrupoDeResolucionAux> g = ggr.getGruposAux();
-		
+
 		JComboBox<GrupoDeResolucionAux> comboUltGrupo = new JComboBox<GrupoDeResolucionAux>();
 		comboUltGrupo.setModel(new DefaultComboBoxModel(new String[] { "Todos" }));
 		for (int j = 0; j < g.size(); j++)
@@ -274,15 +275,30 @@ public class CU2_ConsultarT extends JPanel {
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// gt.derivarTicket(tableModel.getTickets().get(seleccion), obs, idU, idgrupo);
+				TicketAux ticket = tableModel.getTickets().get(seleccion);
+				if (ticket.getEstadoActual().equals("Solucionado a la espera ok")
+						|| ticket.getEstadoActual().equals("Abierto sin derivar")) {
+					CU4_DerivarT panelDerivarTicket = new CU4_DerivarT(ticket, idUsuario);
+					panelDerivarTicket.setPadre(padre);
+					panelDerivarTicket.setAnterior(panel);
+					padre.setContentPane(panelDerivarTicket);
+					padre.setBounds(panelDerivarTicket.getBounds());
+					padre.setLocationRelativeTo(null);
+
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"No se puede derivar un ticket en estado " + ticket.getEstadoActual(), "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 		});
 		btnNewButton.setBounds(547, 640, 130, 40);
 		this.add(btnNewButton);
 
-		JButton btnNewButton_1 = new JButton("Cerrar ticket");
-		btnNewButton_1.setBackground(Color.WHITE);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnCerrarTicket = new JButton("Cerrar ticket");
+		btnCerrarTicket.setBackground(Color.WHITE);
+		btnCerrarTicket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TicketAux ticket = tableModel.getTickets().get(seleccion);
 				if (ticket.getEstadoActual() == "Solucionado a la espera Ok") {
@@ -299,8 +315,8 @@ public class CU2_ConsultarT extends JPanel {
 				}
 			}
 		});
-		btnNewButton_1.setBounds(687, 640, 130, 40);
-		this.add(btnNewButton_1);
+		btnCerrarTicket.setBounds(687, 640, 130, 40);
+		this.add(btnCerrarTicket);
 
 		JButton btnVerDetalle = new JButton("Ver detalle");
 		btnVerDetalle.setBackground(Color.WHITE);

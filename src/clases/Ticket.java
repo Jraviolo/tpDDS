@@ -20,88 +20,79 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ticket")
+@Table(name = "ticket")
 public class Ticket {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="numero")
+	@Column(name = "numero")
 	private Integer id;
 
-	@Column(name="descripcion")
+	@Column(name = "descripcion")
 	private String descripcion;
-	@Column(name="fecha_apertura")
+	@Column(name = "fecha_apertura")
 	private Date fechaDeApertura;
-	@Column(name="fechar_cierre")
+	@Column(name = "fechar_cierre")
 	private Date fechaDeCierre;
 
-	
-	
 	@OneToOne
 	@JoinColumn(name = "idestado_actual")
 	private CambioEstado estadoActual;
-	
+
 	@ManyToOne
-	@JoinColumn(name= "IDClasif")
+	@JoinColumn(name = "IDClasif")
 	public ClasificacionDeTicket clasificacionActual;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "duenio")
 	private Empleado duenio;
-	
-	
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "numero")
 	private List<CambioEstado> historialEstados = new ArrayList<CambioEstado>();
-	
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "numero")
-	private List<CambioClasificacion> cambioClasificacion = new ArrayList<CambioClasificacion>(); 
-	
+	private List<CambioClasificacion> cambioClasificacion = new ArrayList<CambioClasificacion>();
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "numero")
 	private List<Intervencion> intervenciones = new ArrayList<Intervencion>();
-	
-	
+
 	public Ticket() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ticket(Empleado e,ClasificacionDeTicket c,String des,CambioEstado e1,CambioClasificacion cc, Intervencion i) {
-		clasificacionActual=c;
+	public Ticket(Empleado e, ClasificacionDeTicket c, String des, CambioEstado e1, CambioClasificacion cc,
+			Intervencion i) {
+		clasificacionActual = c;
 		cambioClasificacion.add(cc);
-		duenio=e;
+		duenio = e;
 		historialEstados.add(e1);
-		estadoActual=e1;
+		estadoActual = e1;
 		intervenciones.add(i);
-		descripcion=des;
+		descripcion = des;
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-/*ANTIGUOS
-	public EstadoTicket getEstadoActual() {
-		return estadoActual;
-	}
+	/*
+	 * ANTIGUOS public EstadoTicket getEstadoActual() { return estadoActual; }
+	 * 
+	 * 
+	 * public void setEstadoActual(EstadoTicket estadoActual) { this.estadoActual =
+	 * estadoActual; }
+	 */// NUEVOS:
 
-
-	public void setEstadoActual(EstadoTicket estadoActual) {
-		this.estadoActual = estadoActual;
-	}
-*///NUEVOS:
-	
 	public CambioEstado getEstadoActual() {
 		return estadoActual;
 	}
-
-	
 
 	public List<CambioEstado> getHistorialEstados() {
 		return historialEstados;
@@ -112,68 +103,58 @@ public class Ticket {
 	}
 
 	public void setEstadoActual(CambioEstado estado) {
-		//para que quede la misma fecha que el nuevo estado
+		// para que quede la misma fecha que el nuevo estado
 		estadoActual.setFechaFin(estado.getFechaInicio());
-		
+
 		this.historialEstados.add(estado);
 		this.estadoActual = estado;
 	}
-	
+
 	public void nuevaIntervencion(Intervencion i) {
 		this.intervenciones.add(i);
 	}
-	
+
 	public Intervencion ultimaIntervencion() {
 		int i = intervenciones.size();
-		return intervenciones.get(i-1);
+		return intervenciones.get(i - 1);
 	}
-
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
-
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
 
 	public Date getFechaDeApertura() {
 		return fechaDeApertura;
 	}
 
-
 	public void setFechaDeApertura(Date fechaDeApertura) {
 		this.fechaDeApertura = fechaDeApertura;
 	}
-
 
 	public Date getFechaDeCierre() {
 		return fechaDeCierre;
 	}
 
-
 	public void setFechaDeCierre(Date fechaDeCierre) {
 		this.fechaDeCierre = fechaDeCierre;
 	}
 
-
-
-
-	/*public Time getTiempoDeAtencion() {
-		return tiempoDeAtencion;
-	}
-
-
-	public void setTiempoDeAtencion(Time tiempoDeAtencion) {
-		this.tiempoDeAtencion = tiempoDeAtencion;
-	}*/
+	/*
+	 * public Time getTiempoDeAtencion() { return tiempoDeAtencion; }
+	 * 
+	 * 
+	 * public void setTiempoDeAtencion(Time tiempoDeAtencion) {
+	 * this.tiempoDeAtencion = tiempoDeAtencion; }
+	 */
 
 	public Empleado getEmpleado() {
 		return duenio;
 	}
-	
+
 	public ClasificacionDeTicket getClasificacionActual() {
 		return clasificacionActual;
 	}
@@ -181,9 +162,25 @@ public class Ticket {
 	public Date getFechaUltCambio() {
 		return estadoActual.getFechaInicio();
 	}
-	
-	public Usuario getUsuarioCreador(){
+
+	public Usuario getUsuarioCreador() {
 		return intervenciones.get(0).getHistorialIntervencion().get(0).getUsuario();
 	}
-	
+
+	public CambioClasificacion ultimoCambio() {
+		return this.cambioClasificacion.get(cambioClasificacion.size() - 1);
+
+	}
+
+	public void actualizarClasificacion(CambioClasificacion cc, ClasificacionDeTicket c) {
+
+		this.cambioClasificacion.add(cc);
+		this.clasificacionActual = c;
+
+	}
+
+	public List<Intervencion> getIntervenciones() {
+		return this.intervenciones;
+	}
+
 }
