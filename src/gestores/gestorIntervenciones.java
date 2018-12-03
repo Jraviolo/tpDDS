@@ -41,6 +41,7 @@ public class gestorIntervenciones {
 		CambioIntervencion c1=new CambioIntervencion(e,u);
 		c1.setFechaInicioAsignacion(fecha);
 		
+		
 		i.finalizarIntervencion(c1, obs,fecha);
 	}
 	

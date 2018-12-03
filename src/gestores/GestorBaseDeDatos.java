@@ -361,41 +361,43 @@ public class GestorBaseDeDatos {
 
 
 	public Ticket buscarTicket(int idTicket) {
-		return null;
-		/*
-		 * SessionFactory factory = new
-		 * Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class
-		 * ).buildSessionFactory();
-		 * 
-		 * //crear sesión
-		 * 
-		 * Session session = factory.getCurrentSession(); //usar el objeto session
-		 * 
-		 * session.beginTransaction(); Ticket t=session.get(Ticket.class, idTicket);
-		 * session.getTransaction().commit(); session.close();
-		 * 
-		 * factory.close(); return t;/
-		 */
+		
+		
+		 SessionFactory factory = new
+		  Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class
+		  ).buildSessionFactory();
+		  
+		  //crear sesión
+		  
+		  Session session = factory.getCurrentSession(); //usar el objeto session
+		  
+		  session.beginTransaction(); Ticket t=session.get(Ticket.class, idTicket);
+		  session.getTransaction().commit(); session.close();
+		  
+		  factory.close(); 
+		  return t;
+		 
 	}
 
 	public int actualizarTicket(int idticket, Ticket t) {
-		return idticket;
-		/*
-		 * //crear factory
-		 * 
-		 * SessionFactory factory = new
-		 * Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class
-		 * ).buildSessionFactory();
-		 * 
-		 * //crear sesión
-		 * 
-		 * Session session = factory.getCurrentSession();
-		 * 
-		 * //usar el objeto session session.beginTransaction(); session.saveOrUpdate(t);
-		 * session.getTransaction().commit(); session.close();
-		 * 
-		 * factory.close(); return t.getId();/
-		 */
+		
+		
+		  //crear factory
+		  
+		  SessionFactory factory = new
+		  Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class
+		  ).buildSessionFactory();
+		  
+		  //crear sesión
+		  
+		  Session session = factory.getCurrentSession();
+		  
+		  //usar el objeto session 
+		  session.beginTransaction(); session.saveOrUpdate(t);
+		  session.getTransaction().commit(); session.close();
+		  
+		  factory.close(); 
+		  return t.getId();
 
 	}
 

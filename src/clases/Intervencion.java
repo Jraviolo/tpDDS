@@ -158,16 +158,11 @@ public class Intervencion {
 	
 	public CambioIntervencion UltimoEstado(){
 		CambioIntervencion c1=new CambioIntervencion();
-		Boolean encontrado=false;
-		int i=historialIntervencion.size()-1;
-		while(encontrado==false && i>0) {
+		for(int i=0;i<historialIntervencion.size();i++) {
 			c1=historialIntervencion.get(i);
-			if(c1.getFechaFinAsignacion()==null && c1.getEstado().toString()=="trabajando") {
-				encontrado=true;
-			}
-			else c1=null;
+			if(c1.getFechaFinAsignacion()==null) return c1;
 		}
-		return c1;
+		return null;
 	}
 
 	public GrupoDeResolucion getGrupo() {

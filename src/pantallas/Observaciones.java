@@ -163,8 +163,8 @@ public class Observaciones extends JDialog {
 				
 				if (op==0) {
 					if (rdbtnResuelto.isSelected()) {
-						
-						//gt.cerrarTicket(idTicket,textField.getText(),idUsuario);
+						int idgrupo=1;
+						gt.cerrarTicket(idTicket,textField.getText(),idUsuario,idgrupo);
 					} else if (rdbtnEderivarAGrupo.isSelected()) {
 						//derivar
 						int idGrupo = ((GrupoDeResolucion) comboBox.getSelectedItem()).getCodigo();

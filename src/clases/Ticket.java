@@ -19,6 +19,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name = "ticket")
 public class Ticket {
@@ -47,7 +50,8 @@ public class Ticket {
 	@JoinColumn(name = "duenio")
 	private Empleado duenio;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinColumn(name = "numero")
 	private List<CambioEstado> historialEstados = new ArrayList<CambioEstado>();
 
@@ -117,6 +121,17 @@ public class Ticket {
 	public Intervencion ultimaIntervencion() {
 		int i = intervenciones.size();
 		return intervenciones.get(i - 1);
+	}
+	
+	public Intervencion getIntervencion(int idgrupo) {
+		for (int i=0;i<intervenciones.size(); i++) {
+			if(intervenciones.get(i).getGrupo().getCodigo()==idgrupo) {
+				return intervenciones.get(i);
+			}
+			
+		}
+		System.out.println("noooooooo");
+		return null;
 	}
 
 	public String getDescripcion() {

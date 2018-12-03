@@ -89,26 +89,29 @@ public class GestorTicket {
 		return listaResultado;
 	}
 	
-	public void cerrarTicket(int idTicket,String obs,int idU) {
+	public void cerrarTicket(int idTicket,String obs,int idU,int idG) {
 		
 		Ticket t = gbd.buscarTicket(idTicket);
 		Usuario u=gbd.buscarUsuario(idU);
 		
 		EstadoTicket t_cerrado=gbd.buscarEstadoTicket(3);
-		EstadoIntervencion i_trabajando=gbd.buscarEstadoIntervencion(2);
+		EstadoIntervencion i_terminada=gbd.buscarEstadoIntervencion(2);
 		
 		Date fechacierre=new Date();
 		
 		CambioEstado e1=new CambioEstado(t_cerrado,u);
 		e1.setFechaInicio(fechacierre);
+		e1.setFechaFin(fechacierre);
 		
+		t.setFechaDeCierre(fechacierre);
 		t.setEstadoActual(e1);
 		
 		//chequear
-		Intervencion i = t.ultimaIntervencion();
-		
-	//	gi.finalizarIntervencion(i, EstadoIntervencion.terminada, u, obs,fechacierre);
-		gbd.actualizarTicket(idTicket, t);
+		Intervencion i = t.getIntervencion(idG);
+		System.out.println(i.getEstado());
+		gi.finalizarIntervencion(i, i_terminada, u, obs,fechacierre);
+		int v= gbd.actualizarTicket(idTicket, t);
+		System.out.println(v);
 	}
 	
 	
