@@ -222,7 +222,7 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 			 
 					JButton btnNewButton = new JButton("Actualizar \r\nEstado");
 					btnNewButton.setBackground(Color.WHITE);
-					btnNewButton.setBounds(714, 640, 130, 40);
+					btnNewButton.setBounds(482, 640, 150, 40);
 					this.add(btnNewButton);
 					
 					JButton btnNewButton_1 = new JButton("Comentar");
@@ -231,7 +231,7 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 						public void actionPerformed(ActionEvent arg0) {
 						}
 					});
-					btnNewButton_1.setBounds(854, 640, 130, 40);
+					btnNewButton_1.setBounds(642, 640, 150, 40);
 					this.add(btnNewButton_1);
 			
 			JButton cerrar = new JButton("Cancelar");
