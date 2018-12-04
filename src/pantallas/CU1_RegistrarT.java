@@ -211,9 +211,9 @@ public class CU1_RegistrarT extends JPanel {
 						System.out.println(String.valueOf(idClasificacion));
 						
 						if(gbd.existeLegajo(l)) {
-						gt.registrarTicket(l, idClasificacion, ob.getText(),idUsuario, idgrupo,now);
-						
-						Observaciones asd = new Observaciones(new JFrame(),true,idTicket,idUsuario);
+						//gt.registrarTicket(l, idClasificacion, ob.getText(),idUsuario, idgrupo,now);
+						int idTicket2=1;
+						Observaciones asd = new Observaciones(new JFrame(),true,idTicket2,idUsuario);
 						asd.setVisible(true);
 						removerPanel();
 						}

@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clases.GrupoDeResolucion;
+import clasesAuxiliares.ClasificacionAux;
+import clasesAuxiliares.GrupoDeResolucionAux;
+import gestores.GestorGrupoDeResolucion;
 import gestores.GestorTicket;
 
 import javax.swing.JLabel;
@@ -22,6 +25,7 @@ import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.JTextField;
@@ -43,6 +47,7 @@ public class Observaciones extends JDialog {
 	private JScrollPane obscroll;
 	
 	private GestorTicket gt=new GestorTicket();
+	private GestorGrupoDeResolucion gg=new GestorGrupoDeResolucion();
 
 	public Observaciones(Frame parent, boolean modal,int idTicket,int idUsuario) {
 		super(parent, modal);
@@ -106,15 +111,19 @@ public class Observaciones extends JDialog {
 		contentPane.add(rdbtnResuelto);
 		
 		JRadioButton rdbtnEderivarAGrupo = new JRadioButton("Derivar a grupo de soporte:");
-		rdbtnEderivarAGrupo.setBounds(93, 389, 232, 23);
+		rdbtnEderivarAGrupo.setBounds(93, 389, 223, 23);
 		contentPane.add(rdbtnEderivarAGrupo);
 		
-		
+		//combobox grupos
 		String[] bookTitles = new String[] {"Effective Java", "Head First Java",
                 "Thinking in Java", "Java for Dummies"};
 		
-		JComboBox comboBox = new JComboBox(bookTitles);
-		comboBox.setBounds(331, 389, 130, 23);
+		ArrayList<GrupoDeResolucionAux> c=gg.getGruposAux();
+		
+		JComboBox<GrupoDeResolucionAux> comboBox = new JComboBox<GrupoDeResolucionAux>();
+		for(int j = 0; j < c.size(); j++)
+			comboBox.addItem(c.get(j));
+		comboBox.setBounds(93, 420, 368, 23);
 		contentPane.add(comboBox);
 		comboBox.setEnabled(false);
 		

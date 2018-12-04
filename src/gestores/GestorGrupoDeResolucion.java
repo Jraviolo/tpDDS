@@ -1,6 +1,7 @@
 package gestores;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import clases.ClasificacionDeTicket;
 import clases.GrupoDeResolucion;
@@ -89,5 +90,19 @@ public class GestorGrupoDeResolucion {
 		System.out.println("grupo: "+a.getNombre());
 		return a;
 	}	
-
+	
+	
+	public GrupoDeResolucionAux getGrupo(int clasif) {
+		ArrayList<GrupoDeResolucion> grupos=gbd.getGrupos();
+		for(GrupoDeResolucion g: grupos) {
+			List<ClasificacionDeTicket> clasificaciones=g.getClasificaciones();
+			for(ClasificacionDeTicket c:clasificaciones) {
+				if(c.getIdClasificacion()==clasif) {
+					GrupoDeResolucionAux a = new GrupoDeResolucionAux(g.getNombre(),g.getCodigo());
+					return a;
+				}
+			}
+		}
+		return null;
+	}	
 }

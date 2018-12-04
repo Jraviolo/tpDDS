@@ -64,7 +64,7 @@ public class CU4_DerivarT extends JPanel {
 		titulo_pantalla.setBounds(93, 99, 416, 25);
 		this.add(titulo_pantalla);
 
-		
+		//ESTADO ACTUAL
 
 		JLabel lblEstadoActual = new JLabel("Estado actual:");
 		lblEstadoActual.setBounds(93, 135, 168, 20);
@@ -77,6 +77,7 @@ public class CU4_DerivarT extends JPanel {
 		this.add(estado);
 		estado.setColumns(10);
 
+		//DESCRIPCION 
 		JLabel lblDescripcinDelProblema = new JLabel("Descripci\u00F3n del problema:");
 		lblDescripcinDelProblema.setBounds(93, 166, 176, 14);
 		this.add(lblDescripcinDelProblema);
@@ -85,9 +86,11 @@ public class CU4_DerivarT extends JPanel {
 		descripcion.setHorizontalAlignment(SwingConstants.LEFT);
 		descripcion.setEditable(false);
 		descripcion.setBounds(93, 191, 368, 95);
+		descripcion.setText(t.getDescripcion());
 		this.add(descripcion);
 		descripcion.setColumns(10);
 
+		//NUEVO ESTADO
 		JLabel lblNuevoEstado = new JLabel("Nuevo estado:");
 		lblNuevoEstado.setBounds(93, 297, 176, 20);
 		this.add(lblNuevoEstado);
@@ -97,18 +100,10 @@ public class CU4_DerivarT extends JPanel {
 		comboBox.setBounds(271, 297, 190, 20);
 		this.add(comboBox);
 
-		JLabel lblNewLabel = new JLabel("Grupo de resoluci\u00F3n:");
-		lblNewLabel.setBounds(93, 359, 168, 20);
-		this.add(lblNewLabel);
 		
-		GrupoDeResolucionAux grupo = ggr.getGrupo(t.getClasificacion());
-	/*	GestorGrupoDeResolucion ggr = new GestorGrupoDeResolucion();
-		GrupoDeResolucionAux grupo = ggr.getGrupo((ClasificacionAux) comboClasificacion.getSelectedItem());
-	*/	JComboBox<GrupoDeResolucionAux> comboBox_2 = new JComboBox<GrupoDeResolucionAux>();
-		comboBox_2.addItem(grupo);
-		comboBox_2.setBounds(271, 359, 190, 20);
-		this.add(comboBox_2);
 
+		//CLASIFICACIONES
+		
 		JLabel lblClasificacinDeTicket = new JLabel("Clasificaci\u00F3n de ticket:");
 		lblClasificacinDeTicket.setBounds(93, 328, 168, 20);
 		this.add(lblClasificacinDeTicket);
@@ -117,21 +112,49 @@ public class CU4_DerivarT extends JPanel {
 		ArrayList<ClasificacionAux> clasificaciones = gc.getClasificacionesAux();
 		JComboBox<ClasificacionAux> comboClasificacion = new JComboBox<ClasificacionAux>();
 		
-		
-		comboClasificacion.setEditable(true);
 		for (ClasificacionAux c : clasificaciones) {
 			comboClasificacion.addItem(c);
+			if(c.getId()==t.getClasificacion().getId()) comboClasificacion.setSelectedItem(c);
 		}
-		comboClasificacion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//GrupoDeResolucionAux grupo = actualizarGrupo(grupo,(ClasificacionAux) comboClasificacion.getSelectedItem());
-				comboBox_2.removeAllItems();
-				comboBox_2.addItem(ggr.getGrupo((ClasificacionAux) comboClasificacion.getSelectedItem()));
-			}
-		});
 		comboClasificacion.setBounds(271, 328, 190, 20);
 		this.add(comboClasificacion);
+		
+		
+		//GRUPO DE RESOLUCION
+		
+				JLabel lblNewLabel = new JLabel("Grupo de resoluci\u00F3n:");
+				lblNewLabel.setBounds(93, 359, 168, 20);
+				this.add(lblNewLabel);
+				
+				GrupoDeResolucionAux grupo = ggr.getGrupo(t.getClasificacion().getId());
+			/*	GestorGrupoDeResolucion ggr = new GestorGrupoDeResolucion();
+				GrupoDeResolucionAux grupo = ggr.getGrupo((ClasificacionAux) comboClasificacion.getSelectedItem());
+			*/	JComboBox<GrupoDeResolucionAux> comboBox_2 = new JComboBox<GrupoDeResolucionAux>();
+				comboBox_2.addItem(grupo);
+				comboBox_2.setBounds(271, 359, 190, 20);
+				this.add(comboBox_2);
+		
+		
+		//ACCION CLASIFICACIONES
+		comboClasificacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int idclasif= ((ClasificacionAux)comboClasificacion.getSelectedItem()).getId();
+				
+				//GrupoDeResolucionAux grupo = actualizarGrupo(grupo,(ClasificacionAux) comboClasificacion.getSelectedItem());
+				//comboBox_2.removeAllItems();
+				//comboBox_2.addItem(ggr.getGrupo((ClasificacionAux) comboClasificacion.getSelectedItem()));
+				
+				comboBox_2.removeAllItems();
+				
+				//BUSCO POR ID DE CLASIFICACION---VER EN GESTOR D GRUPO
+				comboBox_2.addItem(ggr.getGrupo(idclasif));
+				
+			}
+		});
+		
 
+		
+		//OBSERACIONES
 
 		JLabel lblObservaciones = new JLabel("Observaciones:");
 		lblObservaciones.setBounds(93, 390, 168, 14);
@@ -142,13 +165,15 @@ public class CU4_DerivarT extends JPanel {
 		this.add(observaciones);
 		observaciones.setColumns(10);
 		
+		//BOTONES
+		
 		JButton imprimir_aceptar = new JButton("Aceptar");
 		imprimir_aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				GrupoDeResolucion g = (GrupoDeResolucion) comboBox_2.getSelectedItem();
-				ClasificacionAux c = (ClasificacionAux) comboClasificacion.getSelectedItem();
-				gt.derivarTicket(t.getIdTicket(), 1, g.getCodigo(), c.getId(), observaciones.getText(), idUsuario);
+			//	GrupoDeResolucion g = (GrupoDeResolucion) comboBox_2.getSelectedItem();
+			//	ClasificacionAux c = (ClasificacionAux) comboClasificacion.getSelectedItem();
+			//	gt.derivarTicket(t.getIdTicket(), 1, g.getCodigo(), c.getId(), observaciones.getText(), idUsuario);
 
 			}
 		});
