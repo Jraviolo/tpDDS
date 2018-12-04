@@ -122,13 +122,13 @@ public class InicioSesion extends JFrame {
 				int idUsuario = Integer.valueOf(user.getText());
 				int idGrupo = idUsuario;
 
-				if (idGrupo == 0) {
+				if (idGrupo == 1) {
 					Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda(idUsuario, idGrupo);
 					panelMesaDeAyuda.setPadre(frame);
 					panelMesaDeAyuda.setAnterior(contentPane);
 					setContentPane(panelMesaDeAyuda);
 				} else {
-					if (idGrupo > 0 && idGrupo <= ggr.getGruposAux().size()) {
+					if (idGrupo > 1 && idGrupo <= ggr.getGruposAux().size()) {
 					Grupo_de_resolucion panelGrupoDeResolucion = new Grupo_de_resolucion(idUsuario,idGrupo);
 					panelGrupoDeResolucion.setPadre(frame);
 					panelGrupoDeResolucion.setAnterior(contentPane);
