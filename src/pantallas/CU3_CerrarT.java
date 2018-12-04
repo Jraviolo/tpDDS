@@ -3,6 +3,7 @@ package pantallas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Panel;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,6 +23,7 @@ public class CU3_CerrarT extends JPanel {
 
 	private JFrame padre;
 	private JPanel anterior;
+	private Rectangle boundsAnterior;
 	private GestorTicket gt;
 	
 	
@@ -116,11 +118,16 @@ public class CU3_CerrarT extends JPanel {
 	public void removerPanel() {
 		padre.remove(this);
 		padre.setContentPane(anterior);
-		padre.setBounds(anterior.getBounds());
+		padre.setBounds(boundsAnterior);
 		padre.setLocationRelativeTo(null);
 	}
 
 	public void setAnterior(JPanel anterior) {
 		this.anterior = anterior;
+	}
+
+	public void setBoundsAnterior(Rectangle bounds) {
+		this.boundsAnterior=bounds;
+		
 	}
 }

@@ -26,6 +26,8 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Panel;
+import java.awt.Rectangle;
+
 import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
@@ -46,6 +48,7 @@ public class CU1_RegistrarT extends JPanel {
 	
 	private JPanel anterior;
 	private JFrame padre;
+	private Rectangle boundsAnterior;
 	private JTextField textNro_de_ticket;
 	private JTextField legajo;
 	private JTextArea ob;
@@ -256,13 +259,20 @@ public class CU1_RegistrarT extends JPanel {
 		this.padre = padre;
 	}
 	
-	public void removerPanel(){
+	public void removerPanel() {
 		padre.remove(this);
 		padre.setContentPane(anterior);
+		padre.setBounds(boundsAnterior);
+		padre.setLocationRelativeTo(null);
 	}
-	
+
 	public void setAnterior(JPanel anterior) {
-		this.anterior=anterior;
+		this.anterior = anterior;
+	}
+
+	public void setBoundsAnterior(Rectangle bounds) {
+		this.boundsAnterior=bounds;
+		
 	}
 
 }

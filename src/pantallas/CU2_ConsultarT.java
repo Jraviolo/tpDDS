@@ -22,6 +22,8 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Panel;
+import java.awt.Rectangle;
+
 import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
@@ -58,6 +60,7 @@ public class CU2_ConsultarT extends JPanel {
 	private JFrame padre;
 	private JPanel anterior;
 	private JPanel panel = this;
+	private Rectangle boundsAnterior;
 	private JTextField numeroTicket;
 	private JTextField numeroLegajo;
 	private JTextField fechaApertura;
@@ -281,6 +284,7 @@ public class CU2_ConsultarT extends JPanel {
 					CU4_DerivarT panelDerivarTicket = new CU4_DerivarT(ticket, idUsuario);
 					panelDerivarTicket.setPadre(padre);
 					panelDerivarTicket.setAnterior(panel);
+					panelDerivarTicket.setBoundsAnterior(new Rectangle(0, 0, 1281, 720));
 					padre.setContentPane(panelDerivarTicket);
 					padre.setBounds(panelDerivarTicket.getBounds());
 					padre.setLocationRelativeTo(null);
@@ -305,6 +309,7 @@ public class CU2_ConsultarT extends JPanel {
 					CU3_CerrarT panelCerrarTicket = new CU3_CerrarT(ticket.getIdTicket(), idUsuario, idGrupo);
 					panelCerrarTicket.setPadre(padre);
 					panelCerrarTicket.setAnterior(panel);
+					panelCerrarTicket.setBoundsAnterior(new Rectangle(0, 0, 1281, 720));
 					padre.setContentPane(panelCerrarTicket);
 					padre.setBounds(panelCerrarTicket.getBounds());
 					padre.setLocationRelativeTo(null);
@@ -372,12 +377,17 @@ public class CU2_ConsultarT extends JPanel {
 	public void removerPanel() {
 		padre.remove(this);
 		padre.setContentPane(anterior);
-		padre.setBounds(anterior.getBounds());
+		padre.setBounds(boundsAnterior);
 		padre.setLocationRelativeTo(null);
 	}
 
 	public void setAnterior(JPanel anterior) {
 		this.anterior = anterior;
+	}
+
+	public void setBoundsAnterior(Rectangle bounds) {
+		this.boundsAnterior=bounds;
+		
 	}
 
 }

@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Panel;
+import java.awt.Rectangle;
+
 import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
@@ -28,8 +30,9 @@ import java.awt.Font;
 import javax.swing.JPasswordField;
 
 public class Mesa_de_ayuda extends JPanel {
-	JFrame padre;
-	JPanel anterior;
+	private JFrame padre;
+	private JPanel anterior;
+	private Rectangle boundsAnterior;
 	JPanel panel=this;
 	
 	public Mesa_de_ayuda(int idUsuario,int idgrupo) {
@@ -78,6 +81,7 @@ public class Mesa_de_ayuda extends JPanel {
 				CU2_ConsultarT panelConsultarTicket = new CU2_ConsultarT(idUsuario, idgrupo);
 				panelConsultarTicket.setPadre(padre);
 				panelConsultarTicket.setAnterior(panel);
+				panelConsultarTicket.setBoundsAnterior(new Rectangle(0, 0, 554, 700));
 				padre.setContentPane(panelConsultarTicket);
 				padre.setBounds(panelConsultarTicket.getBounds());
 				padre.setLocationRelativeTo(null);
@@ -127,9 +131,10 @@ public class Mesa_de_ayuda extends JPanel {
 				CU1_RegistrarT panelRegistrarTicket = new CU1_RegistrarT(idUsuario,idgrupo);
 				panelRegistrarTicket.setPadre(padre);
 				panelRegistrarTicket.setAnterior(panel);
+				panelRegistrarTicket.setBoundsAnterior(new Rectangle(0, 0, 554, 700));
 				padre.setContentPane(panelRegistrarTicket);
-			//	padre.setBounds(panelRegistrarTicket.getBounds());
-			//	padre.setLocationRelativeTo(null);
+				padre.setBounds(panelRegistrarTicket.getBounds());
+				padre.setLocationRelativeTo(null);
 
 			}
 		});
@@ -146,10 +151,17 @@ public class Mesa_de_ayuda extends JPanel {
 	public void removerPanel() {
 		padre.remove(this);
 		padre.setContentPane(anterior);
+		padre.setBounds(boundsAnterior);
+		padre.setLocationRelativeTo(null);
 	}
 
 	public void setAnterior(JPanel anterior) {
 		this.anterior = anterior;
+	}
+
+	public void setBoundsAnterior(Rectangle bounds) {
+		this.boundsAnterior=bounds;
+		
 	}
 
 }
