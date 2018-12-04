@@ -375,7 +375,7 @@ public class GestorBaseDeDatos {
 		 
 	}
 
-	public int actualizarTicket(int idticket, Ticket t) {
+	public int actualizarTicket(Ticket t) {
 		
 		
 		  //crear factory

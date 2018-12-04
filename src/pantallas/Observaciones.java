@@ -149,7 +149,7 @@ public class Observaciones extends JDialog {
 		JButton imprimir_aceptar = new JButton("Finalizar");
 		imprimir_aceptar.addActionListener( e ->{
 			
-			if(textField.getText().isEmpty()) {
+			if(textField.getText().isEmpty() || textField.getText().length()>299) {
 				JOptionPane.showMessageDialog(new JPanel(),"El campo observaciones no puede estar vacio","Error",JOptionPane.ERROR_MESSAGE);
 			}
 			else if(!rdbtnResuelto.isSelected() && !rdbtnEderivarAGrupo.isSelected()) {
@@ -176,10 +176,9 @@ public class Observaciones extends JDialog {
 						gt.cerrarTicket(idTicket,textField.getText(),idUsuario,idgrupo);
 					} else if (rdbtnEderivarAGrupo.isSelected()) {
 						//derivar
-						int idGrupo = ((GrupoDeResolucion) comboBox.getSelectedItem()).getCodigo();
-						//gt.derivarTicket(idTicket,textField.getText(),idUsuario,idGrupo);
+						int idGrupo = ((GrupoDeResolucionAux) comboBox.getSelectedItem()).getId();
+						gt.derivarTicket(idTicket,textField.getText(),idUsuario,idGrupo);
 
-						
 					}
 					this.setVisible(false);
 				}

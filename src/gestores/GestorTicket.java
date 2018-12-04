@@ -31,7 +31,7 @@ public class GestorTicket {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void registrarTicket(int legajo,int idClasificacion,String Descripcion,int idUsuario,int idgrupo,Date fecha) {
+	public int registrarTicket(int legajo,int idClasificacion,String Descripcion,int idUsuario,int idgrupo,Date fecha) {
 		
 		ClasificacionDeTicket clasificacion= gbd.buscarClasificacion(idClasificacion);
 		GrupoDeResolucion mesaDeAyuda=gbd.buscarGrupo(idgrupo);
@@ -41,13 +41,6 @@ public class GestorTicket {
 		
 		EstadoTicket t_abiertoSinDerivar=gbd.buscarEstadoTicket(0);
 		EstadoIntervencion i_trabajando=gbd.buscarEstadoIntervencion(3);
-
-		System.out.println("Nombre Clasificacion:"+clasificacion.getNombre());
-		System.out.println("Nombre grupo:"+mesaDeAyuda.getNombre());
-		System.out.println("--Usuario:"+usuario.getUsuario());
-		System.out.println("--Empleado:"+empleado.getApellido());
-		System.out.println("--Estado inter trabajando:"+i_trabajando.getEstado());
-		System.out.println("--Estado ticket abierto:"+t_abiertoSinDerivar.getEstado());
 		
 		
 		CambioEstado e1=new CambioEstado(t_abiertoSinDerivar,usuario);
@@ -63,7 +56,9 @@ public class GestorTicket {
 		//t.setId(123);
 		
 		//esto bd
-		System.out.println("-ID DEL TICKET:"+gbd.registrarTicket(t));
+		int id = gbd.registrarTicket(t);
+		System.out.println("-ID DEL TICKET:"+id);
+		return id;
 		//retornar idticket*/
 	}	
 	public ArrayList<TicketAux> consultarTicket(Integer nroT,Integer nroL,ClasificacionAux clasificacion,String estado, Date fechaApertura, Date fechaUltCambio, GrupoDeResolucionAux ultGrupo) {
@@ -111,7 +106,7 @@ public class GestorTicket {
 		Intervencion i = t.getIntervencion(idG);
 		System.out.println(i.getEstado());
 		gi.finalizarIntervencion(i, i_terminada, u, obs,fechacierre);
-		int v= gbd.actualizarTicket(idTicket, t);
+		int v= gbd.actualizarTicket(t);
 		System.out.println(v);
 	}
 	
@@ -162,11 +157,11 @@ t.nuevaIntervencion(in);
 
 	}
 	
-int id=gbd.actualizarTicket(t.getId(), t);	
+int id=gbd.actualizarTicket( t);	
 	}  
 
 	
-	
+	//ALE
 	public void derivarTicket(int idTicket,String obs,int idU,int idgrupo) {
 		Ticket t = gbd.buscarTicket(idTicket);
 		Usuario u=gbd.buscarUsuario(idU);
@@ -185,11 +180,11 @@ int id=gbd.actualizarTicket(t.getId(), t);
 		
 		t.setEstadoActual(e2);
 		
-		//ojota
-		Intervencion i=t.ultimaIntervencion();
+		//EL 1 ES UNA SOLUCION PROVISORIA PARA SIEMPRE COMO TODO LO PROVISORIO
+		Intervencion i=t.getIntervencion(1);
 		gi.actualizarIntervencion(i, i_enespera, u, obs,fechaderivar);
 		t.nuevaIntervencion(i1);
-		gbd.actualizarTicket(idTicket, t);
+		gbd.actualizarTicket(t);
 	}
 	
 	public ArrayList<EstadoTicket> getEstados() {
