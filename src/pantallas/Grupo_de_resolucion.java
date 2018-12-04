@@ -29,6 +29,7 @@ public class Grupo_de_resolucion extends JPanel {
 
 	private JFrame padre;
 	private JPanel anterior;
+	private JPanel panel = this;
 	private Rectangle boundsAnterior;
 	
 	public Grupo_de_resolucion(int idUsuario2,int idgrupo2) {
@@ -90,6 +91,13 @@ public class Grupo_de_resolucion extends JPanel {
 		JButton btnNewButton_1 = new JButton("Consultar intervenciones asignadas");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CU7_ConsultarIntervenciones panelConsultarIntervenciones = new CU7_ConsultarIntervenciones(idUsuario, idgrupo);
+				panelConsultarIntervenciones.setPadre(padre);
+				panelConsultarIntervenciones.setAnterior(panel);
+				panelConsultarIntervenciones.setBoundsAnterior(new Rectangle(0, 0, 554, 700));
+				padre.setContentPane(panelConsultarIntervenciones);
+				padre.setBounds(panelConsultarIntervenciones.getBounds());
+				padre.setLocationRelativeTo(null);
 			}
 		});
 		btnNewButton_1.setBackground(Color.WHITE);
