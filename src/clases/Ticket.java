@@ -55,7 +55,8 @@ public class Ticket {
 	@JoinColumn(name = "numero")
 	private List<CambioEstado> historialEstados = new ArrayList<CambioEstado>();
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinColumn(name = "numero")
 	private List<CambioClasificacion> cambioClasificacion = new ArrayList<CambioClasificacion>();
 

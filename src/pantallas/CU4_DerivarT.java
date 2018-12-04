@@ -31,8 +31,8 @@ public class CU4_DerivarT extends JPanel {
 
 	private JFrame padre;
 	private JPanel anterior;
-	private GestorTicket gt;
-	GestorGrupoDeResolucion ggr = new GestorGrupoDeResolucion();
+	private GestorTicket gt=new GestorTicket();
+	private GestorGrupoDeResolucion ggr = new GestorGrupoDeResolucion();
 	
 	public CU4_DerivarT(TicketAux t, int idUsuario) {
 
@@ -171,10 +171,10 @@ public class CU4_DerivarT extends JPanel {
 		imprimir_aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-			//	GrupoDeResolucion g = (GrupoDeResolucion) comboBox_2.getSelectedItem();
-			//	ClasificacionAux c = (ClasificacionAux) comboClasificacion.getSelectedItem();
-			//	gt.derivarTicket(t.getIdTicket(), 1, g.getCodigo(), c.getId(), observaciones.getText(), idUsuario);
-
+				GrupoDeResolucionAux g = (GrupoDeResolucionAux) comboBox_2.getSelectedItem();
+				ClasificacionAux c = (ClasificacionAux) comboClasificacion.getSelectedItem();
+				gt.derivarTicket(t.getIdTicket(), 1, g.getId(), c.getId(), observaciones.getText(), idUsuario);
+				removerPanel();
 			}
 		});
 		imprimir_aceptar.setForeground(new Color(255, 255, 255));

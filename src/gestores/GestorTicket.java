@@ -117,7 +117,9 @@ public class GestorTicket {
 		Ticket t = gbd.buscarTicket(idT);
 		Usuario u=gbd.buscarUsuario(idU);
 		GrupoDeResolucion g=gbd.buscarGrupo(idGr);
-		ClasificacionDeTicket c=gbd.buscarClasificacion(idClasificacion);
+		
+		
+		ClasificacionDeTicket c=gbd.buscarClasificacion(idClasificacion);//this
 		
 		EstadoTicket t_estado=gbd.buscarEstadoTicket(idEstado);
 		EstadoIntervencion i_asignada=gbd.buscarEstadoIntervencion(0);
@@ -126,38 +128,39 @@ public class GestorTicket {
 		Date fechaderivar=new Date();
 		
 		CambioEstado e2=new CambioEstado(t_estado,u);
-e2.setFechaInicio(fechaderivar);		
+		e2.setFechaInicio(fechaderivar);		
 		t.setEstadoActual(e2);
 		
 		
 		// verificamos si hay que cambiar clasificacion
-if (idClasificacion!=t.getClasificacionActual().getIdClasificacion()) {
-	
-Date fC=new Date();
-CambioClasificacion cC=gc.newCambioClasificacion(c, u);
-cC.setFechaInicio(fC);;
+		if (idClasificacion != t.getClasificacionActual().getIdClasificacion()) {
 
-CambioClasificacion uc=t.ultimoCambio();
-uc.setFechaFin(fC);
+			Date fC = fechaderivar;
+			CambioClasificacion cC = gc.newCambioClasificacion(c, u);
+			cC.setFechaInicio(fC);
+			
+			/////////// nota diagrama
+			CambioClasificacion uc = t.ultimoCambio();
+			uc.setFechaFin(fC);
 
-t.actualizarClasificacion(cC, c);
-}		
-	
-	ArrayList<Intervencion> list=new ArrayList<Intervencion>();
-list=ggr.tieneEnEspera(t, g, c);	
-	if (!list.isEmpty()) {
+			t.actualizarClasificacion(cC, c);
+			//////////
+		}
 
-		gi.actualizarIntervencion(list.get(0), i_asignada, u, obs, fechaderivar);
-		
-	}
-	else {
-		
-Intervencion in=gi.crearIntervencion(i_asignada, g, u, fechaderivar);
-t.nuevaIntervencion(in);
+		ArrayList<Intervencion> list = new ArrayList<Intervencion>();
+		list = ggr.tieneEnEspera(t, g, c);
+		if (!list.isEmpty()) {
 
-	}
-	
-int id=gbd.actualizarTicket( t);	
+			gi.actualizarIntervencion(list.get(0), i_asignada, u, obs, fechaderivar);
+
+		} else {
+
+			Intervencion in = gi.crearIntervencion(i_asignada, g, u, fechaderivar);
+			t.nuevaIntervencion(in);
+
+		}
+
+		int id = gbd.actualizarTicket(t);
 	}  
 
 	

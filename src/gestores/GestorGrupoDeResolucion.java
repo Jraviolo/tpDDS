@@ -47,20 +47,19 @@ public class GestorGrupoDeResolucion {
 	}
 
 	public ArrayList<Intervencion> tieneEnEspera(Ticket t, GrupoDeResolucion gr, ClasificacionDeTicket ct) {
-		ArrayList<Intervencion> list=new ArrayList<Intervencion>();
+		ArrayList<Intervencion> list = new ArrayList<Intervencion>();
 
-			if ( gr.getClasificaciones().contains(ct)) { 
-		for (Intervencion i: t.getIntervenciones()) {
-		if (i.getEstado().getId()==1)
-		list.add(i);	
-			
-		}	
+		if (gr.getClasificaciones().contains(ct)) {
+			for (Intervencion i : t.getIntervenciones()) {
+				if (i.getEstado().getId() == 1 && i.getGrupo().getCodigo()==gr.getCodigo())
+					list.add(i);
+			}
 
-				return list;
-
-		}	
 			return list;
+
 		}
+		return list;
+	}
 
 	public ArrayList<ClasificacionAux> getClasificacionesAux(GrupoDeResolucionAux grupoActual) {
 		GrupoDeResolucion grupo = gbd.buscarGrupo(grupoActual.getId());
