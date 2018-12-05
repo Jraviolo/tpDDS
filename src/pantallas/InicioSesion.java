@@ -129,6 +129,7 @@ public class InicioSesion extends JFrame {
 					Mesa_de_ayuda panelMesaDeAyuda = new Mesa_de_ayuda(idUsuario, idGrupo);
 					panelMesaDeAyuda.setPadre(frame);
 					panelMesaDeAyuda.setAnterior(contentPane);
+					panelMesaDeAyuda.setBoundsAnterior(new Rectangle(100, 100, 554, 700));
 					setContentPane(panelMesaDeAyuda);
 				} else {
 					if (idGrupo > 1 && idGrupo <= ggr.getGruposAux().size()) {

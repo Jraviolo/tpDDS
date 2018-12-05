@@ -528,14 +528,14 @@ public class GestorBaseDeDatos {
 		Boolean idIntervencion = false;
 
 		
-		  if (nroT != null) { int i = intervenciones.size()-1; while (idIntervencion==
+	/*	  if (nroT != null) { int i = intervenciones.size()-1; while (idIntervencion==
 		  false && i >= 0) { for (Ticket t:
 		  intervenciones.get(i).UltimoEstado().getUsuario().getEmpleado().getTickets())
 		  { if (t.getId()== nroT) { i1=intervenciones.get(i); idIntervencion=true;
 		 
 		  }} i--; } }
-		 
-	/*	if (nroT != null) {
+	*/	 
+		if (nroT != null) {
 			Ticket t = buscarTicket(nroT);
 			for (Intervencion i : intervenciones) {
 				if (t.getIntervenciones().contains(i)) {
@@ -545,7 +545,7 @@ public class GestorBaseDeDatos {
 		} else {
 			L1 = intervenciones;
 		}
-*/
+
 		if (nroL != null) {
 			for (Intervencion i : intervenciones) {
 				
