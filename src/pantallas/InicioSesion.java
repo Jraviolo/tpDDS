@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clases.Ticket;
+import gestores.GestorBaseDeDatos;
 import gestores.GestorGrupoDeResolucion;
 import gestores.GestorUsuario;
 
@@ -63,6 +65,7 @@ public class InicioSesion extends JFrame {
 	 */
 	public InicioSesion() {
 
+				
 		Color theme = new Color(38, 79, 111);
 		setLocationRelativeTo(null);
 		setResizable(false);

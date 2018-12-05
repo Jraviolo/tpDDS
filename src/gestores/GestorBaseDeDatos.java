@@ -1,12 +1,16 @@
 package gestores;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
+import org.hibernate.query.NativeQuery;
+
+import com.mysql.cj.SimpleQuery;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -431,15 +435,27 @@ public class GestorBaseDeDatos {
 
 		session.beginTransaction();
 
-		Query q = session.createQuery("select numero from Intervencion where IDinterv="+idIntervencion);
-		q.setParameter("id", idIntervencion);
-		int Resultado = (int) q.uniqueResult();
+		/*opcion son varios id iguales
+		List<Object[]> query = session.createSQLQuery("select * from intervencion where IDinterv='"+idIntervencion+"'").list();
+		//q.setParameter("id", idIntervencion);
+		//List<Object[]> rows = query.list();
+		for(Object[] row : query){
+			int numero=(int) row[1];
+			System.out.println("id ticket:"+numero);
+		}*/
+		
+		Object[] query = (Object[]) session.createSQLQuery("select * from intervencion where IDinterv='"+idIntervencion+"'")
+				.uniqueResult();
+		int numero=(int) query[1];
+		System.out.println("id ticket:"+numero);
+
+		
+		System.out.println("Hola");
 		session.getTransaction().commit();
 		session.close();
 		factory.close();
-		Ticket t = buscarTicket(Resultado);
+		Ticket t = buscarTicket(numero);
 		return t;
-
 
 		}
 
