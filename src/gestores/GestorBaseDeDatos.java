@@ -414,13 +414,15 @@ public class GestorBaseDeDatos {
 		// usar el objeto session
 
 		session.beginTransaction();
-		Object id= session.createQuery("select max(id) from Ticket").uniqueResult();
+		Integer id = (Integer) session.createQuery("select max(id) from Ticket").uniqueResult();
 		session.getTransaction().commit();
 		session.close();
 
 		factory.close();
-		if(id==null) return 0;
-		else return (int)id;
+		if (id == null)
+			return 0;
+		else
+			return id;
 	}
 
 	public Ticket buscarTicketAsociado(int idIntervencion) {
@@ -517,7 +519,7 @@ public class GestorBaseDeDatos {
 		session.close();
 
 		factory.close();
-		
+
 		Intervencion i1 = new Intervencion();
 		ArrayList<Intervencion> L1 = new ArrayList<Intervencion>();
 		ArrayList<Intervencion> L2 = new ArrayList<Intervencion>();
@@ -528,28 +530,31 @@ public class GestorBaseDeDatos {
 		ArrayList<Intervencion> listaResultado = new ArrayList<Intervencion>();
 		Boolean idIntervencion = false;
 
-		
-	/*	  if (nroT != null) { int i = intervenciones.size()-1; while (idIntervencion==
-		  false && i >= 0) { for (Ticket t:
-		  intervenciones.get(i).UltimoEstado().getUsuario().getEmpleado().getTickets())
-		  { if (t.getId()== nroT) { i1=intervenciones.get(i); idIntervencion=true;
-		 
-		  }} i--; } }
-	*/	 
+		/*
+		 * if (nroT != null) { int i = intervenciones.size()-1; while (idIntervencion==
+		 * false && i >= 0) { for (Ticket t:
+		 * intervenciones.get(i).UltimoEstado().getUsuario().getEmpleado().getTickets())
+		 * { if (t.getId()== nroT) { i1=intervenciones.get(i); idIntervencion=true;
+		 * 
+		 * }} i--; } }
+		 */
 		if (nroT != null) {
 			Ticket t = buscarTicket(nroT);
 			for (Intervencion i : intervenciones) {
-				if (t.getIntervenciones().contains(i)) {
+				for(Intervencion i2 : t.getIntervenciones()) {
+				if (i.getIdIntervencion().equals(i2.getIdIntervencion())) {
 					L1.add(i);
+					//break;
 				}
 			}
-		} else {
+			}
+			} else {
 			L1 = intervenciones;
 		}
 
 		if (nroL != null) {
 			for (Intervencion i : intervenciones) {
-				
+
 				if (i.UltimoEstado().getUsuario().getEmpleado().getLegajo().equals(nroL)) {
 					L2.add(i);
 				}
@@ -605,19 +610,15 @@ public class GestorBaseDeDatos {
 		}
 
 		for (Intervencion i : intervenciones) {
-			
+			if (L1.contains(i)) {
 				if (L2.contains(i)) {
 					if (L4.contains(i)) {
 						if (L5.contains(i)) {
 							if (L6.contains(i)) {
 								if (L7.contains(i)) {
-									if (idIntervencion) {
-										if (i.equals(i1)) {
-											listaResultado.add(i);
-										}
-									} else {
-										listaResultado.add(i);
-									}
+
+									listaResultado.add(i);
+
 								}
 							}
 
@@ -625,7 +626,7 @@ public class GestorBaseDeDatos {
 					}
 				}
 			}
-		
+		}
 
 		return listaResultado;
 	}
