@@ -610,8 +610,13 @@ public class GestorBaseDeDatos {
 						if (L5.contains(i)) {
 							if (L6.contains(i)) {
 								if (L7.contains(i)) {
-									if(nroT!=null && i1.equals(i)) {
-									listaResultado.add(i);}
+									if (idIntervencion) {
+										if (i.equals(i1)) {
+											listaResultado.add(i);
+										}
+									} else {
+										listaResultado.add(i);
+									}
 								}
 							}
 
