@@ -500,6 +500,26 @@ public class GestorBaseDeDatos {
 
 	}
 
+	public String getDescripcionTicket(int idticket){
+
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Intervencion.class).buildSessionFactory();
+		Session session = factory.getCurrentSession();
+
+		// usar el objeto session
+
+		session.beginTransaction();
+
+		String query = (String) session
+				.createSQLQuery("select descripcion from ticket where numero='" + idticket + "'").uniqueResult();
+		
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+	
+		return query;
+		}
+	
 	public ArrayList<Intervencion> consultarIntervenciones(String estado, Date fechaDesde, Date fechaHasta,
 			Integer nroT, Integer nroL, Integer idGrupo) {
 		// crear objeto factory

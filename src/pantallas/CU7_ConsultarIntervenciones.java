@@ -289,7 +289,7 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 						public void actionPerformed(ActionEvent arg0) {
 							IntervencionAux intervencion = tableModel.getIntervenciones().get(seleccion);
 
-								CU8_ActualizarIntervencion panelActualizarInt = new CU8_ActualizarIntervencion(intervencion.getIdIntervencion(),intervencion.getIdTicket(), idUsuario, idGrupo);
+								CU8_ActualizarIntervencion panelActualizarInt = new CU8_ActualizarIntervencion(intervencion,(int)intervencion.getIdTicket(), idUsuario, idGrupo);
 								panelActualizarInt.setPadre(padre);
 								panelActualizarInt.setAnterior(panel);
 								panelActualizarInt.setBoundsAnterior(new Rectangle(0, 0, 1281, 720));

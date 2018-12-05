@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import clasesAuxiliares.IntervencionAux;
+import gestores.GestorBaseDeDatos;
 import gestores.GestorTicket;
 
 public class CU8_ActualizarIntervencion extends JPanel {
@@ -24,9 +26,10 @@ public class CU8_ActualizarIntervencion extends JPanel {
 	private JFrame padre;
 	private JPanel anterior;
 	private Rectangle boundsAnterior;
-	private GestorTicket gt;
+	private GestorTicket gt=new GestorTicket();
+	private GestorBaseDeDatos gbd=new GestorBaseDeDatos();
 
-	public CU8_ActualizarIntervencion(int idTicket, int idUsuario, int idGrupo) {
+	public CU8_ActualizarIntervencion(IntervencionAux intervencion,int idTicket, int idUsuario, int idGrupo) {
 
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
@@ -56,6 +59,69 @@ public class CU8_ActualizarIntervencion extends JPanel {
 		titulo_pantalla.setBounds(93, 99, 416, 25);
 		this.add(titulo_pantalla);
 
+		//ESTADO ACTUAL
+		JLabel EstadoActual = new JLabel("Estado actual:");
+		EstadoActual.setBounds(93, 157, 141, 20);
+		this.add(EstadoActual);
+
+		JTextField textEstado = new JTextField();
+		textEstado.setEnabled(false);
+		textEstado.setHorizontalAlignment(SwingConstants.CENTER);
+		textEstado.setEditable(false);
+		textEstado.setText(intervencion.getEstadoIntervencion());
+		textEstado.setBounds(188, 157, 271, 20);
+		this.add(textEstado);
+		textEstado.setColumns(10);
+		textEstado.setDisabledTextColor(Color.BLACK);
+
+		//DESCRIPCION
+		JLabel lblDescripcin = new JLabel("Descripci\u00F3n del problema:");
+		lblDescripcin.setBounds(93, 188, 223, 14);
+		this.add(lblDescripcin);
+
+		JTextField campoDescripcion = new JTextField();
+		campoDescripcion.setEditable(false);
+		campoDescripcion.setHorizontalAlignment(SwingConstants.LEFT);
+		campoDescripcion.setBounds(93, 213, 366, 95);
+		this.add(campoDescripcion);
+		campoDescripcion.setColumns(10);
+		campoDescripcion.setText(gbd.getDescripcionTicket(idTicket));
+		
+		//NUEVO ESTADO
+		
+		JLabel lblNuevoEstado = new JLabel("Nuevo estado:");
+		lblNuevoEstado.setBounds(93, 319, 141, 20);
+		this.add(lblNuevoEstado);
+
+		JComboBox Estado = new JComboBox();
+		Estado.setBounds(188, 319, 271, 20);
+		this.add(Estado);
+		
+		System.out.println(intervencion.getIdIntervencion());
+
+		//CLASIFICACION
+		JLabel lblClasificacionTicket = new JLabel("Clasificaci\u00F3n del ticket:");
+		lblClasificacionTicket.setBounds(93, 347, 141, 20);
+		this.add(lblClasificacionTicket);
+
+		JComboBox Clasificacion = new JComboBox();
+		Clasificacion.setBounds(227, 348, 232, 20);
+		this.add(Clasificacion);
+
+		//OBSERVACIONES
+		JLabel lblFechaDeApertura = new JLabel("Observaciones:");
+		lblFechaDeApertura.setBounds(93, 378, 141, 20);
+		this.add(lblFechaDeApertura);
+
+		JTextField campoObservaciones = new JTextField();
+		campoObservaciones.setHorizontalAlignment(SwingConstants.LEFT);
+		campoObservaciones.setColumns(10);
+		campoObservaciones.setBounds(93, 401, 366, 95);
+		this.add(campoObservaciones);
+		// txtHhmm.setBorder(null);
+
+		
+		//botones
 		JButton imprimir_aceptar = new JButton("Aceptar");
 		imprimir_aceptar.setForeground(new Color(255, 255, 255));
 		imprimir_aceptar.setBackground(theme);
@@ -71,63 +137,6 @@ public class CU8_ActualizarIntervencion extends JPanel {
 		cancelar.setBackground(new Color(255, 255, 255));
 		cancelar.setBounds(408, 620, 130, 40);
 		this.add(cancelar);
-
-		JLabel EstadoActual = new JLabel("Estado actual:");
-		EstadoActual.setBounds(93, 157, 141, 20);
-		this.add(EstadoActual);
-
-		JTextField textEstado = new JTextField();
-		textEstado.setEnabled(false);
-		textEstado.setHorizontalAlignment(SwingConstants.CENTER);
-		textEstado.setEditable(false);
-		textEstado.setText("XXXXXXX");
-		textEstado.setBounds(188, 157, 271, 20);
-		this.add(textEstado);
-		textEstado.setColumns(10);
-		textEstado.setDisabledTextColor(Color.BLACK);
-
-		JLabel Nro_de_legajo = new JLabel("Nro de legajo:");
-		Nro_de_legajo.setBounds(93, 180, 141, 14);
-		this.add(EstadoActual);
-
-		JLabel lblNuevoEstado = new JLabel("Nuevo estado:");
-		lblNuevoEstado.setBounds(93, 319, 141, 20);
-		this.add(lblNuevoEstado);
-
-		JComboBox Estado = new JComboBox();
-		Estado.setBounds(188, 319, 271, 20);
-		this.add(Estado);
-
-		JLabel lblClasificacionTicket = new JLabel("Clasificaci\u00F3n del ticket:");
-		lblClasificacionTicket.setBounds(93, 347, 141, 20);
-		this.add(lblClasificacionTicket);
-
-		JComboBox Clasificacion = new JComboBox();
-		Clasificacion.setBounds(227, 348, 232, 20);
-		this.add(Clasificacion);
-
-		JLabel lblDescripcin = new JLabel("Descripci\u00F3n del problema:");
-		lblDescripcin.setBounds(93, 188, 223, 14);
-		this.add(lblDescripcin);
-
-		JTextField campoDescripcion = new JTextField();
-		campoDescripcion.setEditable(false);
-		campoDescripcion.setHorizontalAlignment(SwingConstants.LEFT);
-		campoDescripcion.setBounds(93, 213, 366, 95);
-		this.add(campoDescripcion);
-		campoDescripcion.setColumns(10);
-
-		JLabel lblFechaDeApertura = new JLabel("Observaciones:");
-		lblFechaDeApertura.setBounds(93, 378, 141, 20);
-		this.add(lblFechaDeApertura);
-
-		JTextField campoObservaciones = new JTextField();
-		campoObservaciones.setHorizontalAlignment(SwingConstants.LEFT);
-		campoObservaciones.setColumns(10);
-		campoObservaciones.setBounds(93, 401, 366, 95);
-		this.add(campoObservaciones);
-		// txtHhmm.setBorder(null);
-
 	}
 
 	public void setPadre(JFrame padre) {
