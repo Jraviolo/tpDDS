@@ -219,7 +219,7 @@ public class CU1_RegistrarT extends JPanel {
 						int id=gt.registrarTicket(l, idClasificacion, ob.getText(),idUsuario, idgrupo,now);
 						
 						
-						Observaciones asd = new Observaciones(new JFrame(),true,id,idUsuario);
+						Observaciones asd = new Observaciones(new JFrame(),true,id,idUsuario,idClasificacion);
 						asd.setVisible(true);
 						removerPanel();
 						}

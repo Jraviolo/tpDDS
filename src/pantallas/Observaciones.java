@@ -49,7 +49,7 @@ public class Observaciones extends JDialog {
 	private GestorTicket gt=new GestorTicket();
 	private GestorGrupoDeResolucion gg=new GestorGrupoDeResolucion();
 
-	public Observaciones(Frame parent, boolean modal,int idTicket,int idUsuario) {
+	public Observaciones(Frame parent, boolean modal,int idTicket,int idUsuario,int idclasificacion) {
 		super(parent, modal);
 		Color theme = new Color(38, 79, 111);
 		setResizable(false);
@@ -115,14 +115,18 @@ public class Observaciones extends JDialog {
 		contentPane.add(rdbtnEderivarAGrupo);
 		
 		//combobox grupos
-		String[] bookTitles = new String[] {"Effective Java", "Head First Java",
-                "Thinking in Java", "Java for Dummies"};
 		
-		ArrayList<GrupoDeResolucionAux> c=gg.getGruposAux();
+		
+		
 		
 		JComboBox<GrupoDeResolucionAux> comboBox = new JComboBox<GrupoDeResolucionAux>();
+		/*
+		ArrayList<GrupoDeResolucionAux> c=gg.getGruposAux();
 		for(int j = 0; j < c.size(); j++)
-			comboBox.addItem(c.get(j));
+			comboBox.addItem(c.get(j));*/
+		
+		GrupoDeResolucionAux g=gg.getGrupo(idclasificacion);
+		comboBox.addItem(g);
 		comboBox.setBounds(93, 420, 368, 23);
 		contentPane.add(comboBox);
 		comboBox.setEnabled(false);
