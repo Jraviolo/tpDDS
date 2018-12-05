@@ -31,30 +31,28 @@ public class GestorBaseDeDatos {
 	public GestorBaseDeDatos() {
 
 	}
-	
-	
-	
-	public boolean existeLegajo(int legajo){
 
-	//crear factory
-	SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Empleado.class).buildSessionFactory();
-	//crear sesión
+	public boolean existeLegajo(int legajo) {
 
-	Session session = factory.getCurrentSession();
-	//usar el objeto session
+		// crear factory
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Empleado.class)
+				.buildSessionFactory();
+		// crear sesión
 
-	session.beginTransaction();
-	Empleado e=session.get(Empleado.class, legajo);
-	session.getTransaction().commit();
-	session.close();
-	factory.close();
+		Session session = factory.getCurrentSession();
+		// usar el objeto session
 
-	if (e==null){
-		return false;
-	}
-	else{
-		return true;
-	}
+		session.beginTransaction();
+		Empleado e = session.get(Empleado.class, legajo);
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+
+		if (e == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public ArrayList<ClasificacionDeTicket> getClasificaciones() {
@@ -258,19 +256,19 @@ public class GestorBaseDeDatos {
 		Boolean idTicket = false;
 
 		if (nroT != null) {
-			int i = tickets.size()-1;
+			int i = tickets.size() - 1;
 			while (idTicket == false && i >= 0) {
 				if (tickets.get(i).getId() == nroT) {
-					T1=tickets.get(i);
-					idTicket=true;
+					T1 = tickets.get(i);
+					idTicket = true;
 				}
 				i--;
 			}
 		}
 
 		if (nroL != null) {
-			for(Ticket t: tickets) {
-				if(t.getEmpleado().getLegajo().equals(nroL)) {
+			for (Ticket t : tickets) {
+				if (t.getEmpleado().getLegajo().equals(nroL)) {
 					L2.add(t);
 				}
 			}
@@ -279,8 +277,8 @@ public class GestorBaseDeDatos {
 		}
 
 		if (clasificacion != null) {
-			for(Ticket t: tickets) {
-				if(t.getClasificacionActual().getIdClasificacion().equals(clasificacion.getId())) {
+			for (Ticket t : tickets) {
+				if (t.getClasificacionActual().getIdClasificacion().equals(clasificacion.getId())) {
 					L3.add(t);
 				}
 			}
@@ -289,8 +287,8 @@ public class GestorBaseDeDatos {
 		}
 
 		if (estado != null) {
-			for(Ticket t: tickets) {
-				if(t.getEstadoActual().getEstado().getEstado().toString().equals(estado)){
+			for (Ticket t : tickets) {
+				if (t.getEstadoActual().getEstado().getEstado().toString().equals(estado)) {
 					L4.add(t);
 				}
 			}
@@ -300,10 +298,10 @@ public class GestorBaseDeDatos {
 
 		if (fechaApertura != null) {
 			SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-			for(Ticket t: tickets) {
+			for (Ticket t : tickets) {
 				String fecha1 = f.format(t.getFechaDeApertura());
 				String fecha2 = f.format(fechaApertura);
-				if(fecha1.equals(fecha2)) {
+				if (fecha1.equals(fecha2)) {
 					L5.add(t);
 				}
 			}
@@ -313,10 +311,10 @@ public class GestorBaseDeDatos {
 
 		if (fechaUltCambio != null) {
 			SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-			for(Ticket t: tickets) {
+			for (Ticket t : tickets) {
 				String fecha1 = f.format(t.getFechaUltCambio());
 				String fecha2 = f.format(fechaUltCambio);
-				if(fecha1.equals(fecha2)) {
+				if (fecha1.equals(fecha2)) {
 					L6.add(t);
 				}
 			}
@@ -325,8 +323,8 @@ public class GestorBaseDeDatos {
 		}
 
 		if (ultGrupo != null) {
-			for(Ticket t: tickets) {
-				if(t.ultimaIntervencion().getGrupo().getCodigo()==ultGrupo.getId()) {
+			for (Ticket t : tickets) {
+				if (t.ultimaIntervencion().getGrupo().getCodigo() == ultGrupo.getId()) {
 					L7.add(t);
 				}
 			}
@@ -361,95 +359,92 @@ public class GestorBaseDeDatos {
 		return listaResultado;
 	}
 
-
 	public Ticket buscarTicket(int idTicket) {
-		
-		
-		 SessionFactory factory = new
-		  Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class
-		  ).buildSessionFactory();
-		  
-		  //crear sesión
-		  
-		  Session session = factory.getCurrentSession(); //usar el objeto session
-		  
-		  session.beginTransaction(); Ticket t=session.get(Ticket.class, idTicket);
-		  session.getTransaction().commit(); session.close();
-		  
-		  factory.close(); 
-		  return t;
-		 
+
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class)
+				.buildSessionFactory();
+
+		// crear sesión
+
+		Session session = factory.getCurrentSession(); // usar el objeto session
+
+		session.beginTransaction();
+		Ticket t = session.get(Ticket.class, idTicket);
+		session.getTransaction().commit();
+		session.close();
+
+		factory.close();
+		return t;
+
 	}
 
 	public int actualizarTicket(Ticket t) {
-		
-		
-		  //crear factory
-		  
-		  SessionFactory factory = new
-		  Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class
-		  ).buildSessionFactory();
-		  
-		  //crear sesión
-		  
-		  Session session = factory.getCurrentSession();
-		  
-		  //usar el objeto session 
-		  session.beginTransaction(); session.saveOrUpdate(t);
-		  session.getTransaction().commit(); session.close();
-		  
-		  factory.close(); 
-		  return t.getId();
+
+		// crear factory
+
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class)
+				.buildSessionFactory();
+
+		// crear sesión
+
+		Session session = factory.getCurrentSession();
+
+		// usar el objeto session
+		session.beginTransaction();
+		session.saveOrUpdate(t);
+		session.getTransaction().commit();
+		session.close();
+
+		factory.close();
+		return t.getId();
 
 	}
 
 	public int ultimoIdTicket() {
-		
-		  //crear factory
-		  
-		  SessionFactory factory = new
-		  Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class
-		  ).buildSessionFactory();
-		  
-		  //crear sesión
-		  
-		  Session session = factory.getCurrentSession();
-		  
-		  //usar el objeto session 
-		  
-		  session.beginTransaction(); 
-		  int idTicket= (int)
-		  session.createQuery("select max(id) from Ticket").uniqueResult();
-		  session.getTransaction().commit(); session.close();
-		  
-		  factory.close(); 
-		  return idTicket;
-	}
-	
-	public Ticket buscarTicketAsociado(int idIntervencion){
 
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Intervencion.class).buildSessionFactory();
+		// crear factory
+
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class)
+				.buildSessionFactory();
+
+		// crear sesión
+
 		Session session = factory.getCurrentSession();
 
-		//usar el objeto session
+		// usar el objeto session
+
+		session.beginTransaction();
+		int idTicket = (int) session.createQuery("select max(id) from Ticket").uniqueResult();
+		session.getTransaction().commit();
+		session.close();
+
+		factory.close();
+		return idTicket;
+	}
+
+	public Ticket buscarTicketAsociado(int idIntervencion) {
+
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Intervencion.class).buildSessionFactory();
+		Session session = factory.getCurrentSession();
+
+		// usar el objeto session
 
 		session.beginTransaction();
 
-		/*opcion son varios id iguales
-		List<Object[]> query = session.createSQLQuery("select * from intervencion where IDinterv='"+idIntervencion+"'").list();
-		//q.setParameter("id", idIntervencion);
-		//List<Object[]> rows = query.list();
-		for(Object[] row : query){
-			int numero=(int) row[1];
-			System.out.println("id ticket:"+numero);
-		}*/
-		
-		Object[] query = (Object[]) session.createSQLQuery("select * from intervencion where IDinterv='"+idIntervencion+"'")
-				.uniqueResult();
-		int numero=(int) query[1];
-		System.out.println("id ticket:"+numero);
+		/*
+		 * opcion son varios id iguales List<Object[]> query =
+		 * session.createSQLQuery("select * from intervencion where IDinterv='"
+		 * +idIntervencion+"'").list(); //q.setParameter("id", idIntervencion);
+		 * //List<Object[]> rows = query.list(); for(Object[] row : query){ int
+		 * numero=(int) row[1]; System.out.println("id ticket:"+numero); }
+		 */
 
-		
+		Object[] query = (Object[]) session
+				.createSQLQuery("select * from intervencion where IDinterv='" + idIntervencion + "'").uniqueResult();
+		int numero = (int) query[1];
+		System.out.println("id ticket:" + numero);
+
 		System.out.println("Hola");
 		session.getTransaction().commit();
 		session.close();
@@ -457,8 +452,7 @@ public class GestorBaseDeDatos {
 		Ticket t = buscarTicket(numero);
 		return t;
 
-		}
-
+	}
 
 	public ArrayList<EstadoTicket> getEstados() {
 
@@ -473,15 +467,13 @@ public class GestorBaseDeDatos {
 
 		// usar el objeto session
 		session.beginTransaction();
-		ArrayList<EstadoTicket> estados = (ArrayList<EstadoTicket>) session
-				.createQuery("from EstadoTicket").getResultList();
+		ArrayList<EstadoTicket> estados = (ArrayList<EstadoTicket>) session.createQuery("from EstadoTicket")
+				.getResultList();
 		session.getTransaction().commit();
 		session.close();
 		factory.close();
 		return estados;
 	}
-
-
 
 	public ArrayList<GrupoDeResolucion> getGrupos() {
 
@@ -505,130 +497,130 @@ public class GestorBaseDeDatos {
 
 	}
 
+	public ArrayList<Intervencion> consultarIntervenciones(String estado, Date fechaDesde, Date fechaHasta,
+			Integer nroT, Integer nroL, Integer idGrupo) {
+		// crear objeto factory
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class)
+				.buildSessionFactory();
 
+		// crear sesión
 
-	public ArrayList<Intervencion> consultarIntervenciones(String estado, Date fechaDesde, Date fechaHasta, Integer nroT,
-			Integer nroL, Integer idGrupo){
-				// crear objeto factory
-				SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class)
-						.buildSessionFactory();
+		Session session = factory.getCurrentSession();
+
+		// usar el objeto session
+		session.beginTransaction();
+		ArrayList<Intervencion> intervenciones = (ArrayList<Intervencion>) session.createQuery("from Intervencion")
+				.getResultList();
+
+		session.getTransaction().commit();
+		session.close();
+
+		factory.close();
 		
-				// crear sesión
+		Intervencion i1 = new Intervencion();
+		ArrayList<Intervencion> L1 = new ArrayList<Intervencion>();
+		ArrayList<Intervencion> L2 = new ArrayList<Intervencion>();
+		ArrayList<Intervencion> L4 = new ArrayList<Intervencion>();
+		ArrayList<Intervencion> L5 = new ArrayList<Intervencion>();
+		ArrayList<Intervencion> L6 = new ArrayList<Intervencion>();
+		ArrayList<Intervencion> L7 = new ArrayList<Intervencion>();
+		ArrayList<Intervencion> listaResultado = new ArrayList<Intervencion>();
+		Boolean idIntervencion = false;
+
 		
-				Session session = factory.getCurrentSession();
-		
-				// usar el objeto session
-				session.beginTransaction();
-				ArrayList<Intervencion> intervenciones= (ArrayList<Intervencion>) session.createQuery("from Intervencion").getResultList();
-		
-				session.getTransaction().commit();
-				session.close();
-		
-				factory.close();
-		
-				Intervencion i1= new Intervencion();
-				ArrayList<Intervencion> L2 = new ArrayList<Intervencion>();
-				ArrayList<Intervencion> L4 = new ArrayList<Intervencion>();
-				ArrayList<Intervencion> L5 = new ArrayList<Intervencion>();
-				ArrayList<Intervencion> L6 = new ArrayList<Intervencion>();
-				ArrayList<Intervencion> L7 = new ArrayList<Intervencion>();
-				ArrayList<Intervencion> listaResultado = new ArrayList<Intervencion>();
-				Boolean idIntervencion= false;
-		
-				if (nroT != null) {
-					int i = intervenciones.size()-1;
-					while (idIntervencion== false && i >= 0) {					
-	for (Ticket t: intervenciones.get(i).UltimoEstado().getUsuario().getEmpleado().getTickets()) {						
-						if (t.getId()== nroT) {
-							i1=intervenciones.get(i);
-							idIntervencion=true;
-						
-						}}
-						i--;
-					}
+		  if (nroT != null) { int i = intervenciones.size()-1; while (idIntervencion==
+		  false && i >= 0) { for (Ticket t:
+		  intervenciones.get(i).UltimoEstado().getUsuario().getEmpleado().getTickets())
+		  { if (t.getId()== nroT) { i1=intervenciones.get(i); idIntervencion=true;
+		 
+		  }} i--; } }
+		 
+	/*	if (nroT != null) {
+			Ticket t = buscarTicket(nroT);
+			for (Intervencion i : intervenciones) {
+				if (t.getIntervenciones().contains(i)) {
+					L1.add(i);
 				}
-		
-				if (nroL != null) {
-					for(Intervencion i: intervenciones) {
-						if(i.UltimoEstado().getUsuario().getEmpleado().getLegajo().equals(nroL)) {
-							L2.add(i);
-						}
-					}
-				} else {
-					L2 = intervenciones;
-				}
-		
+			}
+		} else {
+			L1 = intervenciones;
+		}
+*/
+		if (nroL != null) {
+			for (Intervencion i : intervenciones) {
 				
-				if (estado != null) {
-					for(Intervencion  i: intervenciones) {
-						if(i.getEstado().equals(estado)){
-							L4.add(i);
-						}
-					}
-				} else {
-					L4 = intervenciones;
+				if (i.UltimoEstado().getUsuario().getEmpleado().getLegajo().equals(nroL)) {
+					L2.add(i);
 				}
-		
-				if (fechaDesde != null) {
-					SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-					for(Intervencion i: intervenciones) {
-						String fecha1 = f.format(i.getFechaInicio());
-						String fecha2 = f.format(fechaDesde);
-						if(fecha1.equals(fecha2)) {
-							L5.add(i);
-						}
-					}
-				} else {
-					L5 = intervenciones;
+			}
+		} else {
+			L2 = intervenciones;
+		}
+
+		if (estado != null) {
+			for (Intervencion i : intervenciones) {
+				if (i.getEstado().getEstado().equals(estado)) {
+					L4.add(i);
 				}
-		
-				if (fechaHasta!= null) {
-					SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-					for(Intervencion i: intervenciones) {
-						String fecha1 = f.format(i.getFechaFin());
-						String fecha2 = f.format(fechaHasta);
-						if(fecha1.equals(fecha2)) {
-							L6.add(i);
-						}
-					}
-				} else {
-					L6 = intervenciones;
+			}
+		} else {
+			L4 = intervenciones;
+		}
+
+		if (fechaDesde != null) {
+			SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+			for (Intervencion i : intervenciones) {
+				String fecha1 = f.format(i.getFechaInicio());
+				String fecha2 = f.format(fechaDesde);
+				if (fecha1.equals(fecha2)) {
+					L5.add(i);
 				}
-		
-				if (idGrupo != null) {
-					for(Intervencion i: intervenciones) {
-						if(i.getGrupo().getCodigo()==idGrupo) {
-							L7.add(i);
-						}
-					}
-				} else {
-					L7 = intervenciones;
+			}
+		} else {
+			L5 = intervenciones;
+		}
+
+		if (fechaHasta != null) {
+			SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+			for (Intervencion i : intervenciones) {
+				String fecha1 = f.format(i.getFechaFin());
+				String fecha2 = f.format(fechaHasta);
+				if (fecha1.equals(fecha2)) {
+					L6.add(i);
 				}
-		
-				for (Intervencion i: intervenciones) {
-		
-					if (L2.contains(i)) {
-							if (L4.contains(i)) {
-								if (L5.contains(i)) {
-									if (L6.contains(i)) {
-										if (L7.contains(i)) {
-											if (idIntervencion) {
-												if (i.equals(i1)) {
-													listaResultado.add(i);
-												}
-											} else {
-												listaResultado.add(i);
-											}
-										}
-									
+			}
+		} else {
+			L6 = intervenciones;
+		}
+
+		if (idGrupo != null) {
+			for (Intervencion i : intervenciones) {
+				if (i.getGrupo().getCodigo() == idGrupo) {
+					L7.add(i);
+				}
+			}
+		} else {
+			L7 = intervenciones;
+		}
+
+		for (Intervencion i : intervenciones) {
+			
+				if (L2.contains(i)) {
+					if (L4.contains(i)) {
+						if (L5.contains(i)) {
+							if (L6.contains(i)) {
+								if (L7.contains(i)) {
+									if(nroT!=null && i1.equals(i)) {
+									listaResultado.add(i);}
 								}
 							}
+
 						}
 					}
-		
 				}
-		
-				return listaResultado;
 			}
-	}
+		
 
+		return listaResultado;
+	}
+}

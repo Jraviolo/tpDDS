@@ -90,7 +90,7 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 			this.add(lblCriteriosDeBusqueda);
 			
 			JLabel lblEstado = new JLabel("Estado intervención:");
-			lblEstado.setBounds(93, 160, 46, 17);
+			lblEstado.setBounds(93, 160, 80, 17);
 			this.add(lblEstado);
 			
 			JComboBox comboEstado = new JComboBox();
