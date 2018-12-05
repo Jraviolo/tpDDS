@@ -134,6 +134,23 @@ public class Ticket {
 		System.out.println("noooooooo");
 		return null;
 	}
+	
+	public Intervencion getIntervencion2(int idintervencion) {
+		for (int i=0;i<intervenciones.size(); i++) {
+			if(intervenciones.get(i).getIdIntervencion()==idintervencion) {
+				return intervenciones.get(i);
+			}
+			
+		}
+		return null;
+	}
+	
+	public boolean intervencionEnEspera() {
+		for(Intervencion i: intervenciones) {
+			if(i.getEstado().getId()==1)return true;
+		}
+		return false;
+	}
 
 	public String getDescripcion() {
 		return descripcion;

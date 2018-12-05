@@ -198,5 +198,45 @@ public class GestorTicket {
 		return gbd.ultimoIdTicket();
 	}
 	
-	
+	public void ActualizarEstadoI(int idIntervencion,int idEstadoIntervencion,int idClasificacion,String obs,int idU,boolean mesa) {
+		//Intervencion i=gbd.bus
+		Usuario u=gbd.buscarUsuario(idU);
+		EstadoIntervencion i_estado=gbd.buscarEstadoIntervencion(idEstadoIntervencion);
+		Ticket t=gbd.buscarTicketAsociado(idIntervencion);
+		Intervencion i= t.getIntervencion2(idIntervencion);
+		
+		Date fecha=new Date();
+		
+		if(idClasificacion!=t.getClasificacionActual().getIdClasificacion()) {
+			ClasificacionDeTicket c =gbd.buscarClasificacion(idClasificacion);
+			CambioClasificacion cc=gc.newCambioClasificacion(c, u);
+			cc.setFechaInicio(fecha);
+			CambioClasificacion uc=t.ultimoCambio();
+			uc.setFechaFin(fecha);
+			t.actualizarClasificacion(cc, c);
+		}
+		
+		gi.actualizarIntervencion(i, i_estado, u, obs, fecha);
+		
+		if(idEstadoIntervencion!=3) {
+			int idEstadoTicket;
+			if(idEstadoIntervencion==2 && mesa) {
+				idEstadoTicket=0;
+			}
+			else if(idEstadoIntervencion==2 && !mesa) {
+				boolean v=t.intervencionEnEspera();
+				if(v)idEstadoTicket=0;
+				else idEstadoTicket=2;
+			}
+			else /*if(idEstadoIntervencion==1)*/ idEstadoTicket=1;
+			EstadoTicket t_estado=gbd.buscarEstadoTicket(idEstadoTicket);
+			CambioEstado ce=new CambioEstado(t_estado,u);
+			ce.setFechaInicio(fecha);
+			t.setEstadoActual(ce);
+			Intervencion i_mesa=t.getIntervencion(1);
+			EstadoIntervencion i_asigando=gbd.buscarEstadoIntervencion(0);
+			gi.actualizarIntervencion(i_mesa, i_asigando, u, i_mesa.getObservaciones(), fecha);
+			gbd.actualizarTicket(t);
+		}
+	}
 }
