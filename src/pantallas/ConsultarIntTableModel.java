@@ -80,7 +80,7 @@ public class ConsultarIntTableModel extends AbstractTableModel{
 		return valor;
 	}
 
-	public List<IntervencionAux> getTickets() {
+	public List<IntervencionAux> getIntervenciones() {
 		return intervenciones;
 	}
 

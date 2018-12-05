@@ -41,6 +41,7 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 
 		private JFrame padre;
 		private JPanel anterior;
+		private JPanel panel=this;
 		private Rectangle boundsAnterior;
 		private JTextField fechaDesde;
 		private JTextField fechaHasta;
@@ -284,6 +285,21 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 					buscar.setBounds(1134, 160, 130, 40);
 					this.add(buscar);
 					JButton btnNewButton = new JButton("Actualizar \r\nEstado");
+					btnNewButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							IntervencionAux intervencion = tableModel.getIntervenciones().get(seleccion);
+
+								CU8_ActualizarIntervencion panelActualizarInt = new CU8_ActualizarIntervencion(intervencion.getIdIntervencion(),intervencion.getIdTicket(), idUsuario, idGrupo);
+								panelActualizarInt.setPadre(padre);
+								panelActualizarInt.setAnterior(panel);
+								panelActualizarInt.setBoundsAnterior(new Rectangle(0, 0, 1281, 720));
+								padre.setContentPane(panelActualizarInt);
+								padre.setBounds(panelActualizarInt.getBounds());
+								padre.setLocationRelativeTo(null);
+						
+							
+						}
+					});
 					btnNewButton.setBackground(Color.WHITE);
 					btnNewButton.setBounds(482, 640, 150, 40);
 					this.add(btnNewButton);
