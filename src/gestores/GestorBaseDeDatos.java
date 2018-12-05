@@ -414,12 +414,13 @@ public class GestorBaseDeDatos {
 		// usar el objeto session
 
 		session.beginTransaction();
-		int idTicket = (int) session.createQuery("select max(id) from Ticket").uniqueResult();
+		Object id= session.createQuery("select max(id) from Ticket").uniqueResult();
 		session.getTransaction().commit();
 		session.close();
 
 		factory.close();
-		return idTicket;
+		if(id==null) return 0;
+		else return (int)id;
 	}
 
 	public Ticket buscarTicketAsociado(int idIntervencion) {
