@@ -22,7 +22,7 @@ import pantallas.CU2_ConsultarT;
 public class GestorTicket {
 
 	private GestorBaseDeDatos gbd = new GestorBaseDeDatos();
-	private gestorIntervenciones gi = new gestorIntervenciones();
+	private GestorIntervenciones gi = new GestorIntervenciones();
 	private GestorClasificacionDeTicket gc=new GestorClasificacionDeTicket();
 	private GestorGrupoDeResolucion ggr = new GestorGrupoDeResolucion();
 	

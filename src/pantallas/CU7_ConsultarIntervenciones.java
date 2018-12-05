@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,8 +29,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import clasesAuxiliares.ClasificacionAux;
+import clasesAuxiliares.GrupoDeResolucionAux;
 import clasesAuxiliares.IntervencionAux;
 import clasesAuxiliares.TicketAux;
+import gestores.GestorIntervenciones;
 
 
 public class CU7_ConsultarIntervenciones extends JPanel {
@@ -38,13 +42,15 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 		private JFrame padre;
 		private JPanel anterior;
 		private Rectangle boundsAnterior;
-		private JTextField textField;
-		private JTextField textField_1;
-		private JTextField textField_2;
-		private JTextField textField_3;
+		private JTextField fechaDesde;
+		private JTextField fechaHasta;
+		private JTextField numeroTicket;
+		private JTextField numeroLegajo;
 		private JTable table_1;
 		private Integer seleccion;
 		private ConsultarIntTableModel tableModel = new ConsultarIntTableModel();
+		private GestorIntervenciones gi = new GestorIntervenciones();
+		
 		
 		public CU7_ConsultarIntervenciones(int idUsuario, int idGrupo) {
 
@@ -77,64 +83,60 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 			this.add(titulo_pantalla);
 			
 			
-			JButton buscar = new JButton("Buscar");
-			buscar.setForeground(new Color(255, 255, 255));
-			buscar.setBackground(theme);
-			buscar.setBounds(1134, 160, 130, 40);
-			this.add(buscar);
+
 			
 			JLabel lblCriteriosDeBusqueda = new JLabel("Criterios de busqueda:");
 			lblCriteriosDeBusqueda.setBounds(93, 135, 170, 14);
 			this.add(lblCriteriosDeBusqueda);
 			
-			JLabel lblEstado = new JLabel("Estado");
+			JLabel lblEstado = new JLabel("Estado intervención:");
 			lblEstado.setBounds(93, 160, 46, 17);
 			this.add(lblEstado);
 			
-			JComboBox comboBox = new JComboBox();
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {"Asignada", "Todos"}));
-			comboBox.setBounds(271, 157, 190, 20);
-			this.add(comboBox);
+			JComboBox comboEstado = new JComboBox();
+			comboEstado.setModel(new DefaultComboBoxModel(new String[] {"Asignada","En espera","Terminada","Trabajando", "Todos"}));
+			comboEstado.setBounds(271, 157, 190, 20);
+			this.add(comboEstado);
 			
 			JLabel lblNewLabel = new JLabel("Fecha desde:");
 			lblNewLabel.setBounds(93, 188, 149, 17);
 			this.add(lblNewLabel);
 			
-			textField = new JTextField();
-			textField.setHorizontalAlignment(SwingConstants.CENTER);
-			textField.setText("/    /");
-			textField.setBounds(271, 185, 190, 20);
-			this.add(textField);
-			textField.setColumns(10);
+			fechaDesde = new JTextField();
+			fechaDesde.setHorizontalAlignment(SwingConstants.CENTER);
+			fechaDesde.setText("");
+			fechaDesde.setBounds(271, 185, 190, 20);
+			this.add(fechaDesde);
+			fechaDesde.setColumns(10);
 			
 			JLabel lblFechaHasta = new JLabel("Fecha hasta:");
 			lblFechaHasta.setBounds(93, 216, 149, 17);
 			this.add(lblFechaHasta);
 			
-			textField_1 = new JTextField();
-			textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-			textField_1.setText("/    /");
-			textField_1.setBounds(271, 213, 190, 20);
-			this.add(textField_1);
-			textField_1.setColumns(10);
+			fechaHasta = new JTextField();
+			fechaHasta.setHorizontalAlignment(SwingConstants.CENTER);
+			fechaHasta.setText("");
+			fechaHasta.setBounds(271, 213, 190, 20);
+			this.add(fechaHasta);
+			fechaHasta.setColumns(10);
 			
 			JLabel lblNmeroTicket = new JLabel("N\u00FAmero ticket:");
 			lblNmeroTicket.setBounds(492, 157, 149, 20);
 			this.add(lblNmeroTicket);
 			
-			textField_2 = new JTextField();
-			textField_2.setBounds(670, 157, 190, 20);
-			this.add(textField_2);
-			textField_2.setColumns(10);
+			numeroTicket = new JTextField();
+			numeroTicket.setBounds(670, 157, 190, 20);
+			this.add(numeroTicket);
+			numeroTicket.setColumns(10);
 			
 			JLabel lblNewLabel_1 = new JLabel("N\u00FAmero de legajo:");
 			lblNewLabel_1.setBounds(492, 188, 149, 20);
 			this.add(lblNewLabel_1);
 			
-			textField_3 = new JTextField();
-			textField_3.setBounds(670, 188, 190, 20);
-			this.add(textField_3);
-			textField_3.setColumns(10);
+			numeroLegajo = new JTextField();
+			numeroLegajo.setBounds(670, 188, 190, 20);
+			this.add(numeroLegajo);
+			numeroLegajo.setColumns(10);
 	/*		
 			///INICIO TABLA
 					table_1 = new JTable();
@@ -219,7 +221,68 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 					
 			///FIN TABLA
 			 
-			 
+					JButton buscar = new JButton("Buscar");
+					buscar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							Date fechaActual = new Date();
+							Date fDesde = null;
+							Date fHasta = null;
+
+							Boolean fDesdeVacia = fechaDesde.getText().isEmpty();
+							Boolean fHastaVacia = fechaHasta.getText().isEmpty();
+
+							if (!fDesdeVacia) {
+								if (fechaDesde.getText().length() == 10) {
+									fDesde = armarFecha(fechaDesde.getText());
+								} else {
+									JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha con formato DD/MM/AAAA",
+											"Fecha invalida", JOptionPane.ERROR_MESSAGE);
+									fDesdeVacia = true;
+								}
+							}
+
+							if (!fHastaVacia) {
+								if (fechaHasta.getText().length() == 10) {
+									fHasta = armarFecha(fechaHasta.getText());
+								} else {
+									JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha con formato DD/MM/AAAA",
+											"Fecha invalida", JOptionPane.ERROR_MESSAGE);
+									fHastaVacia = true;
+								}
+							}
+
+							if ((!fDesdeVacia && fDesde.compareTo(fechaActual) >= 0) || (!fHastaVacia
+									&& (fHasta.compareTo(fechaActual) >= 0 || fHasta.compareTo(fDesde) < 0))) {
+
+								JOptionPane.showMessageDialog(null,
+										"La fecha de apertura y/o del último cambio de estado no pueden ser mayores a la fecha actual.",
+										"Fecha inválida", JOptionPane.ERROR_MESSAGE);
+
+							} else {
+								Integer nroT = null;
+								if (!numeroTicket.getText().isEmpty())
+									nroT = Integer.valueOf(numeroTicket.getText());
+								Integer nroL = null;
+								if (!numeroLegajo.getText().isEmpty())
+									nroL = Integer.valueOf(numeroLegajo.getText());
+								String estado = new String();
+								if (comboEstado.getSelectedItem().toString() == "Todos") {
+									estado = null;
+								} else {
+									estado = comboEstado.getSelectedItem().toString();
+								}
+								
+								setListaIntervenciones(
+										gi.consultarIntervenciones(estado, fDesde, fHasta, nroT,nroL, idGrupo),
+										true);
+
+							}
+						}
+					});
+					buscar.setForeground(new Color(255, 255, 255));
+					buscar.setBackground(theme);
+					buscar.setBounds(1134, 160, 130, 40);
+					this.add(buscar);
 					JButton btnNewButton = new JButton("Actualizar \r\nEstado");
 					btnNewButton.setBackground(Color.WHITE);
 					btnNewButton.setBounds(482, 640, 150, 40);

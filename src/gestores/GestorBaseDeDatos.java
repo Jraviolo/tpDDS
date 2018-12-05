@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import clases.Empleado;
 import clases.EstadoIntervencion;
 import clases.EstadoTicket;
 import clases.GrupoDeResolucion;
+import clases.Intervencion;
 import clases.Ticket;
 import clases.Usuario;
 import clasesAuxiliares.ClasificacionAux;
@@ -419,7 +421,27 @@ public class GestorBaseDeDatos {
 		  factory.close(); 
 		  return idTicket;
 	}
+	
+	public Ticket buscarTicketAsociado(int idIntervencion){
 
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Intervencion.class).buildSessionFactory();
+		Session session = factory.getCurrentSession();
+
+		//usar el objeto session
+
+		session.beginTransaction();
+
+		Query q = session.createQuery("select numero from Intervencion where IDinterv="+idIntervencion);
+		q.setParameter("id", idIntervencion);
+		int Resultado = (int) q.uniqueResult();
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+		Ticket t = buscarTicket(Resultado);
+		return t;
+
+
+		}
 
 
 	public ArrayList<EstadoTicket> getEstados() {
@@ -466,4 +488,131 @@ public class GestorBaseDeDatos {
 		return grupos;
 
 	}
-}
+
+
+
+	public ArrayList<Intervencion> consultarIntervenciones(String estado, Date fechaDesde, Date fechaHasta, Integer nroT,
+			Integer nroL, Integer idGrupo){
+				// crear objeto factory
+				SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class)
+						.buildSessionFactory();
+		
+				// crear sesión
+		
+				Session session = factory.getCurrentSession();
+		
+				// usar el objeto session
+				session.beginTransaction();
+				ArrayList<Intervencion> intervenciones= (ArrayList<Intervencion>) session.createQuery("from Intervencion").getResultList();
+		
+				session.getTransaction().commit();
+				session.close();
+		
+				factory.close();
+		
+				Intervencion i1= new Intervencion();
+				ArrayList<Intervencion> L2 = new ArrayList<Intervencion>();
+				ArrayList<Intervencion> L4 = new ArrayList<Intervencion>();
+				ArrayList<Intervencion> L5 = new ArrayList<Intervencion>();
+				ArrayList<Intervencion> L6 = new ArrayList<Intervencion>();
+				ArrayList<Intervencion> L7 = new ArrayList<Intervencion>();
+				ArrayList<Intervencion> listaResultado = new ArrayList<Intervencion>();
+				Boolean idIntervencion= false;
+		
+				if (nroT != null) {
+					int i = intervenciones.size()-1;
+					while (idIntervencion== false && i >= 0) {					
+	for (Ticket t: intervenciones.get(i).UltimoEstado().getUsuario().getEmpleado().getTickets()) {						
+						if (t.getId()== nroT) {
+							i1=intervenciones.get(i);
+							idIntervencion=true;
+						
+						}}
+						i--;
+					}
+				}
+		
+				if (nroL != null) {
+					for(Intervencion i: intervenciones) {
+						if(i.UltimoEstado().getUsuario().getEmpleado().getLegajo().equals(nroL)) {
+							L2.add(i);
+						}
+					}
+				} else {
+					L2 = intervenciones;
+				}
+		
+				
+				if (estado != null) {
+					for(Intervencion  i: intervenciones) {
+						if(i.getEstado().equals(estado)){
+							L4.add(i);
+						}
+					}
+				} else {
+					L4 = intervenciones;
+				}
+		
+				if (fechaDesde != null) {
+					SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+					for(Intervencion i: intervenciones) {
+						String fecha1 = f.format(i.getFechaInicio());
+						String fecha2 = f.format(fechaDesde);
+						if(fecha1.equals(fecha2)) {
+							L5.add(i);
+						}
+					}
+				} else {
+					L5 = intervenciones;
+				}
+		
+				if (fechaHasta!= null) {
+					SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+					for(Intervencion i: intervenciones) {
+						String fecha1 = f.format(i.getFechaFin());
+						String fecha2 = f.format(fechaHasta);
+						if(fecha1.equals(fecha2)) {
+							L6.add(i);
+						}
+					}
+				} else {
+					L6 = intervenciones;
+				}
+		
+				if (idGrupo != null) {
+					for(Intervencion i: intervenciones) {
+						if(i.getGrupo().getCodigo()==idGrupo) {
+							L7.add(i);
+						}
+					}
+				} else {
+					L7 = intervenciones;
+				}
+		
+				for (Intervencion i: intervenciones) {
+		
+					if (L2.contains(i)) {
+							if (L4.contains(i)) {
+								if (L5.contains(i)) {
+									if (L6.contains(i)) {
+										if (L7.contains(i)) {
+											if (idIntervencion) {
+												if (i.equals(i1)) {
+													listaResultado.add(i);
+												}
+											} else {
+												listaResultado.add(i);
+											}
+										}
+									
+								}
+							}
+						}
+					}
+		
+				}
+		
+				return listaResultado;
+			}
+	}
+
