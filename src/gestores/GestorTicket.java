@@ -244,6 +244,7 @@ public class GestorTicket {
 	
 	public ArrayList<CambioEstadoAux> getEstadosAux(int idticket){
 		Ticket t=gbd.buscarTicket(idticket);
+		ArrayList<GrupoDeResolucion> grupos=gbd.getGrupos();
 		ArrayList<CambioEstadoAux> estadosAux=new ArrayList<CambioEstadoAux>();
 		List<CambioEstado> estados=t.getHistorialEstados();
 		
@@ -267,9 +268,11 @@ public class GestorTicket {
 					break;
 				}
 			
+			
+			
 			estadosAux.add(ea);
 			}
-			estadosAux.sort((o1,o2) -> o1.getFechaInicio().compareTo(o2.getFechaInicio()));
+			estadosAux.sort((o2,o1) -> o1.getFechaInicio().compareTo(o2.getFechaInicio()));
 		return estadosAux;
 		
 	}

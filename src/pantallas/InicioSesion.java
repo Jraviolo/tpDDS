@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import clases.Ticket;
 import gestores.GestorBaseDeDatos;
 import gestores.GestorGrupoDeResolucion;
+import gestores.GestorTicket;
 import gestores.GestorUsuario;
 
 import javax.swing.JLabel;
@@ -65,7 +66,10 @@ public class InicioSesion extends JFrame {
 	 */
 	public InicioSesion() {
 
-				
+		GestorTicket gt=new GestorTicket();
+		System.out.println(gt.getEstadosAux(1).toString());
+		
+		
 		Color theme = new Color(38, 79, 111);
 		setLocationRelativeTo(null);
 		setResizable(false);
