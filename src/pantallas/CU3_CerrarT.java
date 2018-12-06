@@ -24,7 +24,7 @@ public class CU3_CerrarT extends JPanel {
 	private JFrame padre;
 	private JPanel anterior;
 	private Rectangle boundsAnterior;
-	private GestorTicket gt;
+	private GestorTicket gt=new GestorTicket();
 	
 	
 	public CU3_CerrarT(int idTicket,int idUsuario, int idGrupo) {
@@ -91,6 +91,7 @@ public class CU3_CerrarT extends JPanel {
 				}
 				else {
 				gt.cerrarTicket(idTicket, obs, idUsuario, idGrupo);
+				removerPanel();
 				}
 			}
 		});

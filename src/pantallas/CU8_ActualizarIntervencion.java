@@ -187,10 +187,16 @@ public class CU8_ActualizarIntervencion extends JPanel {
 				String obs= campoObservaciones.getText();
 				boolean mesa=Mesachckbx.isSelected();
 				
+				System.out.println("id intervencion:"+idEstadoIntervencion);
+				System.out.println("id clasificacion:" +idClasificacion);
+				System.out.println("obs:"+obs);
+				System.out.println("mesa:"+mesa);
+				
 				if(obs.isEmpty()) JOptionPane.showMessageDialog(null,
 						"Por favor ingrese una obsevación.",
 						"Campos nulos", JOptionPane.ERROR_MESSAGE);
-				else gt.ActualizarEstadoI(idIntervencion, idEstadoIntervencion, idClasificacion, obs, idUsuario, mesa);
+				else {gt.ActualizarEstadoI(idTicket,idIntervencion, idEstadoIntervencion, idClasificacion, obs, idUsuario, mesa);
+				removerPanel();}
 			}
 		});
 		aceptar.setForeground(new Color(255, 255, 255));

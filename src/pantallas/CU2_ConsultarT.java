@@ -305,7 +305,7 @@ public class CU2_ConsultarT extends JPanel {
 		btnCerrarTicket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TicketAux ticket = tableModel.getTickets().get(seleccion);
-				if (ticket.getEstadoActual() == "Solucionado a la espera Ok") {
+				if (ticket.getEstadoActual().equals("Solucionado a la espera ok")) {
 					CU3_CerrarT panelCerrarTicket = new CU3_CerrarT(ticket.getIdTicket(), idUsuario, idGrupo);
 					panelCerrarTicket.setPadre(padre);
 					panelCerrarTicket.setAnterior(panel);

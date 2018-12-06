@@ -200,12 +200,15 @@ public class GestorTicket {
 		return gbd.ultimoIdTicket();
 	}
 	
-	public void ActualizarEstadoI(int idIntervencion,int idEstadoIntervencion,int idClasificacion,String obs,int idU,boolean mesa) {
-		//Intervencion i=gbd.bus
+	public void ActualizarEstadoI(int idticket,int idIntervencion,int idEstadoIntervencion,int idClasificacion,String obs,int idU,boolean mesa) {
+		
 		Usuario u=gbd.buscarUsuario(idU);
 		EstadoIntervencion i_estado=gbd.buscarEstadoIntervencion(idEstadoIntervencion);
-		Ticket t=gbd.buscarTicketAsociado(idIntervencion);
+		
+		Ticket t=gbd.buscarTicket(idticket);
 		Intervencion i= t.getIntervencion2(idIntervencion);
+		
+		System.out.println("idIntervencion: "+i.getIdIntervencion()+" id estado nuevo"+idEstadoIntervencion);
 		
 		Date fecha=new Date();
 		
@@ -231,15 +234,17 @@ public class GestorTicket {
 				else idEstadoTicket=2;
 			}
 			else /*if(idEstadoIntervencion==1)*/ idEstadoTicket=1;
+			System.out.println("antes de bucar estado");
 			EstadoTicket t_estado=gbd.buscarEstadoTicket(idEstadoTicket);
+			System.out.println("ESTADO TICKET:"+t_estado.getEstado()+ "nuemro:"+t_estado.getId());
 			CambioEstado ce=new CambioEstado(t_estado,u);
 			ce.setFechaInicio(fecha);
 			t.setEstadoActual(ce);
 			Intervencion i_mesa=t.getIntervencion(1);
 			EstadoIntervencion i_asigando=gbd.buscarEstadoIntervencion(0);
 			gi.actualizarIntervencion(i_mesa, i_asigando, u, i_mesa.getObservaciones(), fecha);
-			gbd.actualizarTicket(t);
 		}
+		gbd.actualizarTicket(t);
 	}
 	
 	public ArrayList<CambioEstadoAux> getEstadosAux(int idticket){

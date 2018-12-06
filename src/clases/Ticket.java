@@ -173,7 +173,7 @@ public class Ticket {
 	
 	public boolean intervencionEnEspera() {
 		for(Intervencion i: intervenciones) {
-			if(i.getEstado().getId()==1)return true;
+			if(i.getEstado().getId()==1 && i.getGrupo().getCodigo()!=1)return true;
 		}
 		return false;
 	}

@@ -151,7 +151,7 @@ public class Intervencion {
 	public void actualizarIntervencion(CambioIntervencion ci,String Obs,Date fecha){
 		this.UltimoEstado().setFechaFinAsignacion(fecha);
 		estado=ci.getEstado();
-
+			
 		historialIntervencion.add(ci);
 		observaciones=Obs;
 	}
