@@ -38,10 +38,10 @@ public class CU8_ActualizarIntervencion extends JPanel {
 
 	public CU8_ActualizarIntervencion(IntervencionAux intervencion,int idTicket, int idUsuario, int idGrupo) {
 
-		String estadoActual="Trabajando";
-		idGrupo=2;
+		
 		String clasificacionActual=intervencion.getClasificacion().getNombre();
-		//String estadoActual=intervencion.getEstadoIntervencion();
+		String estadoActual=intervencion.getEstadoIntervencion();
+		int idIntervencion=intervencion.getIdIntervencion();
 		
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
@@ -158,11 +158,20 @@ public class CU8_ActualizarIntervencion extends JPanel {
 
 		
 		//botones
-		JButton imprimir_aceptar = new JButton("Aceptar");
-		imprimir_aceptar.setForeground(new Color(255, 255, 255));
-		imprimir_aceptar.setBackground(theme);
-		imprimir_aceptar.setBounds(268, 620, 130, 40);
-		this.add(imprimir_aceptar);
+		JButton aceptar = new JButton("Aceptar");
+		aceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int idEstadoIntervencion=((EstadoIntervencion)Estado.getSelectedItem()).getId();
+				int idClasificacion=((ClasificacionAux)Clasificacion.getSelectedItem()).getId();
+				String obs= campoObservaciones.getText();
+				
+				//gt.ActualizarEstadoI(idIntervencion, idEstadoIntervencion, idClasificacion, obs, idUsuario, mesa);
+			}
+		});
+		aceptar.setForeground(new Color(255, 255, 255));
+		aceptar.setBackground(theme);
+		aceptar.setBounds(268, 620, 130, 40);
+		this.add(aceptar);
 
 		JButton cancelar = new JButton("Cancelar");
 		cancelar.addActionListener(new ActionListener() {
