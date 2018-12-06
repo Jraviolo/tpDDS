@@ -81,7 +81,7 @@ public class GestorIntervenciones {
 				
 		}
 	*/	
-		ArrayList<Intervencion> busqueda = gbd.consultarIntervenciones(0, fDesde, fHasta, nroT, nroL, idGrupo);
+		ArrayList<Intervencion> busqueda = gbd.consultarIntervenciones(0, fDesde, fHasta, 2, nroL, idGrupo);
 		ArrayList<IntervencionAux> listaResultado = new ArrayList<IntervencionAux>();
 		System.out.println("tamaño "+busqueda.size());
 		for(Intervencion i: busqueda) {
@@ -98,9 +98,12 @@ public class GestorIntervenciones {
 			aux.setEstadoTicket(t.getEstadoActual().getEstado().getEstado());
 			aux.setFechaApertura(t.getFechaDeApertura());
 		//	aux.setEstadoIntervencion(i.getEstado().getEstado());
+			aux.setEstadoIntervencion("aaa");
 		//	aux.setFechaAsignacion(i.getFechaInicio());
+			aux.setFechaAsignacion(new Date());
 			aux.setGrupoActual(grupo);
 		//	aux.setObservaciones(i.getObservaciones());
+			aux.setObservaciones("aaa");
 			
 			listaResultado.add(aux);
 		}

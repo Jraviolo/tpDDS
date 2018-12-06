@@ -541,7 +541,7 @@ public class GestorBaseDeDatos {
 		
 	//	List query =  session
 	//			.createSQLQuery("select * from intervencion where IDestado_interv='" + estado + "'AND  numero='" + nroT + "'").getQueryReturns();
-		SQLQuery query = session.createSQLQuery("select * from intervencion where IDestado_interv='" + estado + "'");
+		SQLQuery query = session.createSQLQuery("select * from intervencion where IDestado_interv='" + estado + "'AND  numero='" + nroT + "'");
 		List<Object[]> rows = query.list();
 		ArrayList<Intervencion> lista = new ArrayList<Intervencion>();
 		for(int j=0; j<rows.size();j++){
