@@ -226,14 +226,19 @@ public class GestorTicket {
 		if(idEstadoIntervencion!=3) {
 			int idEstadoTicket;
 			if(idEstadoIntervencion==2 && mesa) {
+				System.out.println("ERROR ACA ");
 				idEstadoTicket=0;
 			}
 			else if(idEstadoIntervencion==2 && !mesa) {
 				boolean v=t.intervencionEnEspera();
-				if(v)idEstadoTicket=0;
-				else idEstadoTicket=2;
+				if(v) {idEstadoTicket=0;}
+				else {idEstadoTicket=2;}
 			}
-			else /*if(idEstadoIntervencion==1)*/ idEstadoTicket=1;
+			
+			else {
+				System.out.println("ERROR ACA 2");
+				idEstadoTicket=0;
+				}
 			System.out.println("antes de bucar estado");
 			EstadoTicket t_estado=gbd.buscarEstadoTicket(idEstadoTicket);
 			System.out.println("ESTADO TICKET:"+t_estado.getEstado()+ "nuemro:"+t_estado.getId());

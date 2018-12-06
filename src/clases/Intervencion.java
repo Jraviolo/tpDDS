@@ -42,7 +42,7 @@ public class Intervencion {
 	@Column(name="observacion")
 	private String observaciones;
 	
-	@ManyToOne(cascade = CascadeType.ALL) ///ale
+	@ManyToOne//(cascade = CascadeType.ALL) ///ale
 	@JoinColumn(name = "codigo")
 	private GrupoDeResolucion intervencion;
 	

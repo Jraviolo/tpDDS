@@ -25,7 +25,7 @@ public class CambioEstado {
 	@Column(name="IDcambios_est")
 	private Integer idCambioEstado;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne//(cascade = CascadeType.ALL)
 	@JoinColumn(name="IDEst")
 	private EstadoTicket estado;
 	//private et es;
