@@ -268,7 +268,16 @@ public class GestorTicket {
 					break;
 				}
 			
-			
+			for(GrupoDeResolucion g:grupos) {
+				List<Usuario> miembro=g.getUsuarios();
+				for(Usuario u:miembro) {
+					if(u.getUsuario().equals(ea.getUsuario())) {
+						ea.setGrupo(g.getNombre());
+						break;
+					}
+					
+				}
+			}
 			
 			estadosAux.add(ea);
 			}

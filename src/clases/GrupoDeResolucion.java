@@ -38,7 +38,8 @@ public class GrupoDeResolucion {
 	@Column(name="activo")
 	private Boolean estado;
 	
-	@OneToMany(cascade = CascadeType.ALL)//, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)//, orphanRemoval = true)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinColumn(name = "cod_gr")
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	
