@@ -79,6 +79,18 @@ public class Ticket {
 		descripcion = des;
 	}
 
+	public List<CambioClasificacion> getCambioClasificacion() {
+		return cambioClasificacion;
+	}
+
+	public void setCambioClasificacion(List<CambioClasificacion> cambioClasificacion) {
+		this.cambioClasificacion = cambioClasificacion;
+	}
+
+	public void setHistorialEstados(List<CambioEstado> historialEstados) {
+		this.historialEstados = historialEstados;
+	}
+
 	public Integer getId() {
 		return id;
 	}

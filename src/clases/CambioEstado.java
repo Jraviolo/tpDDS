@@ -40,8 +40,18 @@ public class CambioEstado {
 	
 	@ManyToOne
 	@JoinColumn(name = "IdUsuario")
-	private Usuario interviene; //@ale agregue este 
+	private Usuario interviene; 
 	
+	public Usuario getInterviene() {
+		return interviene;
+	}
+
+
+	public void setInterviene(Usuario interviene) {
+		this.interviene = interviene;
+	}
+
+
 	public CambioEstado() {
 		// TODO Auto-generated constructor stub
 	}

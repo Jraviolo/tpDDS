@@ -3,6 +3,7 @@ package gestores;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import clases.CambioClasificacion;
 import clases.CambioEstado;
@@ -14,6 +15,7 @@ import clases.GrupoDeResolucion;
 import clases.Intervencion;
 import clases.Ticket;
 import clases.Usuario;
+import clasesAuxiliares.CambioEstadoAux;
 import clasesAuxiliares.ClasificacionAux;
 import clasesAuxiliares.GrupoDeResolucionAux;
 import clasesAuxiliares.TicketAux;
@@ -238,5 +240,37 @@ public class GestorTicket {
 			gi.actualizarIntervencion(i_mesa, i_asigando, u, i_mesa.getObservaciones(), fecha);
 			gbd.actualizarTicket(t);
 		}
+	}
+	
+	public ArrayList<CambioEstadoAux> getEstadosAux(int idticket){
+		Ticket t=gbd.buscarTicket(idticket);
+		ArrayList<CambioEstadoAux> estadosAux=new ArrayList<CambioEstadoAux>();
+		List<CambioEstado> estados=t.getHistorialEstados();
+		
+		List<CambioClasificacion> cc=t.getCambioClasificacion();
+		
+		for(CambioEstado e:estados) {
+			CambioEstadoAux ea=new CambioEstadoAux();
+			ea.setEstado(e.getEstado().getEstado());
+			ea.setFechaFin(e.getFechaFin());
+			ea.setFechaInicio(e.getFechaInicio());
+			ea.setIdCambioEstado(e.getIdCambioEstado());
+			ea.setUsuario(e.getInterviene().getUsuario());
+			
+			for(CambioClasificacion c:cc) {
+				if(c.getFechaInicio().equals(ea.getFechaInicio()) || c.getFechaInicio().after(ea.getFechaInicio()) )
+					if(c.getFechaFin()!=null && ea.getFechaFin()!=null) {
+						if(c.getFechaFin().equals(ea.getFechaFin()) || c.getFechaFin().before(ea.getFechaFin())) {
+							ea.setClasificacion(c.getClasificacion().getNombre());
+							break;
+						}
+					}
+					else ea.setClasificacion(c.getClasificacion().getNombre());
+				}
+			estadosAux.add(ea);
+			}
+		
+		return estadosAux;
+		
 	}
 }

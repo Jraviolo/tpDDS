@@ -52,6 +52,14 @@ public class CambioClasificacion {
 	}
 	
 	
+	public ClasificacionDeTicket getClasificacion() {
+		return clasificacion;
+	}
+
+	public void setClasificacion(ClasificacionDeTicket clasificacion) {
+		this.clasificacion = clasificacion;
+	}
+
 	public Integer getIdCambioClasificacion() {
 		return idCambioClasificacion;
 	}
