@@ -4,13 +4,13 @@ public class GrupoDeResolucionAux {
 
 	
 	private String nombre;
-	private int Id;
+	private Integer Id;
 
 	public GrupoDeResolucionAux() {
 		
 	}
 	
-	public GrupoDeResolucionAux(String n,int i) {
+	public GrupoDeResolucionAux(String n,Integer i) {
 		this.nombre=n;
 		this.Id=i;
 	}
@@ -23,11 +23,11 @@ public class GrupoDeResolucionAux {
 		this.nombre = nombre;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return Id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		Id = id;
 	}
 

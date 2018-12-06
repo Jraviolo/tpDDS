@@ -60,8 +60,7 @@ public class GestorIntervenciones {
 	}
 	
 
-	public ArrayList<IntervencionAux> consultarIntervenciones(String estado, Date fDesde, Date fHasta, Integer nroT, Integer nroL,
-			int idGrupo) {
+	public ArrayList<IntervencionAux> consultarIntervenciones(String estado, Date fDesde, Date fHasta, Integer nroT, Integer nroL) {
 		Integer idEstado;
 /*		if(estado.equals("Asignada")) {
 			idEstado=0;
@@ -81,13 +80,13 @@ public class GestorIntervenciones {
 				
 		}
 	*/	
-		ArrayList<Intervencion> busqueda = gbd.consultarIntervenciones(0, fDesde, fHasta, 2, nroL, idGrupo);
+		ArrayList<Intervencion> busqueda = gbd.consultarIntervenciones3(estado, fDesde, fHasta, nroT, nroL);
 		ArrayList<IntervencionAux> listaResultado = new ArrayList<IntervencionAux>();
 		System.out.println("tamaño "+busqueda.size());
 		for(Intervencion i: busqueda) {
 			Ticket t = gbd.buscarTicketAsociado(i.getIdIntervencion());
 			IntervencionAux aux = new IntervencionAux();
-	//GrupoDeResolucionAux grupo = new GrupoDeResolucionAux(t.ultimaIntervencion().getGrupo().getNombre(), t.ultimaIntervencion().getGrupo().getCodigo());
+	//		GrupoDeResolucionAux grupo = new GrupoDeResolucionAux(t.ultimaIntervencion().getGrupo().getNombre(), t.ultimaIntervencion().getGrupo().getCodigo());
 			GrupoDeResolucionAux grupo = new GrupoDeResolucionAux(t.getIntervencion2(i.getIdIntervencion()).getGrupo().getNombre(), t.getIntervencion2(i.getIdIntervencion()).getGrupo().getCodigo());
 			System.out.println("intervencion "+i.getIdIntervencion()+"grupo "+grupo.getNombre()+"ultima int "+t.ultimaIntervencion().getIdIntervencion());
 			ClasificacionAux clasificacion = new ClasificacionAux(t.getClasificacionActual().getNombre(),t.getClasificacionActual().getIdClasificacion());
@@ -97,13 +96,13 @@ public class GestorIntervenciones {
 			aux.setClasificacion(clasificacion);
 			aux.setEstadoTicket(t.getEstadoActual().getEstado().getEstado());
 			aux.setFechaApertura(t.getFechaDeApertura());
-		//	aux.setEstadoIntervencion(i.getEstado().getEstado());
-			aux.setEstadoIntervencion("aaa");
-		//	aux.setFechaAsignacion(i.getFechaInicio());
-			aux.setFechaAsignacion(new Date());
+			aux.setEstadoIntervencion(i.getEstado().getEstado());
+		//	aux.setEstadoIntervencion("aaa");
+			aux.setFechaAsignacion(i.getFechaInicio());
+		//	aux.setFechaAsignacion(new Date());
 			aux.setGrupoActual(grupo);
-		//	aux.setObservaciones(i.getObservaciones());
-			aux.setObservaciones("aaa");
+			aux.setObservaciones(i.getObservaciones());
+		//	aux.setObservaciones("aaa");
 			
 			listaResultado.add(aux);
 		}
