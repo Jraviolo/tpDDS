@@ -325,10 +325,10 @@ public class CU2_ConsultarT extends JPanel {
 
 		JButton btnVerDetalle = new JButton("Ver detalle");
 		btnVerDetalle.setBackground(Color.WHITE);
-		btnNewButton.addActionListener(new ActionListener() {
+		btnVerDetalle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TicketAux ticket = tableModel.getTickets().get(seleccion);
-				
+				System.out.println("llego");
 					CU2_VerDetalle panelVerDetalle = new CU2_VerDetalle(ticket.getIdTicket(), ticket.getLegajo());
 					panelVerDetalle.setPadre(padre);
 					panelVerDetalle.setAnterior(panel);

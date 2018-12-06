@@ -226,9 +226,9 @@ public class CU2_VerDetalle extends JPanel{
 		table_1.setFillsViewportHeight(true);
 		table_1.setBounds(489, 210, 421, -49);
 		JScrollPane JS = new JScrollPane(table_1);
-		JS.setSize(1171, 394);
-		JS.setLocation(93, 235);
-		JS.setPreferredSize(new Dimension(400, 400));
+		JS.setSize(785, 469);
+		JS.setLocation(479, 160);
+		JS.setPreferredSize(new Dimension(400,400));
 		this.add(JS);
 		
 	}
