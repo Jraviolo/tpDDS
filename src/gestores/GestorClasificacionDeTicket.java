@@ -36,6 +36,18 @@ public class GestorClasificacionDeTicket {
 		return r;
 	}
 	
+	public ArrayList<ClasificacionAux> getClasificacionesAux(int idGrupo) {
+		List<ClasificacionDeTicket> c=  gbd.buscarGrupo(idGrupo).getClasificaciones();
+		ArrayList<ClasificacionAux> r= new ArrayList<ClasificacionAux>();
+		for(int i=0;i<c.size();i++) {
+			int id=c.get(i).getIdClasificacion();
+			String nombre=c.get(i).getNombre();
+			ClasificacionAux a=new ClasificacionAux(nombre,id);
+			r.add(a);
+		}
+		return r;
+	}
+	
 	public void agregarClasificacion() {
 		
 	}

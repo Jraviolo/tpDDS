@@ -15,6 +15,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -85,14 +87,20 @@ public class CU4_DerivarT extends JPanel {
 		JLabel lblDescripcinDelProblema = new JLabel("Descripci\u00F3n del problema:");
 		lblDescripcinDelProblema.setBounds(93, 166, 176, 14);
 		this.add(lblDescripcinDelProblema);
-
-		JTextField descripcion = new JTextField();
-		descripcion.setHorizontalAlignment(SwingConstants.LEFT);
-		descripcion.setEditable(false);
+		
+		JTextArea descripcion = new JTextArea();
+		descripcion.setLineWrap(true);
+		descripcion.setWrapStyleWord(true);
 		descripcion.setBounds(93, 191, 368, 95);
-		descripcion.setText(t.getDescripcion());
 		this.add(descripcion);
 		descripcion.setColumns(10);
+		descripcion.setEditable(false);
+		descripcion.setText(t.getDescripcion());
+		
+		JScrollPane obscroll = new JScrollPane(descripcion);
+		obscroll.setBounds(93, 191, 368, 95);
+		obscroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(obscroll);
 
 		//NUEVO ESTADO
 		JLabel lblNuevoEstado = new JLabel("Nuevo estado:");
@@ -159,15 +167,21 @@ public class CU4_DerivarT extends JPanel {
 
 		
 		//OBSERACIONES
-
 		JLabel lblObservaciones = new JLabel("Observaciones:");
 		lblObservaciones.setBounds(93, 390, 168, 14);
 		this.add(lblObservaciones);
-
-		JTextField observaciones = new JTextField();
+		
+		JTextArea observaciones = new JTextArea();
+		observaciones.setLineWrap(true);
+		observaciones.setWrapStyleWord(true);
 		observaciones.setBounds(93, 415, 368, 95);
 		this.add(observaciones);
 		observaciones.setColumns(10);
+		
+		JScrollPane obscroll2 = new JScrollPane(observaciones);
+		obscroll2.setBounds(93, 415, 368, 95);
+		obscroll2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(obscroll2);
 		
 		//BOTONES
 		

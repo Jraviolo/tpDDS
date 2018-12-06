@@ -6,6 +6,7 @@ import java.awt.Panel;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,12 +14,17 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import clases.EstadoIntervencion;
+import clasesAuxiliares.ClasificacionAux;
 import clasesAuxiliares.IntervencionAux;
 import gestores.GestorBaseDeDatos;
+import gestores.GestorClasificacionDeTicket;
 import gestores.GestorTicket;
 
 public class CU8_ActualizarIntervencion extends JPanel {
@@ -28,9 +34,15 @@ public class CU8_ActualizarIntervencion extends JPanel {
 	private Rectangle boundsAnterior;
 	private GestorTicket gt=new GestorTicket();
 	private GestorBaseDeDatos gbd=new GestorBaseDeDatos();
+	private GestorClasificacionDeTicket gc=new GestorClasificacionDeTicket();
 
 	public CU8_ActualizarIntervencion(IntervencionAux intervencion,int idTicket, int idUsuario, int idGrupo) {
 
+		String estadoActual="Trabajando";
+		idGrupo=2;
+		String clasificacionActual=intervencion.getClasificacion().getNombre();
+		//String estadoActual=intervencion.getEstadoIntervencion();
+		
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
 		setBounds(0, 0, 554, 700);
@@ -68,34 +80,44 @@ public class CU8_ActualizarIntervencion extends JPanel {
 		textEstado.setEnabled(false);
 		textEstado.setHorizontalAlignment(SwingConstants.CENTER);
 		textEstado.setEditable(false);
-		textEstado.setText(intervencion.getEstadoIntervencion());
+		textEstado.setText(estadoActual);
 		textEstado.setBounds(188, 157, 271, 20);
 		this.add(textEstado);
 		textEstado.setColumns(10);
 		textEstado.setDisabledTextColor(Color.BLACK);
 
-		//DESCRIPCION
+		//DESCRIPCION		
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n del problema:");
 		lblDescripcin.setBounds(93, 188, 223, 14);
 		this.add(lblDescripcin);
-
-		JTextField campoDescripcion = new JTextField();
-		campoDescripcion.setEditable(false);
-		campoDescripcion.setHorizontalAlignment(SwingConstants.LEFT);
-		campoDescripcion.setBounds(93, 213, 366, 95);
-		this.add(campoDescripcion);
-		campoDescripcion.setColumns(10);
-		campoDescripcion.setText(gbd.getDescripcionTicket(idTicket));
+		
+		JTextArea ob = new JTextArea();
+		ob.setLineWrap(true);
+		ob.setWrapStyleWord(true);
+		ob.setBounds(93, 213, 366, 95);
+		this.add(ob);
+		ob.setColumns(10);
+		ob.setText(gbd.getDescripcionTicket(idTicket));
+		ob.setEditable(false);
+		
+		
+		JScrollPane obscroll = new JScrollPane(ob);
+		obscroll.setBounds(93, 213, 366, 95);
+		obscroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(obscroll);
 		
 		//NUEVO ESTADO
 		
 		JLabel lblNuevoEstado = new JLabel("Nuevo estado:");
 		lblNuevoEstado.setBounds(93, 319, 141, 20);
 		this.add(lblNuevoEstado);
-
-		JComboBox Estado = new JComboBox();
+		
+		ArrayList<EstadoIntervencion> estados=this.estadosIntervencion(estadoActual);
+		JComboBox<EstadoIntervencion> Estado = new JComboBox<EstadoIntervencion>();
 		Estado.setBounds(188, 319, 271, 20);
 		this.add(Estado);
+		for(EstadoIntervencion e:estados)Estado.addItem(e);
+		
 		
 		System.out.println(intervencion.getIdIntervencion());
 
@@ -104,7 +126,14 @@ public class CU8_ActualizarIntervencion extends JPanel {
 		lblClasificacionTicket.setBounds(93, 347, 141, 20);
 		this.add(lblClasificacionTicket);
 
-		JComboBox Clasificacion = new JComboBox();
+		ArrayList<ClasificacionAux> clasificaciones=gc.getClasificacionesAux(idGrupo);
+		JComboBox<ClasificacionAux> Clasificacion = new JComboBox<ClasificacionAux>();
+		for(ClasificacionAux c:clasificaciones) {
+			Clasificacion.addItem(c);
+			if(clasificacionActual.equals(c.getNombre())) Clasificacion.setSelectedItem(c);
+		}
+		
+		
 		Clasificacion.setBounds(227, 348, 232, 20);
 		this.add(Clasificacion);
 
@@ -112,13 +141,20 @@ public class CU8_ActualizarIntervencion extends JPanel {
 		JLabel lblFechaDeApertura = new JLabel("Observaciones:");
 		lblFechaDeApertura.setBounds(93, 378, 141, 20);
 		this.add(lblFechaDeApertura);
-
-		JTextField campoObservaciones = new JTextField();
-		campoObservaciones.setHorizontalAlignment(SwingConstants.LEFT);
-		campoObservaciones.setColumns(10);
+		
+		JTextArea campoObservaciones = new JTextArea();
+		campoObservaciones.setLineWrap(true);
+		campoObservaciones.setWrapStyleWord(true);
 		campoObservaciones.setBounds(93, 401, 366, 95);
 		this.add(campoObservaciones);
-		// txtHhmm.setBorder(null);
+		campoObservaciones.setColumns(10);
+		
+		
+		JScrollPane obscroll2 = new JScrollPane(campoObservaciones);
+		obscroll2.setBounds(93, 401, 366, 95);
+		obscroll2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		this.add(obscroll2);
+
 
 		
 		//botones
@@ -139,6 +175,24 @@ public class CU8_ActualizarIntervencion extends JPanel {
 		this.add(cancelar);
 	}
 
+	
+	public ArrayList<EstadoIntervencion> estadosIntervencion(String estadoActual) {
+		ArrayList<EstadoIntervencion> estados=new ArrayList<EstadoIntervencion>();
+		EstadoIntervencion e1;
+		if(estadoActual.equals("Asignada")) {
+			e1=gbd.buscarEstadoIntervencion(2);
+			estados.add(e1);
+			e1=gbd.buscarEstadoIntervencion(3);
+			estados.add(e1);
+		}
+		else if(estadoActual.equals("Trabajando")) {
+			e1=gbd.buscarEstadoIntervencion(1);
+			estados.add(e1);
+			e1=gbd.buscarEstadoIntervencion(2);
+			estados.add(e1);
+		}
+		return estados;
+	}
 	public void setPadre(JFrame padre) {
 		this.padre = padre;
 	}
