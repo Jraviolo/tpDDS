@@ -258,18 +258,18 @@ public class GestorTicket {
 			ea.setUsuario(e.getInterviene().getUsuario());
 			
 			for(CambioClasificacion c:cc) {
-				if(c.getFechaInicio().equals(ea.getFechaInicio()) || c.getFechaInicio().after(ea.getFechaInicio()) )
-					if(c.getFechaFin()!=null && ea.getFechaFin()!=null) {
-						if(c.getFechaFin().equals(ea.getFechaFin()) || c.getFechaFin().before(ea.getFechaFin())) {
-							ea.setClasificacion(c.getClasificacion().getNombre());
-							break;
-						}
-					}
-					else ea.setClasificacion(c.getClasificacion().getNombre());
+				if(c.getFechaInicio().equals(ea.getFechaInicio())) {
+					ea.setClasificacion(c.getClasificacion().getNombre());
+					break;
 				}
+				else if(c.getFechaInicio().before(ea.getFechaInicio()))
+					ea.setClasificacion(c.getClasificacion().getNombre());
+					break;
+				}
+			
 			estadosAux.add(ea);
 			}
-		
+			estadosAux.sort((o1,o2) -> o1.getFechaInicio().compareTo(o2.getFechaInicio()));
 		return estadosAux;
 		
 	}
