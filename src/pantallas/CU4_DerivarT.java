@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -188,11 +189,15 @@ public class CU4_DerivarT extends JPanel {
 		JButton imprimir_aceptar = new JButton("Aceptar");
 		imprimir_aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				if(observaciones.getText().isEmpty())JOptionPane.showMessageDialog(null,
+						"Por favor ingrese una obsevación.",
+						"Campos nulos", JOptionPane.ERROR_MESSAGE);
+				else {
 				GrupoDeResolucionAux g = (GrupoDeResolucionAux) comboBox_2.getSelectedItem();
 				ClasificacionAux c = (ClasificacionAux) comboClasificacion.getSelectedItem();
 				gt.derivarTicket(t.getIdTicket(), 1, g.getId(), c.getId(), observaciones.getText(), idUsuario);
 				removerPanel();
+				}
 			}
 		});
 		imprimir_aceptar.setForeground(new Color(255, 255, 255));

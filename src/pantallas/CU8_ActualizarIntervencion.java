@@ -10,9 +10,11 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -72,9 +74,9 @@ public class CU8_ActualizarIntervencion extends JPanel {
 		this.add(titulo_pantalla);
 
 		//ESTADO ACTUAL
-		JLabel EstadoActual = new JLabel("Estado actual:");
-		EstadoActual.setBounds(93, 157, 141, 20);
-		this.add(EstadoActual);
+		JLabel ea = new JLabel("Estado actual:");
+		ea.setBounds(93, 157, 141, 20);
+		this.add(ea);
 
 		JTextField textEstado = new JTextField();
 		textEstado.setEnabled(false);
@@ -155,7 +157,26 @@ public class CU8_ActualizarIntervencion extends JPanel {
 		obscroll2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(obscroll2);
 
-
+		//box mesa
+		JCheckBox Mesachckbx = new JCheckBox();
+		Mesachckbx .setBounds(93, 503, 305, 23);
+		add(Mesachckbx);
+		if(estadoActual.equals("Asignada")) Mesachckbx.setText("Este ticket no pertenece a este grupo");
+		if(estadoActual.equals("Trabajando")) Mesachckbx.setText("Solicitar otra intervencion");
+		
+		if(((EstadoIntervencion)Estado.getSelectedItem()).getId()==1) {
+			Mesachckbx.setSelected(false);
+			Mesachckbx.setEnabled(false);
+		}
+		else if(((EstadoIntervencion)Estado.getSelectedItem()).getId()==3) {
+			Mesachckbx.setSelected(false);
+			Mesachckbx.setEnabled(false);
+		}
+		else if(((EstadoIntervencion)Estado.getSelectedItem()).getId()==2 && estadoActual.equals("Asignada")) {
+			Mesachckbx.setSelected(true);
+			Mesachckbx.setEnabled(false);
+		}
+		else Mesachckbx.setEnabled(true);
 		
 		//botones
 		JButton aceptar = new JButton("Aceptar");
@@ -164,8 +185,12 @@ public class CU8_ActualizarIntervencion extends JPanel {
 				int idEstadoIntervencion=((EstadoIntervencion)Estado.getSelectedItem()).getId();
 				int idClasificacion=((ClasificacionAux)Clasificacion.getSelectedItem()).getId();
 				String obs= campoObservaciones.getText();
+				boolean mesa=Mesachckbx.isSelected();
 				
-				//gt.ActualizarEstadoI(idIntervencion, idEstadoIntervencion, idClasificacion, obs, idUsuario, mesa);
+				if(obs.isEmpty()) JOptionPane.showMessageDialog(null,
+						"Por favor ingrese una obsevación.",
+						"Campos nulos", JOptionPane.ERROR_MESSAGE);
+				else gt.ActualizarEstadoI(idIntervencion, idEstadoIntervencion, idClasificacion, obs, idUsuario, mesa);
 			}
 		});
 		aceptar.setForeground(new Color(255, 255, 255));
@@ -182,9 +207,28 @@ public class CU8_ActualizarIntervencion extends JPanel {
 		cancelar.setBackground(new Color(255, 255, 255));
 		cancelar.setBounds(408, 620, 130, 40);
 		this.add(cancelar);
+		
+		//ACCCION ESTADO
+		Estado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(((EstadoIntervencion)Estado.getSelectedItem()).getId()==1) {
+					Mesachckbx.setSelected(false);
+					Mesachckbx.setEnabled(false);
+				}
+				else if(((EstadoIntervencion)Estado.getSelectedItem()).getId()==3) {
+					Mesachckbx.setSelected(false);
+					Mesachckbx.setEnabled(false);
+				}
+				else if(((EstadoIntervencion)Estado.getSelectedItem()).getId()==2 && estadoActual.equals("Asignada")) {
+					Mesachckbx.setSelected(true);
+					Mesachckbx.setEnabled(false);
+				}
+				else Mesachckbx.setEnabled(true);
+				
+			}
+		});
 	}
 
-	
 	public ArrayList<EstadoIntervencion> estadosIntervencion(String estadoActual) {
 		ArrayList<EstadoIntervencion> estados=new ArrayList<EstadoIntervencion>();
 		EstadoIntervencion e1;
