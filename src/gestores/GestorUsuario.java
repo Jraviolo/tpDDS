@@ -39,7 +39,15 @@ public class GestorUsuario {
 		e.setNombre(empleado.getNombre());
 		e.setTelefonoDirecto(empleado.getTelefonoDirecto());
 		e.setTelefonoInterno(empleado.getTelefonoInterno());
-		e.setUbicacion(empleado.getUbicacion());
+		
+		String str = empleado.getUbicacion();
+		String[] part = str.split("(?<=\\D)(?=\\d)(?=\\d)(?=\\d)");
+		for(int i=0;i<part.length;i++) {
+			if(i==0) e.setCalle(part[i]);
+			else if(i==1) e.setNumero(part[i]);
+			else if(i==2) e.setPiso(part[i]);
+			else if(i==3) e.setOficina(part[i]);
+		}
 		return e;
 	}
 	

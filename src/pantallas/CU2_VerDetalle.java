@@ -22,7 +22,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import clasesAuxiliares.CambioEstadoAux;
+import clasesAuxiliares.EmpleadoAux;
 import clasesAuxiliares.TicketAux;
+import gestores.GestorTicket;
+import gestores.GestorUsuario;
 
 
 public class CU2_VerDetalle extends JPanel{
@@ -32,8 +35,13 @@ public class CU2_VerDetalle extends JPanel{
 	private JPanel anterior;
 	private Rectangle boundsAnterior;
 	private VerDetalleTableModel tableModel = new VerDetalleTableModel();
+	private GestorTicket gt=new GestorTicket();
+	private GestorUsuario ge=new GestorUsuario();
 	
 	public CU2_VerDetalle(Integer idTicket, Integer legajo) {
+		
+		EmpleadoAux empleado=ge.getEmpleadoAux((int)legajo);
+		
 		
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
@@ -53,6 +61,7 @@ public class CU2_VerDetalle extends JPanel{
 		JButton cerrar = new JButton("Cerrar");
 		cerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				removerPanel();
 			}
 		});
 		cerrar.setBackground(new Color(255, 255, 255));
@@ -76,7 +85,7 @@ public class CU2_VerDetalle extends JPanel{
 		lblNewLabel.setBounds(93, 135, 130, 14);
 		this.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("99999");
+		JLabel lblNewLabel_1 = new JLabel(empleado.getLegajo().toString());
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblNewLabel_1.setBounds(243, 135, 46, 14);
 		this.add(lblNewLabel_1);
@@ -85,7 +94,7 @@ public class CU2_VerDetalle extends JPanel{
 		lblNewLabel_2.setBounds(93, 160, 130, 14);
 		this.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("xxxxxx, xxxxxx xxxxxx");
+		JLabel lblNewLabel_3 = new JLabel(empleado.getApellido()+" "+empleado.getNombre());
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblNewLabel_3.setBounds(243, 160, 190, 14);
 		this.add(lblNewLabel_3);
@@ -94,7 +103,7 @@ public class CU2_VerDetalle extends JPanel{
 		lblNewLabel_4.setBounds(93, 185, 130, 14);
 		this.add(lblNewLabel_4);
 		
-		JLabel lblNewLabel_5 = new JLabel("99999999");
+		JLabel lblNewLabel_5 = new JLabel(empleado.getTelefonoInterno().toString());
 		lblNewLabel_5.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblNewLabel_5.setBounds(243, 185, 190, 14);
 		this.add(lblNewLabel_5);
@@ -103,7 +112,7 @@ public class CU2_VerDetalle extends JPanel{
 		lblNewLabel_6.setBounds(93, 210, 130, 14);
 		this.add(lblNewLabel_6);
 		
-		JLabel lblNewLabel_7 = new JLabel("99999999");
+		JLabel lblNewLabel_7 = new JLabel(empleado.getTelefonoDirecto().toString());
 		lblNewLabel_7.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblNewLabel_7.setBounds(243, 210, 190, 14);
 		this.add(lblNewLabel_7);
@@ -112,7 +121,7 @@ public class CU2_VerDetalle extends JPanel{
 		lblNewLabel_8.setBounds(93, 235, 130, 14);
 		this.add(lblNewLabel_8);
 		
-		JLabel lblNewLabel_9 = new JLabel("xxxxxxxxxx");
+		JLabel lblNewLabel_9 = new JLabel(empleado.getDescripcionDeCargo());
 		lblNewLabel_9.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblNewLabel_9.setBounds(243, 235, 190, 14);
 		this.add(lblNewLabel_9);
@@ -125,7 +134,7 @@ public class CU2_VerDetalle extends JPanel{
 		lblCalle.setBounds(121, 285, 102, 14);
 		this.add(lblCalle);
 		
-		JLabel lblNewLabel_12 = new JLabel("xxxxxxxxx");
+		JLabel lblNewLabel_12 = new JLabel(empleado.getCalle());
 		lblNewLabel_12.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblNewLabel_12.setBounds(243, 285, 190, 14);
 		this.add(lblNewLabel_12);
@@ -134,7 +143,7 @@ public class CU2_VerDetalle extends JPanel{
 		lblNmero.setBounds(121, 310, 102, 14);
 		this.add(lblNmero);
 		
-		JLabel label = new JLabel("9999");
+		JLabel label = new JLabel(empleado.getNumero());
 		label.setFont(new Font("Arial", Font.PLAIN, 12));
 		label.setBounds(243, 310, 46, 14);
 		this.add(label);
@@ -143,7 +152,7 @@ public class CU2_VerDetalle extends JPanel{
 		lblPiso.setBounds(121, 335, 46, 14);
 		this.add(lblPiso);
 		
-		JLabel label_1 = new JLabel("99");
+		JLabel label_1 = new JLabel(empleado.getPiso());
 		label_1.setFont(new Font("Arial", Font.PLAIN, 12));
 		label_1.setBounds(243, 335, 46, 14);
 		this.add(label_1);
@@ -152,7 +161,7 @@ public class CU2_VerDetalle extends JPanel{
 		lblOficina.setBounds(121, 360, 102, 14);
 		this.add(lblOficina);
 		
-		JLabel lblXxxxxxxxxxx = new JLabel("xxxxxxxxxxx");
+		JLabel lblXxxxxxxxxxx = new JLabel(empleado.getOficina());
 		lblXxxxxxxxxxx.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblXxxxxxxxxxx.setBounds(243, 360, 114, 14);
 		this.add(lblXxxxxxxxxxx);
@@ -161,66 +170,6 @@ public class CU2_VerDetalle extends JPanel{
 		lblHistorial.setBounds(479, 135, 213, 14);
 		this.add(lblHistorial);
 		
-		//inicio tabla
-	/*	JTable table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-				{"dd/mm/aaaa", "hh:mm", "xxxxx", "xxxxx", "xxxxx", "xxxxx", "xxxxx"},
-			},
-			new String[] {
-				"Fecha cambio", "Hora cambio", "Operador", "Estado", "Grupo resoluci\u00F3n", "Observaciones", "Clasificaci\u00F3n del ticket"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Object.class, String.class, String.class, String.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		table.setBounds(489, 210, 421, -49);
-		//contentPane.add(table);
-		table.setBounds(109, 266, 607, -95);
-		JScrollPane JS= new JScrollPane(table);
-		JS.setSize(785, 469);
-		JS.setLocation(479, 160);
-		JS.setPreferredSize(new Dimension(400,400));
-		contentPane.add(JS);
-		
-		//fin tabla
-*/
 		
 		JTable table_1 = new JTable(this.tableModel);
 		table_1.setFillsViewportHeight(true);

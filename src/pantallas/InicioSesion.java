@@ -65,9 +65,6 @@ public class InicioSesion extends JFrame {
 	 * Create the frame.
 	 */
 	public InicioSesion() {
-
-		GestorTicket gt=new GestorTicket();
-		System.out.println(gt.getEstadosAux(1).toString());
 		
 		
 		Color theme = new Color(38, 79, 111);

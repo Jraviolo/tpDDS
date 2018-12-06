@@ -8,7 +8,10 @@ public class EmpleadoAux {
 	private String apellido;
 	private Integer telefonoInterno;
 	private Integer telefonoDirecto;
-	private String ubicacion;
+	private String calle;
+	private String numero;
+	private String piso;
+	private String oficina;
 	private String descripcionDeCargo;
 	
 	public EmpleadoAux() {
@@ -66,15 +69,6 @@ public class EmpleadoAux {
 	}
 
 
-	public String getUbicacion() {
-		return ubicacion;
-	}
-
-
-	public void setUbicacion(String ubicacion) {
-		this.ubicacion = ubicacion;
-	}
-
 
 	public String getDescripcionDeCargo() {
 		return descripcionDeCargo;
@@ -83,6 +77,46 @@ public class EmpleadoAux {
 
 	public void setDescripcionDeCargo(String descripcionDeCargo) {
 		this.descripcionDeCargo = descripcionDeCargo;
+	}
+
+
+	public String getCalle() {
+		return calle;
+	}
+
+
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
+
+
+	public String getNumero() {
+		return numero;
+	}
+
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+
+	public String getPiso() {
+		return piso;
+	}
+
+
+	public void setPiso(String piso) {
+		this.piso = piso;
+	}
+
+
+	public String getOficina() {
+		return oficina;
+	}
+
+
+	public void setOficina(String oficina) {
+		this.oficina = oficina;
 	}
 	
 }
