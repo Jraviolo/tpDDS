@@ -149,11 +149,11 @@ public class GestorTicket {
 			//////////
 		}
 
-		ArrayList<Intervencion> list = new ArrayList<Intervencion>();
-		list = ggr.tieneEnEspera(t, g, c);
-		if (!list.isEmpty()) {
+		
+		Intervencion i= ggr.tieneEnEspera(t, g);
+		if (i!=null) {
 
-			gi.actualizarIntervencion(list.get(0), i_asignada, u, obs, fechaderivar);
+			gi.actualizarIntervencion(i, i_asignada, u, obs, fechaderivar);
 
 		} else {
 
@@ -162,6 +162,10 @@ public class GestorTicket {
 
 		}
 
+		//ACTUALIZO MESA DE AYUDA
+		Intervencion i_mesa=t.getIntervencion(1);
+		gi.actualizarIntervencion(i_mesa, i_enespera, u, obs,fechaderivar);
+		
 		int id = gbd.actualizarTicket(t);
 	}  
 
