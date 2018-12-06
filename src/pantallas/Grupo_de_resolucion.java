@@ -32,13 +32,13 @@ public class Grupo_de_resolucion extends JPanel {
 	private JPanel panel = this;
 	private Rectangle boundsAnterior;
 	
-	public Grupo_de_resolucion(int idUsuario2,int idgrupo2) {
+	public Grupo_de_resolucion(int idUsuario,int idgrupo) {
 		
 		//                       SACAR EL 2DE ID
 		//tiene que venir de la otra interfaz 
 		//int 
-		int idUsuario=1;
-		int idgrupo=1;
+		//int idUsuario=1;
+		//int idgrupo=1;
 		
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
