@@ -520,7 +520,53 @@ public class GestorBaseDeDatos {
 		return query;
 		}
 	
-	public ArrayList<Intervencion> consultarIntervenciones(String estado, Date fechaDesde, Date fechaHasta,
+	public ArrayList<Intervencion> consultarIntervenciones(Integer estado, Date fechaDesde, Date fechaHasta,
+			Integer nroT, Integer nroL, Integer idGrupo) {
+
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
+				.addAnnotatedClass(Intervencion.class).buildSessionFactory();
+		Session session = factory.getCurrentSession();
+
+		// usar el objeto session
+
+		session.beginTransaction();
+
+		/*
+		 * opcion son varios id iguales List<Object[]> query =
+		 * session.createSQLQuery("select * from intervencion where IDinterv='"
+		 * +idIntervencion+"'").list(); //q.setParameter("id", idIntervencion);
+		 * //List<Object[]> rows = query.list(); for(Object[] row : query){ int
+		 * numero=(int) row[1]; System.out.println("id ticket:"+numero); }
+		 */
+		
+	//	List query =  session
+	//			.createSQLQuery("select * from intervencion where IDestado_interv='" + estado + "'AND  numero='" + nroT + "'").getQueryReturns();
+		SQLQuery query = session.createSQLQuery("select * from intervencion where IDestado_interv='" + estado + "'");
+		List<Object[]> rows = query.list();
+		ArrayList<Intervencion> lista = new ArrayList<Intervencion>();
+		for(int j=0; j<rows.size();j++){
+			Intervencion i = new Intervencion();
+			i.setIdIntervencion(Integer.parseInt( rows.get(j)[0].toString()));
+			System.out.println("aa"+ i.getIdIntervencion());
+			lista.add(i);
+		}
+		
+		//	int numero = (int) query[1];
+	//	System.out.println("id intervencion:" + numero);
+	//	System.out.println("Hola");
+		session.getTransaction().commit();
+		session.close();
+		factory.close();
+	//	Ticket t = buscarTicket(numero);
+	//	ArrayList<Intervencion> lista = new ArrayList<Intervencion>();
+	//	for(Object i: query) {
+	//		lista.add((Intervencion) i);
+	//	}
+		return lista;
+
+	}
+	
+	public ArrayList<Intervencion> consultarIntervenciones2(String estado, Date fechaDesde, Date fechaHasta,
 			Integer nroT, Integer nroL, Integer idGrupo) {
 		// crear objeto factory
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class)

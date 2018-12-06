@@ -168,4 +168,9 @@ public class Intervencion {
 	public GrupoDeResolucion getGrupo() {
 		return intervencion;
 	}
+	@Override
+	public String toString() {
+		String i = ("id: "+idIntervencion);
+		return i;
+	}
 }

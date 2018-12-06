@@ -62,24 +62,45 @@ public class GestorIntervenciones {
 
 	public ArrayList<IntervencionAux> consultarIntervenciones(String estado, Date fDesde, Date fHasta, Integer nroT, Integer nroL,
 			int idGrupo) {
-		ArrayList<Intervencion> busqueda = gbd.consultarIntervenciones(estado, fDesde, fHasta, nroT, nroL, idGrupo);
+		Integer idEstado;
+/*		if(estado.equals("Asignada")) {
+			idEstado=0;
+		}else {
+			if(estado.equals("En espera")) {
+				idEstado=1;
+			}else {
+				if(estado.equals("Trabajando")) {
+					idEstado=2;
+				}else {
+					if(estado.equals("Terminada")) {
+						idEstado=3;
+					}else { idEstado=null;
+					}
+				}
+			}
+				
+		}
+	*/	
+		ArrayList<Intervencion> busqueda = gbd.consultarIntervenciones(0, fDesde, fHasta, nroT, nroL, idGrupo);
 		ArrayList<IntervencionAux> listaResultado = new ArrayList<IntervencionAux>();
-
+		System.out.println("tamaño "+busqueda.size());
 		for(Intervencion i: busqueda) {
 			Ticket t = gbd.buscarTicketAsociado(i.getIdIntervencion());
 			IntervencionAux aux = new IntervencionAux();
-			GrupoDeResolucionAux grupo = new GrupoDeResolucionAux(t.ultimaIntervencion().getGrupo().getNombre(), t.ultimaIntervencion().getGrupo().getCodigo());
+	//GrupoDeResolucionAux grupo = new GrupoDeResolucionAux(t.ultimaIntervencion().getGrupo().getNombre(), t.ultimaIntervencion().getGrupo().getCodigo());
+			GrupoDeResolucionAux grupo = new GrupoDeResolucionAux(t.getIntervencion2(i.getIdIntervencion()).getGrupo().getNombre(), t.getIntervencion2(i.getIdIntervencion()).getGrupo().getCodigo());
+			System.out.println("intervencion "+i.getIdIntervencion()+"grupo "+grupo.getNombre()+"ultima int "+t.ultimaIntervencion().getIdIntervencion());
 			ClasificacionAux clasificacion = new ClasificacionAux(t.getClasificacionActual().getNombre(),t.getClasificacionActual().getIdClasificacion());
+			aux.setIdIntervencion(i.getIdIntervencion());
 			aux.setIdTicket(t.getId());
-			//Legajo del duenio del ticket o del empleado que realizo el ult cambio de la intervencion o del que creo la intervencion?
-			aux.setLegajo(i.getHistorialIntervencion().get(0).getUsuario().getEmpleado().getLegajo());
+			aux.setLegajo(t.getEmpleado().getLegajo());
 			aux.setClasificacion(clasificacion);
 			aux.setEstadoTicket(t.getEstadoActual().getEstado().getEstado());
 			aux.setFechaApertura(t.getFechaDeApertura());
-			aux.setEstadoIntervencion(i.getEstado().getEstado());
-			aux.setFechaAsignacion(i.getFechaInicio());
+		//	aux.setEstadoIntervencion(i.getEstado().getEstado());
+		//	aux.setFechaAsignacion(i.getFechaInicio());
 			aux.setGrupoActual(grupo);
-			aux.setObservaciones(i.getObservaciones());
+		//	aux.setObservaciones(i.getObservaciones());
 			
 			listaResultado.add(aux);
 		}

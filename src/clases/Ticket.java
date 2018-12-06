@@ -120,9 +120,23 @@ public class Ticket {
 	}
 
 	public Intervencion ultimaIntervencion() {
-		int i = intervenciones.size();
-		return intervenciones.get(i - 1);
+		Intervencion ultima = intervenciones.get(0);
+		for(Intervencion i: intervenciones) {
+			if(i.getFechaInicio().compareTo(ultima.getFechaInicio())>0) {
+				if(i.getEstado().id!=2) { //Si la intervencion no esta terminada
+					ultima=i;
+				} else {
+					if(!intervencionEnEspera()){
+						ultima=i;
+					}
+				}
+			}
+		}
+		
+		return ultima;
+		
 	}
+
 	
 	public Intervencion getIntervencion(int idgrupo) {
 		for (int i=0;i<intervenciones.size(); i++) {
