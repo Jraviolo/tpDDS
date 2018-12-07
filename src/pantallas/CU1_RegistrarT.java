@@ -60,14 +60,15 @@ public class CU1_RegistrarT extends JPanel {
 	private GestorClasificacionDeTicket gc=new GestorClasificacionDeTicket();
 	private GestorBaseDeDatos gbd=new GestorBaseDeDatos();
 
-	public CU1_RegistrarT(int idUsuario2,int idgrupo2) {
+	public CU1_RegistrarT(int idUsuario,int idgrupo) {
 		
 		//                       SACAR EL 2DE ID
 		//tiene que venir de la otra interfaz 
 		//int 
-		int idUsuario=1;
-		int idgrupo=1;
-		
+		//int idUsuario=1;
+		//int idgrupo=1;
+		System.out.println(idUsuario);
+		System.out.println(idgrupo);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setLayout(null);
 		setBounds(0, 0, 554, 700);

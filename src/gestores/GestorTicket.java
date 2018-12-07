@@ -120,7 +120,6 @@ public class GestorTicket {
 		Usuario u=gbd.buscarUsuario(idU);
 		GrupoDeResolucion g=gbd.buscarGrupo(idGr);
 		
-		
 		ClasificacionDeTicket c=gbd.buscarClasificacion(idClasificacion);//this
 		
 		EstadoTicket t_estado=gbd.buscarEstadoTicket(idEstado);
@@ -141,12 +140,11 @@ public class GestorTicket {
 			CambioClasificacion cC = gc.newCambioClasificacion(c, u);
 			cC.setFechaInicio(fC);
 			
-			/////////// nota diagrama
+			
 			CambioClasificacion uc = t.ultimoCambio();
 			uc.setFechaFin(fC);
 
 			t.actualizarClasificacion(cC, c);
-			//////////
 		}
 
 		
@@ -212,8 +210,6 @@ public class GestorTicket {
 		Ticket t=gbd.buscarTicket(idticket);
 		Intervencion i= t.getIntervencion2(idIntervencion);
 		
-		System.out.println("idIntervencion: "+i.getIdIntervencion()+" id estado nuevo"+idEstadoIntervencion);
-		
 		Date fecha=new Date();
 		
 		if(idClasificacion!=t.getClasificacionActual().getIdClasificacion()) {
@@ -230,7 +226,6 @@ public class GestorTicket {
 		if(idEstadoIntervencion!=3) {
 			int idEstadoTicket;
 			if(idEstadoIntervencion==2 && mesa) {
-				System.out.println("ERROR ACA ");
 				idEstadoTicket=0;
 			}
 			else if(idEstadoIntervencion==2 && !mesa) {
@@ -240,12 +235,10 @@ public class GestorTicket {
 			}
 			
 			else {
-				System.out.println("ERROR ACA 2");
 				idEstadoTicket=0;
 				}
-			System.out.println("antes de bucar estado");
+			
 			EstadoTicket t_estado=gbd.buscarEstadoTicket(idEstadoTicket);
-			System.out.println("ESTADO TICKET:"+t_estado.getEstado()+ "nuemro:"+t_estado.getId());
 			CambioEstado ce=new CambioEstado(t_estado,u);
 			ce.setFechaInicio(fecha);
 			t.setEstadoActual(ce);
