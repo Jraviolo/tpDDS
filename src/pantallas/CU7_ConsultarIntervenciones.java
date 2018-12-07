@@ -264,7 +264,7 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 				}
 
 				if ((!fDesdeVacia && fDesde.compareTo(fechaActual) >= 0)
-						|| (!fHastaVacia && (fHasta.compareTo(fechaActual) >= 0 || fHasta.compareTo(fDesde) < 0))) {
+						|| (!fHastaVacia && (fHasta.compareTo(fechaActual) >= 0 ||(!fDesdeVacia && !fHastaVacia && fHasta.compareTo(fDesde) < 0)))) {
 
 					JOptionPane.showMessageDialog(null,
 							"La fecha de apertura y/o del último cambio de estado no pueden ser mayores a la fecha actual.",
@@ -297,10 +297,7 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				IntervencionAux intervencion = tableModel.getIntervenciones().get(seleccion);
-				System.out.println("grupo "+intervencion.getGrupoActual());
-				System.out.println("idgrupo "+idGrupo);
 				if (intervencion.getGrupoActual().getId()==idGrupo) {
-					System.out.println("entro");
 					CU8_ActualizarIntervencion panelActualizarInt = new CU8_ActualizarIntervencion(intervencion,
 							(int) intervencion.getIdTicket(), idUsuario, idGrupo);
 					panelActualizarInt.setPadre(padre);

@@ -520,185 +520,7 @@ public class GestorBaseDeDatos {
 		return query;
 	}
 
-	public ArrayList<Intervencion> consultarIntervenciones(Integer estado, Date fechaDesde, Date fechaHasta,
-			Integer nroT, Integer nroL, Integer idGrupo) {
-
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
-				.addAnnotatedClass(Intervencion.class).buildSessionFactory();
-		Session session = factory.getCurrentSession();
-
-		// usar el objeto session
-
-		session.beginTransaction();
-
-		/*
-		 * opcion son varios id iguales List<Object[]> query =
-		 * session.createSQLQuery("select * from intervencion where IDinterv='"
-		 * +idIntervencion+"'").list(); //q.setParameter("id", idIntervencion);
-		 * //List<Object[]> rows = query.list(); for(Object[] row : query){ int
-		 * numero=(int) row[1]; System.out.println("id ticket:"+numero); }
-		 */
-
-		// List query = session
-		// .createSQLQuery("select * from intervencion where IDestado_interv='" + estado
-		// + "'AND numero='" + nroT + "'").getQueryReturns();
-		SQLQuery query = session.createSQLQuery(
-				"select * from intervencion where IDestado_interv='" + estado + "'AND  numero='" + nroT + "'");
-		List<Object[]> rows = query.list();
-		ArrayList<Intervencion> lista = new ArrayList<Intervencion>();
-		for (int j = 0; j < rows.size(); j++) {
-			Intervencion i = new Intervencion();
-			i.setIdIntervencion(Integer.parseInt(rows.get(j)[0].toString()));
-			System.out.println("aa" + i.getIdIntervencion());
-			lista.add(i);
-		}
-
-		// int numero = (int) query[1];
-		// System.out.println("id intervencion:" + numero);
-		// System.out.println("Hola");
-		session.getTransaction().commit();
-		session.close();
-		factory.close();
-		// Ticket t = buscarTicket(numero);
-		// ArrayList<Intervencion> lista = new ArrayList<Intervencion>();
-		// for(Object i: query) {
-		// lista.add((Intervencion) i);
-		// }
-		return lista;
-
-	}
-
-	public ArrayList<Intervencion> consultarIntervenciones2(String estado, Date fechaDesde, Date fechaHasta,
-			Integer nroT, Integer nroL, Integer idGrupo) {
-		// crear objeto factory
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Ticket.class)
-				.buildSessionFactory();
-
-		// crear sesión
-
-		Session session = factory.getCurrentSession();
-
-		// usar el objeto session
-		session.beginTransaction();
-		ArrayList<Intervencion> intervenciones = (ArrayList<Intervencion>) session.createQuery("from Intervencion")
-				.getResultList();
-
-		session.getTransaction().commit();
-		session.close();
-
-		factory.close();
-
-		Intervencion i1 = new Intervencion();
-		ArrayList<Intervencion> L1 = new ArrayList<Intervencion>();
-		ArrayList<Intervencion> L2 = new ArrayList<Intervencion>();
-		ArrayList<Intervencion> L4 = new ArrayList<Intervencion>();
-		ArrayList<Intervencion> L5 = new ArrayList<Intervencion>();
-		ArrayList<Intervencion> L6 = new ArrayList<Intervencion>();
-		ArrayList<Intervencion> L7 = new ArrayList<Intervencion>();
-		ArrayList<Intervencion> listaResultado = new ArrayList<Intervencion>();
-		Boolean idIntervencion = false;
-
-		/*
-		 * if (nroT != null) { int i = intervenciones.size()-1; while (idIntervencion==
-		 * false && i >= 0) { for (Ticket t:
-		 * intervenciones.get(i).UltimoEstado().getUsuario().getEmpleado().getTickets())
-		 * { if (t.getId()== nroT) { i1=intervenciones.get(i); idIntervencion=true;
-		 * 
-		 * }} i--; } }
-		 */
-		if (nroT != null) {
-			Ticket t = buscarTicket(nroT);
-			for (Intervencion i : intervenciones) {
-				for (Intervencion i2 : t.getIntervenciones()) {
-					if (i.getIdIntervencion().equals(i2.getIdIntervencion())) {
-						L1.add(i);
-						// break;
-					}
-				}
-			}
-		} else {
-			L1 = intervenciones;
-		}
-
-		if (nroL != null) {
-			for (Intervencion i : intervenciones) {
-
-				if (i.UltimoEstado().getUsuario().getEmpleado().getLegajo().equals(nroL)) {
-					L2.add(i);
-				}
-			}
-		} else {
-			L2 = intervenciones;
-		}
-
-		if (estado != null) {
-			for (Intervencion i : intervenciones) {
-				if (i.getEstado().getEstado().equals(estado)) {
-					L4.add(i);
-				}
-			}
-		} else {
-			L4 = intervenciones;
-		}
-
-		if (fechaDesde != null) {
-			SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-			for (Intervencion i : intervenciones) {
-				String fecha1 = f.format(i.getFechaInicio());
-				String fecha2 = f.format(fechaDesde);
-				if (fecha1.equals(fecha2)) {
-					L5.add(i);
-				}
-			}
-		} else {
-			L5 = intervenciones;
-		}
-
-		if (fechaHasta != null) {
-			SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-			for (Intervencion i : intervenciones) {
-				String fecha1 = f.format(i.getFechaFin());
-				String fecha2 = f.format(fechaHasta);
-				if (fecha1.equals(fecha2)) {
-					L6.add(i);
-				}
-			}
-		} else {
-			L6 = intervenciones;
-		}
-
-		if (idGrupo != null) {
-			for (Intervencion i : intervenciones) {
-				if (i.getGrupo().getCodigo() == idGrupo) {
-					L7.add(i);
-				}
-			}
-		} else {
-			L7 = intervenciones;
-		}
-
-		for (Intervencion i : intervenciones) {
-			if (L1.contains(i)) {
-				if (L2.contains(i)) {
-					if (L4.contains(i)) {
-						if (L5.contains(i)) {
-							if (L6.contains(i)) {
-								if (L7.contains(i)) {
-
-									listaResultado.add(i);
-
-								}
-							}
-
-						}
-					}
-				}
-			}
-		}
-
-		return listaResultado;
-	}
-
+	
 	public ArrayList<Intervencion> consultarIntervenciones3(String estado, Date fechaDesde, Date fechaHasta,
 			Integer nroT, Integer nroL) {
 		// crear objeto factory
@@ -743,8 +565,8 @@ public class GestorBaseDeDatos {
 
 		if (nroL != null) {
 			for (Intervencion i : intervenciones) {
-
-				if (i.UltimoEstado().getUsuario().getEmpleado().getLegajo().equals(nroL)) {
+				Ticket t = buscarTicketAsociado(i.getIdIntervencion());
+				if (t.getEmpleado().getLegajo().equals(nroL)) {
 					L2.add(i);
 				}
 			}
@@ -776,7 +598,7 @@ public class GestorBaseDeDatos {
 
 		if (fechaHasta != null) {
 			for (Intervencion i : intervenciones) {
-				String fecha1 = f.format(i.UltimoEstado().getFechaFinAsignacion());
+				String fecha1 = f.format(i.UltimoEstado().getFechaInicioAsignacion());
 				String fecha2 = f.format(fechaHasta);
 				if (fecha1.compareTo(fecha2) <= 0) {
 					L6.add(i);

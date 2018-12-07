@@ -230,7 +230,7 @@ public class CU2_ConsultarT extends JPanel {
 				}
 
 				if ((!fApVacia && fApertura.compareTo(fechaActual) >= 0) || (!fUltCVacia
-						&& (fUltCambio.compareTo(fechaActual) >= 0 || fUltCambio.compareTo(fApertura) < 0))) {
+						&& (fUltCambio.compareTo(fechaActual) >= 0 ||(!fApVacia && !fUltCVacia && fUltCambio.compareTo(fApertura) < 0)))) {
 
 					JOptionPane.showMessageDialog(null,
 							"La fecha de apertura y/o del último cambio de estado no pueden ser mayores a la fecha actual.",
