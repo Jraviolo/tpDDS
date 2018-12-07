@@ -270,10 +270,15 @@ public class GestorTicket {
 					ea.setClasificacion(c.getClasificacion().getNombre());
 					break;
 				}
-				else if(c.getFechaInicio().before(ea.getFechaInicio()))
+				else if(c.getFechaInicio().after(ea.getFechaInicio()) && c.getFechaInicio().before(ea.getFechaFin())) {
 					ea.setClasificacion(c.getClasificacion().getNombre());
 					break;
 				}
+				else if(c.getFechaFin()==null) {
+					ea.setClasificacion(c.getClasificacion().getNombre());
+				break;
+				}
+			}
 			
 			for(GrupoDeResolucion g:grupos) {
 				List<Usuario> miembro=g.getUsuarios();
