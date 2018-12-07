@@ -45,6 +45,7 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 	private JTextField fechaHasta;
 	private JTextField numeroTicket;
 	private JTextField numeroLegajo;
+	private JComboBox comboEstado;
 	private JTable table_1;
 	private Integer seleccion;
 	private ConsultarIntTableModel tableModel = new ConsultarIntTableModel();
@@ -88,7 +89,7 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 		lblEstado.setBounds(93, 160, 80, 17);
 		this.add(lblEstado);
 
-		JComboBox comboEstado = new JComboBox();
+		comboEstado = new JComboBox();
 		comboEstado.setModel(
 				new DefaultComboBoxModel(new String[] { "Asignada", "En espera", "Terminada", "Trabajando", "Todos" }));
 		comboEstado.setBounds(271, 157, 190, 20);
@@ -236,7 +237,7 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 		JButton buscar = new JButton("Buscar");
 		buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Date fechaActual = new Date();
+			/*	Date fechaActual = new Date();
 				Date fDesde = null;
 				Date fHasta = null;
 
@@ -287,7 +288,10 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 					setListaIntervenciones(gi.consultarIntervenciones(estado, fDesde, fHasta, nroT, nroL), true);
 
 				}
-			}
+		*/
+		
+		iniciarBusqueda();		
+		}
 		});
 		buscar.setForeground(new Color(255, 255, 255));
 		buscar.setBackground(theme);
@@ -301,11 +305,13 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 					CU8_ActualizarIntervencion panelActualizarInt = new CU8_ActualizarIntervencion(intervencion,
 							(int) intervencion.getIdTicket(), idUsuario, idGrupo);
 					panelActualizarInt.setPadre(padre);
+					setListaIntervenciones(new ArrayList<IntervencionAux>(),true);					
 					panelActualizarInt.setAnterior(panel);
 					panelActualizarInt.setBoundsAnterior(new Rectangle(0, 0, 1281, 720));
 					padre.setContentPane(panelActualizarInt);
 					padre.setBounds(panelActualizarInt.getBounds());
 					padre.setLocationRelativeTo(null);
+					
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"No se pueden actualizar las intervenciones asignadas a otros grupos.", "Error",
@@ -337,6 +343,61 @@ public class CU7_ConsultarIntervenciones extends JPanel {
 		cerrar.setBounds(1134, 640, 130, 40);
 		this.add(cerrar);
 
+		
+	}
+	
+	public void iniciarBusqueda() {
+		Date fechaActual = new Date();
+		Date fDesde = null;
+		Date fHasta = null;
+
+		Boolean fDesdeVacia = fechaDesde.getText().isEmpty();
+		Boolean fHastaVacia = fechaHasta.getText().isEmpty();
+
+		if (!fDesdeVacia) {
+			if (fechaDesde.getText().length() == 10) {
+				fDesde = armarFecha(fechaDesde.getText());
+			} else {
+				JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha con formato DD/MM/AAAA",
+						"Fecha invalida", JOptionPane.ERROR_MESSAGE);
+				fDesdeVacia = true;
+			}
+		}
+
+		if (!fHastaVacia) {
+			if (fechaHasta.getText().length() == 10) {
+				fHasta = armarFecha(fechaHasta.getText());
+			} else {
+				JOptionPane.showMessageDialog(null, "Por favor ingrese la fecha con formato DD/MM/AAAA",
+						"Fecha invalida", JOptionPane.ERROR_MESSAGE);
+				fHastaVacia = true;
+			}
+		}
+
+		if ((!fDesdeVacia && fDesde.compareTo(fechaActual) >= 0)
+				|| (!fHastaVacia && (fHasta.compareTo(fechaActual) >= 0 ||(!fDesdeVacia && !fHastaVacia && fHasta.compareTo(fDesde) < 0)))) {
+
+			JOptionPane.showMessageDialog(null,
+					"La fecha de apertura y/o del último cambio de estado no pueden ser mayores a la fecha actual.",
+					"Fecha inválida", JOptionPane.ERROR_MESSAGE);
+
+		} else {
+			Integer nroT = null;
+			if (!numeroTicket.getText().isEmpty())
+				nroT = Integer.valueOf(numeroTicket.getText());
+			Integer nroL = null;
+			if (!numeroLegajo.getText().isEmpty())
+				nroL = Integer.valueOf(numeroLegajo.getText());
+			String estado = new String();
+			if (comboEstado.getSelectedItem().toString() == "Todos") {
+				estado = null;
+			} else {
+				estado = comboEstado.getSelectedItem().toString();
+			}
+
+			setListaIntervenciones(gi.consultarIntervenciones(estado, fDesde, fHasta, nroT, nroL), true);
+
+		}
 	}
 
 	protected Date armarFecha(String text) {

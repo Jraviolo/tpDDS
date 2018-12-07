@@ -283,6 +283,7 @@ public class CU2_ConsultarT extends JPanel {
 						|| ticket.getEstadoActual().equals("Abierto sin derivar")) {
 					CU4_DerivarT panelDerivarTicket = new CU4_DerivarT(ticket, idUsuario);
 					panelDerivarTicket.setPadre(padre);
+					setListaTickets(new ArrayList<TicketAux>(),true);
 					panelDerivarTicket.setAnterior(panel);
 					panelDerivarTicket.setBoundsAnterior(new Rectangle(0, 0, 1281, 720));
 					padre.setContentPane(panelDerivarTicket);
@@ -308,6 +309,7 @@ public class CU2_ConsultarT extends JPanel {
 				if (ticket.getEstadoActual().equals("Solucionado a la espera ok")) {
 					CU3_CerrarT panelCerrarTicket = new CU3_CerrarT(ticket.getIdTicket(), idUsuario, idGrupo);
 					panelCerrarTicket.setPadre(padre);
+					setListaTickets(new ArrayList<TicketAux>(),true);
 					panelCerrarTicket.setAnterior(panel);
 					panelCerrarTicket.setBoundsAnterior(new Rectangle(0, 0, 1281, 720));
 					padre.setContentPane(panelCerrarTicket);
@@ -328,7 +330,6 @@ public class CU2_ConsultarT extends JPanel {
 		btnVerDetalle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TicketAux ticket = tableModel.getTickets().get(seleccion);
-				System.out.println("llego");
 					CU2_VerDetalle panelVerDetalle = new CU2_VerDetalle(ticket.getIdTicket(), ticket.getLegajo());
 					panelVerDetalle.setPadre(padre);
 					panelVerDetalle.setAnterior(panel);
